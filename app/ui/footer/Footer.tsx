@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <div className="footer bg-base-100 text-text-color  ">
-        <footer className="footer bg-primary-color text-text-color p-10 ">
+        <footer className="footer bg-primary-color text-text-color p-10 text-lg">
           <nav className="">
             <h6 className="footer-title">Crédits</h6>
             <Link href={'#'} className="link link-hover">

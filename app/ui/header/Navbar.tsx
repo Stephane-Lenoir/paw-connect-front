@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import Logo from './Logo';
 
 export default function NavBar() {
   return (
@@ -40,9 +42,7 @@ export default function NavBar() {
               </li>
             </ul>
           </div>
-          <Link href={'#'} className="btn btn-ghost text-xl">
-            Paw Connect
-          </Link>
+          <Logo />
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-3xl">
@@ -50,7 +50,7 @@ export default function NavBar() {
               <Link href={'#'}>Adopter</Link>
             </li>
             <li>
-              <Link href={'#'}>Localisation</Link>
+              <Link href={'#'}>Localiser</Link>
             </li>
             <li>
               <Link href={'#'}>Dons</Link>
@@ -58,7 +58,7 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <button className="btn btn-ghost btn-circle">
+          <button type="button" className="btn btn-ghost btn-circle">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-5 w-5"

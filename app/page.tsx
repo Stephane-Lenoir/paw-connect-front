@@ -1,14 +1,17 @@
+import Button from './ui/button';
 import Card from './ui/card/Card';
 import Footer from './ui/footer/Footer';
 import Header from './ui/header/Header';
-import Photo from './ui/Homeimg.tsx/photo';
+import Homeimg from './ui/homeimg/Homeimg';
 
 export default function Home() {
   return (
     <>
       <Header />
-      {/* <Photo /> */}
+      <Homeimg />
+
       <Card />
+      <Button />
 
       <Footer />
     </>
