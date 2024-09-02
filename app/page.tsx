@@ -5,6 +5,7 @@ import Header from './ui/header/Header';
 import Homeimg from './ui/homeimg/Homeimg';
 
 export default function Home() {
+<<<<<<< HEAD
   return (
     <>
       <Header />
@@ -16,4 +17,7 @@ export default function Home() {
       <Footer />
     </>
   );
+=======
+  return <>Coucouuuuuuuuuuuuuuuuu</>;
+>>>>>>> develop
 }
