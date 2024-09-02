@@ -19,6 +19,9 @@ export default function Footer() {
             <Link href={'#'} className="link link-hover">
               Dylan
             </Link>
+            <Link href={'#'} className="link link-hover">
+              Fabien
+            </Link>
           </nav>
           <nav>
             <h6 className="footer-title">Company</h6>
