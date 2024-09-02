@@ -1,7 +1,7 @@
-Context
+# Context
 Un context en React permet de transmettre des données (généralement de state) à travers l'arborescence des composants sans avoir besoin de les transmettre explicitement via les props à chaque niveau. C'est une sorte de gestion global du state. On y place donc généralement des données utiles dans toute l'appli, comme des données d'authentification, des paramètres de thème, ..
 
-1. Creer le context
+# 1. Creer le context
 On créé le contexte avec la fonction createContext de React. On pense à l'exporter car il faudra l'importer pour récuperer la valeur qu'il contient.
 
 import React from 'react';
@@ -12,7 +12,7 @@ export default MyContext; Lorsqu'on créé le context, on doit lui passer une va
 
 const MyContext = React.createContext<undefined | boolean>(undefined);
 
-2. Mise à dispo du context
+# 2. Mise à dispo du context
 On englobe tous les composants qui auront besoin du context avec le Context.Provider. Le contexte sera disponible dans les composants englobés et dans toute leur descendance (enfants, petits enfants, ...) Le Provider prend une propriété value qui contient les données à partager.
 
 <MyContext.Provider value={/* valeur du context à partager /}> {/ arbre de composants providés */} </MyContext.Provider> Une bonne idée est de créer un custom composant pour contenir ce code :
@@ -21,7 +21,7 @@ interface ProviderProps { children: ReactNode; } function MyContextProvider({chi
 
 <MyContext.Provider value={isZen}> {children} </MyContext.Provider> }
 
-3. Utilisation du context
+# 3. Utilisation du context
 De n'importe quel composant faisant parti de l'arbre englobé par le provider on accède "directement" à la valeur contenue dans le context avec le hook useContext. Et si la valeur du context change, le composant refera son rendu.
 
 // on importe le hook import { useContext } from 'react'; // on importe le context import MyContext from './MyContext';
