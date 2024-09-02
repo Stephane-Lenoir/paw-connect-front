@@ -1,6 +1,4 @@
-import React from 'react';
-import NavBar from '../ui/header/nav-bar';
-
+import NavBar from '../ui/header/Navbar';
 
 const AnimalPage: React.FC = () => {
   return (
