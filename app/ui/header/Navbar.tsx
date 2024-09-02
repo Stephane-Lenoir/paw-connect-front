@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Logo from './Logo';
+import Modal from '../loginModal/Modal';
 
 export default function NavBar() {
   return (
@@ -76,7 +77,7 @@ export default function NavBar() {
         </div>
         <ul className="menu menu-horizontal px-1 text-3xl">
           <li>
-            <Link href={'#'}>Login</Link>
+            <Modal />
           </li>
         </ul>
       </div>

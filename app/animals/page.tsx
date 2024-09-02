@@ -18,10 +18,16 @@ const AnimalPage: React.FC = () => {
 
         {/* Actions */}
         <div className="flex space-x-4">
-          <button className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg">
+          <button
+            type="button"
+            className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg"
+          >
             Héberger
           </button>
-          <button className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg">
+          <button
+            type="button"
+            className="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-lg"
+          >
             Adopter
           </button>
         </div>

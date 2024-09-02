@@ -12,6 +12,10 @@
   --card-bg: #FFFFFF;
 }
 
+.modal-backdrop {
+  user-select: none;
+}
+
 
 /* :root {
   --foreground-rgb: 0, 0, 0;
