@@ -30,7 +30,7 @@ export default function NavBar() {
                 <Link href={'#'}>Adopter</Link>
               </li>
               <li>
-                <Link href={'#'}>Localisation</Link>
+                <Link href={'#'}>Localiser</Link>
               </li>
               <li>
                 <Link href={'#'}>Dons</Link>
@@ -75,9 +75,11 @@ export default function NavBar() {
             </svg>
           </button>
         </div>
-        <li className="text-3xl">
-          <Link href={'#'}>Login</Link>
-        </li>
+        <ul className="menu menu-horizontal px-1 text-3xl">
+          <li>
+            <Link href={'#'}>Login</Link>
+          </li>
+        </ul>
       </div>
     </>
   );
