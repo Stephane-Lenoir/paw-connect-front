@@ -6,7 +6,6 @@ import Button from './Button';
 import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
-
 export default function Card() {
   return (
     <>
