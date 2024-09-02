@@ -4,6 +4,15 @@
 
 
 
+:root {
+  --primary-color: #A7C7E7;
+  --secondary-color: #89d9d1;
+  --background-color: #F0F8FF;
+  --text-color: #4A4A4A;
+  --card-bg: #FFFFFF;
+}
+
+
 /* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;

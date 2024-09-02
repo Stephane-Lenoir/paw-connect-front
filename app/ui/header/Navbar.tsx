@@ -3,8 +3,8 @@ import Link from 'next/link';
 export default function NavBar() {
   return (
     <>
-      <div className="navbar bg-base-100">
-        <div className="navbar-start">
+      <div className="navbar bg-base-100 bg-primary-color text-text-color">
+        <div className="navbar-start text-7xl">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
@@ -45,7 +45,7 @@ export default function NavBar() {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 text-3xl">
             <li>
               <Link href={'#'}>Adopter</Link>
             </li>
@@ -74,10 +74,10 @@ export default function NavBar() {
               />
             </svg>
           </button>
-          <li>
-            <Link href={'#'}>Login</Link>
-          </li>
         </div>
+        <li className="text-3xl">
+          <Link href={'#'}>Login</Link>
+        </li>
       </div>
     </>
   );
