@@ -1,3 +1,5 @@
+'use client';
+
 {
   /* Imports des composants*/
 }
@@ -7,12 +9,24 @@ import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
 
-export default async function Card() {
-  /* fecth la liste des animaux depuis http://localhost:3000/api/ */
-  const data = await fetch('http://localhost:3000/api/');
-  // const animals = await data.json();
-  // console.log(animals);
+import { useState } from 'react';
+import animalDetailModal from '../animalDetailModal/animalDetailModal';
 
+export default async function Card() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
+  {
+    /* fecth la liste des animaux depuis http://localhost:3000/api/ */
+  }
+  {
+    /*const data = await fetch('http://localhost:3000/api/'); // const animals = await data.json(); //*/
+  }
+  {
+    /*console.log(animals);*/
+  }
   return (
     <>
       <div className="flex flex-wrap justify-center gap-10 m-8">
