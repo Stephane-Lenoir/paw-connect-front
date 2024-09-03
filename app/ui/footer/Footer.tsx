@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <>
       <div className="footer bg-base-100 text-text-color  ">
-        <footer className="footer bg-primary-color text-text-color p-10 text-lg">
+        <footer className="footer bg-primary-color text-text-color p-10 text-lg justify-evenly">
           <nav className="">
             <h6 className="footer-title">Crédits</h6>
             <Link href={'#'} className="link link-hover">
@@ -23,15 +23,7 @@ export default function Footer() {
               Fabien
             </Link>
           </nav>
-          <nav>
-            <h6 className="footer-title">Company</h6>
-            <Link href={'#'} className="link link-hover">
-              A propos
-            </Link>
-            <Link href={'#'} className="link link-hover">
-              Contact
-            </Link>
-          </nav>
+
           <nav>
             <h6 className="footer-title">Liens</h6>
             <Link href={'#'} className="link link-hover">
@@ -58,6 +50,16 @@ export default function Footer() {
             </Link>
             <Link href={'#'} className="link link-hover">
               Cookie policy
+            </Link>
+          </nav>
+
+          <nav>
+            <h6 className="footer-title">Company</h6>
+            <Link href={'#'} className="link link-hover">
+              A propos
+            </Link>
+            <Link href={'#'} className="link link-hover">
+              Contact
             </Link>
           </nav>
         </footer>

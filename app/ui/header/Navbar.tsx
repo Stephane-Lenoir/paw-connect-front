@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import Logo from './Logo';
-import { use, useState } from 'react';
+
+import { useState } from 'react';
+import Modal from '../loginModal/Modal';
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -95,7 +97,7 @@ export default function NavBar() {
 
         <ul className="menu menu-horizontal px-1 text-3xl">
           <li>
-            <Link href={'#'}>Login</Link>
+            <Modal />
           </li>
         </ul>
       </div>
