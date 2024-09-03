@@ -6,8 +6,10 @@ export default function Animals() {
   return (
     <>
       <Rules />
-      <Filtres />
-      <Cards />
+      <div className="flex flex-wrap gap-5 justify-center">
+        <Filtres />
+        <Cards />
+      </div>
     </>
   );
 }

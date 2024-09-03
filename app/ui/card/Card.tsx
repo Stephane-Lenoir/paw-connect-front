@@ -15,7 +15,7 @@ export default async function Card() {
 
   return (
     <>
-      <div className="flex flex-wrap justify-center gap-10 mt-8 mb-8">
+      <div className="flex flex-wrap justify-center gap-10 m-8">
         {/* {animals.map((animal) => (
           <div
             key={animal.id}
@@ -27,7 +27,7 @@ export default async function Card() {
             <p>{animal.location}</p>
           </div>
         ))} */}
-        <div className="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/6 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
+        <div className="w-auto sm:w-auto md:w-auto lg:w-auto bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
           <Img />
 
           <div className="p-4">
@@ -39,10 +39,9 @@ export default async function Card() {
 
         {/* Le reste on pourra supprimer, c'est pour la démo */}
 
-        <div className="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/6 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
-          <div className="h-52 bg-primary-color text-white flex items-center justify-center text-xl font-bold">
-            <Img />
-          </div>
+        <div className="w-auto sm:w-auto md:w-auto lg:w-auto bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
+          <Img />
+
           <div className="p-4">
             <Title />
             <Refuge />
@@ -50,10 +49,9 @@ export default async function Card() {
           </div>
         </div>
 
-        <div className="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/6 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
-          <div className="h-52 bg-primary-color text-white flex items-center justify-center text-xl font-bold">
-            <Img />
-          </div>
+        <div className="w-auto sm:w-auto md:w-auto lg:w-auto bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
+          <Img />
+
           <div className="p-4">
             <Title />
             <Refuge />
@@ -61,21 +59,9 @@ export default async function Card() {
           </div>
         </div>
 
-        <div className="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/6 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
-          <div className="h-52 bg-primary-color text-white flex items-center justify-center text-xl font-bold">
-            <Img />
-          </div>
-          <div className="p-4">
-            <Title />
-            <Refuge />
-            <Button />
-          </div>
-        </div>
+        <div className="w-auto sm:w-auto md:w-auto lg:w-auto bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
+          <Img />
 
-        <div className="w-10/12 sm:w-1/2 md:w-1/3 lg:w-1/6 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg">
-          <div className="h-52 bg-primary-color text-white flex items-center justify-center text-xl font-bold">
-            <Img />
-          </div>
           <div className="p-4">
             <Title />
             <Refuge />
