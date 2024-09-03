@@ -1,7 +1,15 @@
+'use client';
+
 import Link from 'next/link';
 import Logo from './Logo';
+import { use, useState } from 'react';
 
 export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <>
       <div className="navbar bg-base-100 bg-primary-color text-text-color">
@@ -57,23 +65,34 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">
-          <button type="button" className="btn btn-ghost btn-circle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          {isOpen && (
+            <div className="m-2 w-full sm:w-64 z-10">
+              <input
+                type="text"
+                placeholder="Rechercher..."
+                className="input input-bordered input-accent w-full max-w-xs"
+                name="search"
               />
-            </svg>
-          </button>
+            </div>
+          )}
         </div>
+        <button type="button" className="btn btn-ghost btn-circle" onClick={toggle}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </button>
+
         <ul className="menu menu-horizontal px-1 text-3xl">
           <li>
             <Link href={'#'}>Login</Link>
