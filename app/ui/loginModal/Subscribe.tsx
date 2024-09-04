@@ -2,17 +2,6 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 export default function Subscribe() {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   fetch('http://localhost:3000/api/register')
-  //     .then((res) => res.json())
-  //     .then((result) => {
-  //       setData(result);
-  //     });
-  // }, []);
-  // console.log(data);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -20,21 +9,11 @@ export default function Subscribe() {
     const data = Object.fromEntries(formData);
 
     try {
-      // const response = await fetch('http://localhost:3000/api/register', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify(data),
-      // });
-
       const response = await axios.post('http://localhost:3000/api/register', data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
-      console.log(response);
 
       if (response) {
         console.log('Signup succesfull');
