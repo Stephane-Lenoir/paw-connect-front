@@ -1,5 +1,5 @@
 import Terms from '../ui/terms/Terms';
-export default function aboutPage() {
+export default function TermsOfUse() {
   return (
     <>
     <Terms />
