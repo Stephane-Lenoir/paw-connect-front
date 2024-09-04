@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function Login() {
+export default function Login({ setIsLogged }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -16,6 +16,8 @@ export default function Login() {
 
       if (response) {
         console.log('Login succesfull');
+        setIsLogged(true); // it display the avatar
+        event.target.closest('dialog').close(); // close modal
       } else {
         console.error('Error during login');
       }

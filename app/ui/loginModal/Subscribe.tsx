@@ -17,6 +17,7 @@ export default function Subscribe() {
 
       if (response) {
         console.log('Signup succesfull');
+        event.target.closest('dialog').close(); // close modal
       } else {
         console.error('Error during signup');
       }
