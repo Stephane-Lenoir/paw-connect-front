@@ -12,7 +12,7 @@ export default function Modal() {
       </Link>
 
       <dialog id="my_modal_1" className="modal h-auto">
-        <div className="modal-box absolute right-50 top-10 rounded-box  flex flex-col items-center space-y-4 p-5 overflow-hidden">
+        <div className="modal-box absolute right-50 top-10 rounded-box  flex flex-col items-center space-y-4 p-5">
           <Subscribe />
           {/* <div className="divider">OU</div> */}
           <Login />

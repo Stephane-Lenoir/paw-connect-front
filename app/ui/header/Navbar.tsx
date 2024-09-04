@@ -41,7 +41,7 @@ export default function NavBar() {
                 <Link href="animals">Adopter</Link>
               </li>
               <li>
-                <Link href={'#'}>Localiser</Link>
+                <Link href="location">Localiser</Link>
               </li>
               <li>
                 <Link href={'#'}>Dons</Link>
@@ -56,7 +56,7 @@ export default function NavBar() {
               <Link href="/animals">Adopter</Link>
             </li>
             <li>
-              <Link href={'#'}>Localiser</Link>
+              <Link href="location">Localiser</Link>
             </li>
             <li>
               <Link href={'#'}>Dons</Link>
