@@ -1,3 +1,5 @@
+'use client';
+
 {
   /* Imports des composants*/
 }
@@ -6,12 +8,9 @@ import Button from './Button';
 import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
+import Modal from '../animalDetailModal/Modal';
 
 export default async function Card() {
-  /* fecth la liste des animaux depuis http://localhost:3000/api/ */
-  //const data = await fetch('http://localhost:3000/api/');
-  // const animals = await data.json();
-  // console.log(animals);
 
   return (
     <>
@@ -33,7 +32,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -45,7 +44,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -55,7 +54,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -65,7 +64,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
       </div>
