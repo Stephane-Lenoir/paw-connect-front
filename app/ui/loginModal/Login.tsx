@@ -12,9 +12,13 @@ export default function Login({ setIsLogged }) {
         headers: {
           'Content-Type': 'application/json',
         },
+        withCredentials: true, // This is important
       });
 
-      if (response) {
+      if (response && response.status === 200) {
+        // Save the token in the local storage
+        // console.log(response.data.token);
+        localStorage.setItem('jwt_token', response.data.token);
         console.log('Login succesfull');
         setIsLogged(true); // it display the avatar
         event.target.closest('dialog').close(); // close modal
