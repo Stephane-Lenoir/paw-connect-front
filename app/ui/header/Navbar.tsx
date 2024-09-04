@@ -46,9 +46,6 @@ export default function NavBar() {
               <li>
                 <Link href={'#'}>Dons</Link>
               </li>
-              <li>
-                <Link href={'#'}>Login</Link>
-              </li>
             </ul>
           </div>
           <Logo />
