@@ -36,13 +36,13 @@ export default function Subscribe() {
 
       console.log(response);
 
-      if (response.ok) {
-        console.log('Inscription réussie');
+      if (response) {
+        console.log('Signup succesfull');
       } else {
-        console.error("Erreur lors de l'inscription");
+        console.error('Error during signup');
       }
     } catch (error) {
-      console.error("Erreur lors de l'envoi des données :", error);
+      console.error('Error while sending data', error);
     }
   };
 
