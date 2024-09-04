@@ -10,8 +10,6 @@ import Refuge from './Refuge';
 import Title from './Title';
 import Modal from '../animalDetailModal/Modal';
 
-import { useState } from 'react';
-
 export default async function Card() {
   // /* fecth la liste des animaux depuis http://localhost:3000/api/ */
 
