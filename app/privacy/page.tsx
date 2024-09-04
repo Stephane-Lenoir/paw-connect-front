@@ -1,8 +1,8 @@
-import About from '../ui/about/About';
-export default function aboutPage() {
+import Privacy from '../ui/privacy/Privacy';
+export default function privacyPage() {
   return (
     <>
-    <About />
+    <Privacy />
     </>
   );
 }
