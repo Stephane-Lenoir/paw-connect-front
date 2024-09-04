@@ -42,7 +42,7 @@ export default function Footer() {
           </nav>
           <nav>
             <h6 className="footer-title">Legal</h6>
-            <Link href={'#'} className="link link-hover">
+            <Link href={'/terms'} className="link link-hover">
              Conditions d'utilisation
             </Link>
             <Link href={'#'} className="link link-hover">
