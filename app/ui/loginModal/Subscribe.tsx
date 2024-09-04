@@ -101,11 +101,11 @@ export default function Subscribe() {
           </svg>
           <input type="password" className="grow" placeholder="Password" name="password" required />
         </label>
-        {/* <select className="select select-bordered w-full" name="role_id" required>
+        <select className="select select-bordered w-full" name="role_id" required>
           <option defaultValue="Etes vous une association?">Etes vous une association?</option>
           <option>Oui</option>
           <option>Non</option>
-        </select> */}
+        </select>
         <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
           S'inscrire
         </button>
