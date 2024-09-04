@@ -8,25 +8,17 @@ import Button from './Button';
 import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
+import Modal from '../animalDetailModal/Modal';
 
 import { useState } from 'react';
-import animalDetailModal from '../animalDetailModal/animalDetailModal';
 
 export default async function Card() {
-  const [isOpen, setIsOpen] = useState(false);
+  // /* fecth la liste des animaux depuis http://localhost:3000/api/ */
 
-  const toggle = () => {
-    setIsOpen(!isOpen);
-  };
-  {
-    /* fecth la liste des animaux depuis http://localhost:3000/api/ */
-  }
-  {
-    /*const data = await fetch('http://localhost:3000/api/'); // const animals = await data.json(); //*/
-  }
-  {
-    /*console.log(animals);*/
-  }
+  //   /*const data = await fetch('http://localhost:3000/api/'); // const animals = await data.json(); //*/
+
+  //   /*console.log(animals);*/
+
   return (
     <>
       <div className="flex flex-wrap justify-center gap-10 m-8">
@@ -47,7 +39,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -59,7 +51,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -69,7 +61,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
 
@@ -79,7 +71,7 @@ export default async function Card() {
           <div className="p-4">
             <Title />
             <Refuge />
-            <Button />
+            <Modal />
           </div>
         </div>
       </div>
