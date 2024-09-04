@@ -1,8 +1,55 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 export default function Subscribe() {
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   fetch('http://localhost:3000/api/register')
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setData(result);
+  //     });
+  // }, []);
+  // console.log(data);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    try {
+      // const response = await fetch('http://localhost:3000/api/register', {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify(data),
+      // });
+
+      const response = await axios.post('http://localhost:3000/api/register', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      console.log(response);
+
+      if (response.ok) {
+        console.log('Inscription réussie');
+      } else {
+        console.error("Erreur lors de l'inscription");
+      }
+    } catch (error) {
+      console.error("Erreur lors de l'envoi des données :", error);
+    }
+  };
+
   return (
     <>
       <h3 className="font-bold text-2xl mb-2 text-center">S'inscrire</h3>
-      <form className="w-full space-y-4">
+      <form className="w-full space-y-4" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2 w-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -54,11 +101,11 @@ export default function Subscribe() {
           </svg>
           <input type="password" className="grow" placeholder="Password" name="password" required />
         </label>
-        <select className="select select-bordered w-full" name="role_id" required>
+        {/* <select className="select select-bordered w-full" name="role_id" required>
           <option defaultValue="Etes vous une association?">Etes vous une association?</option>
           <option>Oui</option>
           <option>Non</option>
-        </select>
+        </select> */}
         <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
           S'inscrire
         </button>
