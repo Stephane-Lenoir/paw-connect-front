@@ -9,7 +9,7 @@ import Title from './Title';
 
 export default async function Card() {
   /* fecth la liste des animaux depuis http://localhost:3000/api/ */
-  const data = await fetch('http://localhost:3000/api/');
+  //const data = await fetch('http://localhost:3000/api/');
   // const animals = await data.json();
   // console.log(animals);
 
