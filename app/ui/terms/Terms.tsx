@@ -42,7 +42,7 @@ const Terms = () => {
                 <p className="mb-4 ml-8 text-lg">Paw Connect se réserve le droit de modifier ces Conditions d'utilisation à tout moment. Les modifications seront publiées sur le Site, et il est de la responsabilité des Utilisateurs de consulter régulièrement ces conditions pour être informés des changements.</p>
 
                 <h2 className="text-3xl font-semibold mb-3">7. Droit Applicable et Juridiction</h2>
-                <p className="mb-4 ml-8 text-lg">Ces Conditions d'utilisation sont régies par les lois de [Pays].</p>
+                <p className="mb-4 ml-8 text-lg">Ces Conditions d'utilisation sont régies par les lois de la république Française.</p>
                 <p className="mb-6 ml-8 text-lg">Tout litige relatif à l'utilisation du Site sera soumis à la compétence exclusive des tribunaux de Paris, France.</p>
 
                 <h2 className="text-3xl font-semibold mb-3 ml-2">8. Contact</h2>
