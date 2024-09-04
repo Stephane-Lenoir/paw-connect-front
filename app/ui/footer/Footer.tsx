@@ -48,7 +48,7 @@ export default function Footer() {
             <Link href={'#'} className="link link-hover">
               Politique de confidentialité
             </Link>
-            <Link href={'#'} className="link link-hover">
+            <Link href={'/cookies'} className="link link-hover">
               Politique de cookies
             </Link>
           </nav>
