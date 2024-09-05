@@ -1,17 +1,13 @@
-'use client';
-
 {
   /* Imports des composants*/
 }
 
-import Button from './Button';
 import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
 import Modal from '../animalDetailModal/Modal';
 
-export default async function Card() {
-
+export default function Card() {
   return (
     <>
       <div className="flex flex-wrap justify-center gap-10 m-8">

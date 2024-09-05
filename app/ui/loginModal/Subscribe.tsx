@@ -1,8 +1,35 @@
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 export default function Subscribe() {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+
+    try {
+      const response = await axios.post('http://localhost:3000/api/register', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response) {
+        console.log('Signup succesfull');
+        event.target.closest('dialog').close(); // close modal
+      } else {
+        console.error('Error during signup');
+      }
+    } catch (error) {
+      console.error('Error while sending data', error);
+    }
+  };
+
   return (
     <>
       <h3 className="font-bold text-2xl mb-2 text-center">S'inscrire</h3>
-      <form className="w-full space-y-4">
+      <form className="w-full space-y-4" onSubmit={handleSubmit}>
         <label className="input input-bordered flex items-center gap-2 w-full">
           <svg
             xmlns="http://www.w3.org/2000/svg"

@@ -6,7 +6,7 @@ export default function Animals() {
   return (
     <>
       <Rules />
-      <div className="flex flex-wrap gap-5 justify-center">
+      <div className="flex flex-wrap gap-5 justify-center items-center mb-5">
         <Filtres />
         <Cards />
       </div>

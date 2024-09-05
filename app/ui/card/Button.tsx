@@ -1,4 +1,4 @@
-export default async function Button() {
+export default function Button() {
   return (
     <>
       <button
