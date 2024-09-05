@@ -4,8 +4,7 @@ import NavBar from "../header/Navbar";
 const Cookies = () => {
     return (
         <div className="flex flex-col min-h-screen">
-        <NavBar />
-        <div className="flex-1 flex flex-col justify-center leading-none pr-8">
+        <NavBar />        
         <h1 className="text-4xl font-bold mb-8 mt-4 text-center">Politique des Cookies</h1>
                     <p className="text-xl leading-none mb-2">Dernière mise à jour : 04/09/2024</p>
                     <p className="text-xl leading-none mb-2">Chez Paw Connect, nous utilisons des cookies et des technologies similaires pour améliorer votre expérience sur notre site internet Paw Connect. </p>
@@ -60,7 +59,7 @@ const Cookies = () => {
                     <p className="text-xl leading-none mb-2">pawconnect@gmail.com</p>
                 <h3 className="text-2xl font-semibold underline mb-2">Adresse postale :</h3> 
                     <p className="text-xl leading-none mb-2">9 rue des Chats, 75000 Paris, France</p>
-        </div>
+        
       <Footer />
       </div>
     );
