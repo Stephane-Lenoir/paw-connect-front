@@ -22,6 +22,7 @@ export default function Login({ setIsLogged }) {
         console.log('Login succesfull');
         setIsLogged(true); // it display the avatar
         event.target.closest('dialog').close(); // close modal
+        event.target.reset(); // reset the form
       } else {
         console.error('Error during login');
       }
@@ -71,10 +72,6 @@ export default function Login({ setIsLogged }) {
           <button className="btn">Fermer</button>
         </form>
       </div>
-
-      <form method="dialog" className="modal-backdrop ">
-        <button className="cursor-default">close</button>
-      </form>
     </>
   );
 }

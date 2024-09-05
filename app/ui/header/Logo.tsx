@@ -5,7 +5,7 @@ export default function Logo() {
   return (
     <>
       <Link href="/" className="text-xl ">
-        <Image src="/logo.png" alt="logo" width={200} height={200}></Image>
+        <Image src="/logo.png" alt="logo" width={220} height={220}></Image>
       </Link>
     </>
   );

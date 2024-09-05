@@ -65,7 +65,7 @@ export function Add() {
         </div>
 
         <div className="modal-action mt-6 flex justify-center">
-          <button type="submit" className="btn btn-primary">
+          <button type="submit" className="btn bg-primary-color hover:bg-secondary-color">
             Créer
           </button>
         </div>

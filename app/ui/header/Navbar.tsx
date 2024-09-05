@@ -20,7 +20,7 @@ export default function NavBar() {
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
+                className="h-6 w-6"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -35,16 +35,22 @@ export default function NavBar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow text-3xl"
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 p-2 shadow "
             >
               <li>
-                <Link href="animals">Adopter</Link>
+                <Link href="animals" className="text-lg">
+                  Adopter
+                </Link>
               </li>
               <li>
-                <Link href="location">Localiser</Link>
+                <Link href="location" className="text-lg">
+                  Localiser
+                </Link>
               </li>
               <li>
-                <Link href={'#'}>Dons</Link>
+                <Link href={'#'} className="text-lg">
+                  Dons
+                </Link>
               </li>
             </ul>
           </div>

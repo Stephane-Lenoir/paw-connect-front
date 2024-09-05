@@ -53,15 +53,15 @@ export default function Modal() {
           {isDropdownOpen && (
             <div
               id="userDropdown"
-              className="bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600"
+              className="text-gray"
               style={{
                 position: 'absolute',
-                top: 70,
-                right: 10,
+                top: '120%',
+                right: '5%',
                 zIndex: 1000,
               }}
             >
-              <div className="px-4 py-3 text-sm text-gray-900 dark:text-white">
+              <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600">
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
                   aria-labelledby="avatarButton"
@@ -69,7 +69,7 @@ export default function Modal() {
                   <li>
                     <Link
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
                     </Link>
@@ -77,24 +77,16 @@ export default function Modal() {
                   <li>
                     <Link
                       href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                      className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Settings
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Earnings
                     </Link>
                   </li>
                 </ul>
                 <div className="py-1">
                   <Link
                     href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    className="block px-4 py-2 text-lg text-stone-950	hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     onClick={handleLogout}
                   >
                     Logout
