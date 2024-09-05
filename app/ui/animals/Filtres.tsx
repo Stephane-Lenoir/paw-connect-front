@@ -3,9 +3,9 @@ import Link from 'next/link';
 export default function Filtres() {
   return (
     <>
-      <div className=" sm:w-1/6 bg-primary-color flex flex-col items-center sm:h-screen mt-5 mb-5 rounded-xl">
+      <div className="w-4/5 sm:w-1/6 md:w-4/5 lg:w-1/6 bg-primary-color flex flex-col items-center sm:h-screen md:h-96 lg:h-screen mt-5 mb-5 rounded-xl">
+        {' '}
         <h3 className="text-2xl"> Filtres </h3>
-
         <div className="collapse collapse-arrow bg-primary-color">
           <input type="radio" name="my-accordion-2" defaultChecked />
           <div className="collapse-title text-xl font-medium">Âge</div>
@@ -23,7 +23,6 @@ export default function Filtres() {
             </select>
           </div>
         </div>
-
         <div className="collapse collapse-arrow bg-primary-color">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">Sexe</div>
@@ -37,7 +36,6 @@ export default function Filtres() {
             </Link>
           </div>
         </div>
-
         <div className="collapse collapse-arrow bg-primary-color">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">Espéces</div>
@@ -55,7 +53,6 @@ export default function Filtres() {
             </Link>
           </div>
         </div>
-
         <div className="collapse collapse-arrow bg-primary-color">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">Races </div>
@@ -66,7 +63,6 @@ export default function Filtres() {
             </Link>
           </div>
         </div>
-
         <div className="collapse collapse-arrow bg-primary-color">
           <input type="radio" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">Disponibilité</div>
