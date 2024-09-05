@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Login from './Login';
 import Subscribe from './Subscribe';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Modal() {
   const [isLogged, setIsLogged] = useState(false);
@@ -11,6 +11,19 @@ export default function Modal() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      setIsLogged(true);
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem('jwt_token');
+    setIsLogged(false);
+    setIsDropdownOpen(false);
   };
 
   return (
@@ -82,9 +95,9 @@ export default function Modal() {
                   <Link
                     href="#"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                    onClick={() => setIsLogged(false)}
+                    onClick={handleLogout}
                   >
-                    Sign out
+                    Logout
                   </Link>
                 </div>
               </div>
