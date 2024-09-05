@@ -29,6 +29,7 @@ export default function Login({ setIsLogged }) {
       console.error('Error while sending data', error);
     }
   };
+
   return (
     <>
       <h3 className="font-bold text-2xl mb-2 text-center">Login</h3>
