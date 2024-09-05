@@ -15,9 +15,9 @@ export default function Animals() {
     try {
       // Get the token from the local storage
       const token = localStorage.getItem('jwt_token');
-      if (!token) {
-        throw new Error('No token found');
-      }
+      // if (!token) {
+      //   throw new Error('No token found');
+      // }
 
       const res = await axios.post(
         'http://localhost:3000/api/animals',
