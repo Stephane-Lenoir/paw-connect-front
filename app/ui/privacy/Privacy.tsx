@@ -3,8 +3,9 @@ import NavBar from "../header/Navbar";
 
 const Privacy = () => {
     return (
-        <div className="p-8">
+        <div>
             <NavBar />
+            <div className="p-8">
             <h1 className="text-5xl font-bold mb-4 text-center">Politique de Confidentialité</h1>
                     <p className="mb-2 ml-8 text-lg">Dernière mise à jour : 04/09/2024</p>
                     <p className="mb-2 ml-8 text-lg">Chez Paw Connect, nous nous engageons à protéger la confidentialité des informations personnelles de nos utilisateurs. </p>
@@ -69,6 +70,7 @@ const Privacy = () => {
                     <p className="mb-2 ml-8 text-lg">Nous nous réservons le droit de modifier cette Politique de Confidentialité à tout moment.</p>
                     <p className="mb-2 ml-8 text-lg">Toute modification sera publiée sur cette page, et, si les changements sont significatifs, nous vous en informerons par e-mail ou par une notification sur le Site.</p>
                     <p className="mb-2 ml-8 text-lg">Nous vous encourageons à consulter régulièrement cette page pour rester informé de nos pratiques en matière de confidentialité.</p>
+            </div>
             <Footer />
         </div>
     );

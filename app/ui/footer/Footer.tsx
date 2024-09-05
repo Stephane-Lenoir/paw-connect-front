@@ -56,7 +56,7 @@ export default function Footer() {
           <nav>
             <h6 className="footer-title">Company</h6>
             <Link href={'/about'} className="link link-hover">
-              A propos
+             À propos
             </Link>
             <Link href={'mailto:pawconnect@gamil.com'} className="link link-hover" target="_blank">
               Contact
