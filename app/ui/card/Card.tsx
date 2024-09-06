@@ -26,8 +26,8 @@ export default function Card() {
             <Img photo={animal.photo} />
 
             <div className="p-4">
-              <Title name={animal.name} />
-              <Refuge />
+              <Title name={animal.name} gender={animal.gender} />
+              <Refuge refuge={animal.user.name} />
               <Modal animal={animal} />
             </div>
           </div>

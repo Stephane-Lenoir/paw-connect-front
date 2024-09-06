@@ -35,11 +35,16 @@ export default function NavBar() {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 p-2 shadow "
+              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 p-2 shadow w-32 "
             >
               <li>
+                <Link href="/" className="text-lg">
+                  Accueil
+                </Link>
+              </li>
+              <li>
                 <Link href="animals" className="text-lg">
-                  Adopter
+                  Les animaux
                 </Link>
               </li>
               <li>
@@ -59,7 +64,11 @@ export default function NavBar() {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-3xl">
             <li>
-              <Link href="/animals">Adopter</Link>
+              <Link href="/">Accueil</Link>
+            </li>
+
+            <li>
+              <Link href="/animals">Les animaux</Link>
             </li>
             <li>
               <Link href="location">Localiser</Link>

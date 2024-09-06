@@ -1,7 +1,7 @@
-export default function Refuge() {
+export default function Refuge({ refuge }) {
   return (
     <>
-      <p>Refuge des Pattes Joyeuses</p>
+      <p>Refuge : {refuge}</p>
     </>
   );
 }

@@ -1,7 +1,9 @@
-export default function Title({ name }) {
+export default function Title({ name, gender }) {
   return (
     <>
-      <p className="font-bold">{name}, mâle 🐾</p>
+      <p className="font-bold">
+        {name}, {gender} 🐾
+      </p>
     </>
   );
 }
