@@ -11,46 +11,42 @@ export default function Animals() {
   const [animals, setAnimals] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      // Get the token from the local storage
-      const token = localStorage.getItem('jwt_token');
-      // if (!token) {
-      //   throw new Error('No token found');
-      // }
+  // const fetchData = async () => {
+  //   try {
+  // Get the token from the local storage
+  //     const token = localStorage.getItem('jwt_token');
 
-      const res = await axios.post(
-        'http://localhost:3000/api/animals',
-        {},
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          withCredentials: true,
-        },
-      );
+  //     const res = await axios.post(
+  //       'http://localhost:3000/api/animals',
+  //       {},
+  //       {
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         withCredentials: true,
+  //       },
+  //     );
 
-      setAnimals(res.data);
-      console.log(res.data);
-    } catch (err) {
-      console.error('Error fetching animals:', err);
-      setError(err.message || 'Failed to fetch animals');
-    }
-  };
+  //     setAnimals(res.data);
+  //     console.log(res.data);
+  //   } catch (err) {
+  //     console.error('Error fetching animals:', err);
+  //     setError(err.message || 'Failed to fetch animals');
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
-  if (error) return <div>Error: {error}</div>;
+  // if (error) return <div>Error: {error}</div>;
 
   return (
     <>
       <Rules />
       <div className="flex flex-wrap gap-5 justify-center items-center mb-5">
         <Filtres />
-        <Cards animals={animals} />
+        <Cards />
       </div>
     </>
   );
