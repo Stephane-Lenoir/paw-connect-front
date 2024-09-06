@@ -5,7 +5,8 @@ import Img from './Img';
 import Refuge from './Refuge';
 import Title from './Title';
 import Modal from './Modal';
-import { getAnimals, getAllAnimals } from '../../services/api';
+import { getAnimals } from '../../services/Home';
+import { getAllAnimals } from '../../services/Animals';
 
 export default function Card() {
   const [animals, setAnimals] = useState([]);
