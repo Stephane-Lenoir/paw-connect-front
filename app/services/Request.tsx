@@ -1,33 +1,38 @@
-import axios from 'axios';
+import api from './axiosConfig';
 
 // Route Requests
 
 export async function getAllRequests() {
-  const response = axios.get('http://localhost:3000/api/requests');
+  return api.get('requests');
 
-  return response;
+  // const response = axios.get('http://localhost:3000/api/requests');
+  // return response;
 }
 
 export async function getRequestById(id) {
-  const response = axios.get(`http://localhost:3000/api/requests/${id}`);
+  return api.get(`requests/${id}`);
 
-  return response;
+  // const response = axios.get(`http://localhost:3000/api/requests/${id}`);
+  // return response;
 }
 
 export async function createRequest(request) {
-  const response = axios.post('http://localhost:3000/api/requests', request);
+  return api.post('requests', request);
 
-  return response;
+  // const response = axios.post('http://localhost:3000/api/requests', request);
+  // return response;
 }
 
 export async function updateRequest(id, request) {
-  const response = axios.put(`http://localhost:3000/api/requests/${id}`, request);
+  return api.put(`requests/${id}`, request);
 
-  return response;
+  // const response = axios.put(`http://localhost:3000/api/requests/${id}`, request);
+  // return response;
 }
 
 export async function deleteRequest(id) {
-  const response = axios.delete(`http://localhost:3000/api/requests/${id}`);
+  return api.delete(`requests/${id}`);
 
-  return response;
+  // const response = axios.delete(`http://localhost:3000/api/requests/${id}`);
+  // return response;
 }

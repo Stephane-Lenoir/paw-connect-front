@@ -1,21 +1,24 @@
-import axios from 'axios';
+import api from './axiosConfig';
 
 //Route User
 
 export async function getUser() {
-  const response = axios.get('http://localhost:3000/api/profiles');
+  return api.get('profiles');
 
-  return response;
+  // const response = axios.get('http://localhost:3000/api/profiles');
+  // return response;
 }
 
 export async function updateUserById(id) {
-  const response = axios.put(`http://localhost:3000/api/profiles/${id}`);
+  return api.put(`profiles/${id}`);
 
-  return response;
+  // const response = axios.put(`http://localhost:3000/api/profiles/${id}`);
+  // return response;
 }
 
 export async function deleteUserById(id) {
-  const response = axios.delete(`http://localhost:3000/api/profiles/${id}`);
+  return api.delete(`profiles/${id}`);
 
-  return response;
+  // const response = axios.delete(`http://localhost:3000/api/profiles/${id}`);
+  // return response;
 }

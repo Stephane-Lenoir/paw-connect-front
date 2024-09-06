@@ -1,8 +1,9 @@
-import axios from 'axios';
+import api from './axiosConfig';
 
 // Route Home
 export async function getAnimals() {
-  const response = axios.get('http://localhost:3000/api/');
+  return api.get('/');
 
-  return response;
+  // const response = axios.get('http://localhost:3000/api/');
+  // return response;
 }

@@ -1,32 +1,37 @@
+import api from './axiosConfig';
+
 // Route Animals
-import axios from 'axios';
-
 export async function getAllAnimals() {
-  const response = axios.get('http://localhost:3000/api/animals');
+  return api.get('animals');
 
-  return response;
+  // const response = axios.get('http://localhost:3000/api/animals');
+  // return response;
 }
 
 export async function getAnimalById(id) {
-  const response = axios.get(`http://localhost:3000/api/animals/${id}`);
+  return api.get(`animals/${id}`);
 
-  return response;
+  // const response = axios.get(`http://localhost:3000/api/animals/${id}`);
+  // return response;
 }
 
 export async function createAnimal(animal) {
-  const response = axios.post('http://localhost:3000/api/animals', animal);
+  return api.post('animals', animal);
 
-  return response;
+  // const response = axios.post('http://localhost:3000/api/animals', animal);
+  // return response;
 }
 
 export async function updateAnimal(id, animal) {
-  const response = axios.put(`http://localhost:3000/api/animals/${id}`, animal);
+  return api.put(`animals/${id}`, animal);
 
-  return response;
+  // const response = axios.put(`http://localhost:3000/api/animals/${id}`, animal);
+  // return response;
 }
 
 export async function deleteAnimal(id) {
-  const response = axios.delete(`http://localhost:3000/api/animals/${id}`);
+  return api.delete(`animals/${id}`);
 
-  return response;
+  // const response = axios.delete(`http://localhost:3000/api/animals/${id}`);
+  // return response;
 }
