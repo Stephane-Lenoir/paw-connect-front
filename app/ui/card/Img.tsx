@@ -1,15 +1,17 @@
 import Image from 'next/image';
 
-export default function Img() {
+export default function Img({ photo }) {
   return (
     <>
-      <Image
-        src="/chien.jpg"
-        alt="Chien"
-        className="max-w-auto h-auto bg-primary-color text-white flex items-center justify-center text-xl font-bold"
-        width={400}
-        height={500}
-      ></Image>
+      <div className="w-full h-80 relative overflow-hidden rounded-lg">
+        <Image
+          src={photo}
+          alt="Animal"
+          layout="fill"
+          objectFit="cover"
+          className="bg-primary-color"
+        />
+      </div>
     </>
   );
 }
