@@ -1,6 +1,5 @@
 import api from './axiosConfig';
 
-const BASE_URL = 'http://localhost:3000/api';
 
 // Route Requests
 export async function getAllRequests() {
