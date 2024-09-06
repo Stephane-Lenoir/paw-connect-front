@@ -1,6 +1,12 @@
 import axios from 'axios';
 
 export async function getAnimals() {
+  const response = axios.get('http://localhost:3000/api/');
+
+  return response;
+}
+
+export async function getAllAnimals() {
   const response = axios.get('http://localhost:3000/api/animals');
 
   return response;

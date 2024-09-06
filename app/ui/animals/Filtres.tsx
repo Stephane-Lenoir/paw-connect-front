@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Filtres() {
   return (
     <>
-      <div className="w-4/5 sm:w-1/6 md:w-4/5 lg:w-1/6 bg-primary-color flex flex-col items-center sm:h-screen md:h-1/6 lg:h-screen mt-5 mb-5 rounded-xl">
+      <div className="w-4/5 sm:w-1/6 md:w-4/5 lg:w-1/6 bg-primary-color flex flex-col sm:h-screen md:h-1/6 lg:h-screen mt-5 mb-5 rounded-xl">
         {' '}
         <h3 className="text-center text-3xl mt-6 mb-6"> Filtres </h3>
         <div className="collapse collapse-arrow bg-primary-color ">

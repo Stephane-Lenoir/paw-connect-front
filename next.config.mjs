@@ -6,6 +6,8 @@ const nextConfig = {
       'cataas.com',
       'www.lesrecettesdedaniel.fr',
       'www.publicdomainpictures.net',
+      'example.com',
+      'via.placeholder.com',
     ],
   },
 };
