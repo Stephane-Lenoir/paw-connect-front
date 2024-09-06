@@ -1,7 +1,7 @@
-export default function Title() {
+export default function Title({ name }) {
   return (
     <>
-      <p className="font-bold">Milo, mâle 🐾</p>
+      <p className="font-bold">{name}, mâle 🐾</p>
     </>
   );
 }
