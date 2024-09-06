@@ -1,17 +1,22 @@
 import api from './axiosConfig';
 
-// Route Assocations
-
+// Route Associations
 export async function getAllAssociations() {
-  return api.get('associations');
-
-  // const response = axios.get('http://localhost:3000/api/associations');
-  // return response;
+  try {
+    const response = await api.get('associations');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function getAssociationById(id) {
-  return api.get(`associations/${id}`);
-
-  // const response = axios.get(`http://localhost:3000/api/associations/${id}`);
-  // return response;
+  try {
+    const response = await api.get(`associations/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }

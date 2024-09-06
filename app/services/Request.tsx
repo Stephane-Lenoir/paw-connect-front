@@ -1,38 +1,56 @@
 import api from './axiosConfig';
 
+const BASE_URL = 'http://localhost:3000/api';
+
 // Route Requests
-
 export async function getAllRequests() {
-  return api.get('requests');
 
-  // const response = axios.get('http://localhost:3000/api/requests');
-  // return response;
+  try {
+    const response = await api.get("requests");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function getRequestById(id) {
-  return api.get(`requests/${id}`);
-
-  // const response = axios.get(`http://localhost:3000/api/requests/${id}`);
-  // return response;
+  try {
+    const response = await api.get(`requests/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function createRequest(request) {
-  return api.post('requests', request);
-
-  // const response = axios.post('http://localhost:3000/api/requests', request);
-  // return response;
+  try {
+    const response = await api.post("requests", request);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function updateRequest(id, request) {
-  return api.put(`requests/${id}`, request);
-
-  // const response = axios.put(`http://localhost:3000/api/requests/${id}`, request);
-  // return response;
+  try {
+    const response = await api.put(`requests/${id}`, request);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function deleteRequest(id) {
-  return api.delete(`requests/${id}`);
-
-  // const response = axios.delete(`http://localhost:3000/api/requests/${id}`);
-  // return response;
+  try {
+    const response = await axios.delete(`${BASE_URL}/requests/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+>>>>>>> c4b4845 (better way  of the fetch methods)
 }

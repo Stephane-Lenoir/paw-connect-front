@@ -28,7 +28,7 @@ export default function Card() {
         }
         if (data) {
           console.log(data);
-          setAnimals(data.data);
+          setAnimals(data);
         }
       };
       fetchData();

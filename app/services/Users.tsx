@@ -1,24 +1,36 @@
 import api from './axiosConfig';
 
-//Route User
 
+
+// Route User
 export async function getUser() {
-  return api.get('profiles');
 
-  // const response = axios.get('http://localhost:3000/api/profiles');
-  // return response;
+  try {
+    const response = await api.get("profiles");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
-export async function updateUserById(id) {
-  return api.put(`profiles/${id}`);
-
-  // const response = axios.put(`http://localhost:3000/api/profiles/${id}`);
-  // return response;
+export async function updateUserById(id, user) {
+  try {
+    const response = await api.put(`profiles/${id}`, user);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
 
 export async function deleteUserById(id) {
-  return api.delete(`profiles/${id}`);
-
-  // const response = axios.delete(`http://localhost:3000/api/profiles/${id}`);
-  // return response;
+  try {
+    const response = await api.delete(`/profiles/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+>>>>>>> c4b4845 (better way  of the fetch methods)
 }
