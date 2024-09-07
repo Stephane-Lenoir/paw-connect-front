@@ -1,12 +1,9 @@
 import api from './axiosConfig';
 
-
-
 // Route User
 export async function getUser() {
-
   try {
-    const response = await api.get("profiles");
+    const response = await api.get('profiles');
     return response.data;
   } catch (error) {
     console.error(error);
@@ -32,5 +29,4 @@ export async function deleteUserById(id) {
     console.error(error);
     throw error;
   }
->>>>>>> c4b4845 (better way  of the fetch methods)
 }

@@ -1,11 +1,9 @@
 import api from './axiosConfig';
 
-
 // Route Requests
 export async function getAllRequests() {
-
   try {
-    const response = await api.get("requests");
+    const response = await api.get('requests');
     return response.data;
   } catch (error) {
     console.error(error);
@@ -25,7 +23,7 @@ export async function getRequestById(id) {
 
 export async function createRequest(request) {
   try {
-    const response = await api.post("requests", request);
+    const response = await api.post('requests', request);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -45,11 +43,10 @@ export async function updateRequest(id, request) {
 
 export async function deleteRequest(id) {
   try {
-    const response = await axios.delete(`${BASE_URL}/requests/${id}`);
+    const response = await axios.delete(`requests/${id}`);
     return response.data;
   } catch (error) {
     console.error(error);
     throw error;
   }
->>>>>>> c4b4845 (better way  of the fetch methods)
 }

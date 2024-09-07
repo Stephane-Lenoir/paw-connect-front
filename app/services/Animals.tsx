@@ -3,7 +3,7 @@ import api from './axiosConfig';
 // Route Animals
 export async function getAllAnimals() {
   try {
-    const response = await api.get(`${BASE_URL}/animals`);
+    const response = await api.get('animals');
     return response.data;
   } catch (error) {
     console.error(error);
