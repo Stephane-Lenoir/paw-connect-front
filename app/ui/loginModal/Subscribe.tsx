@@ -94,7 +94,7 @@ export default function Subscribe() {
         </label>
         <select
           className="select select-bordered w-full text-gray-900 text-lg"
-          name="role_id"
+          name="isAssociation"
           required
         >
           <option defaultValue="Etes vous une association?">Etes vous une association?</option>
