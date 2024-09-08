@@ -1,8 +1,10 @@
 import Image from 'next/image';
+import Menu from '../dashboard/Menu';
 
 export function Add() {
   return (
     <div className="container mx-auto px-4 py-8">
+      <Menu />
       <h3 className="font-bold text-2xl mb-6 text-center">Ajout d'un animal</h3>
       <form className="w-full max-w-lg mx-auto space-y-6">
         <div className="mb-4">
@@ -65,8 +67,8 @@ export function Add() {
         </div>
 
         <div className="modal-action mt-6 flex justify-center">
-          <button type="submit" className="btn bg-primary-color hover:bg-secondary-color">
-            Créer
+          <button type="submit" className="btn bg-primary-color w-full hover:bg-secondary-color">
+            Ajouter
           </button>
         </div>
       </form>
