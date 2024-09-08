@@ -68,7 +68,7 @@ export default function Modal() {
                 >
                   <li>
                     <Link
-                      href="#"
+                      href="dashboard"
                       className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
                       Dashboard
