@@ -1,13 +1,11 @@
+import Menu from './Menu';
+
 export default function Profil() {
   return (
-    <div className="bg-background-color w-full min-h-screen p-8">
-      <label
-        htmlFor="my-drawer-2"
-        className="btn bg-primary-color hover:bg-secondary-color drawer-button lg:hidden mb-8"
-      >
-        Menu
-      </label>
-      <h1 className="text-3xl font-bold text-text-color mb-6">Votre profil</h1>
+    <div className="w-full min-h-screen p-8">
+      <Menu />
+
+      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">Votre profil</h1>
       <form className="bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto">
         <div className="mb-4">
           <label htmlFor="firstName" className="block text-text-color text-sm font-bold mb-2">
