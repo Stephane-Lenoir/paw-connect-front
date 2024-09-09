@@ -1,32 +1,23 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-import { getAnimalByUserId } from '../../services/Animals';
+import { getAnimalByUserId, updateAnimal } from '../../services/Animals';
 import Image from 'next/image';
 
 export function EditAnimal() {
   const [animals, setAnimals] = useState([]);
   const [userId, setUserId] = useState(null);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
 
     if (token) {
-      // Divisez le token en trois parties : en-tête, charge utile et signature
       const [header, payload, signature] = token.split('.');
-
-      // console.log(signature);
-
-      // La charge utile est la partie du token qui contient les données utilisateur, qui est encodée en base64
-      // Décodez la charge utile en JSON
       const decodedPayload = JSON.parse(atob(payload));
-
-      // Extrayez l'ID utilisateur de la charge utile
-      setUserId(decodedPayload.id); // Assurez-vous que votre token contient une propriété 'id'
+      setUserId(decodedPayload.id);
     }
 
-    // Fetch the animals of the user
     const fetchData = async () => {
       try {
         const data = await getAnimalByUserId(userId);
@@ -37,6 +28,43 @@ export function EditAnimal() {
     };
     fetchData();
   }, [userId]);
+
+  const handleChange = (e, animalId, field) => {
+    const updatedAnimals = animals.map((animal) => {
+      if (animal.id === animalId) {
+        return { ...animal, [field]: e.target.value };
+      }
+      return animal;
+    });
+    setAnimals(updatedAnimals);
+  };
+
+  const handleSave = async (e, animalId) => {
+    e.preventDefault();
+    const updatedAnimal = {
+      name: e.target.name.value,
+      description: e.target.description.value,
+      availability: e.target.availability.value,
+      gender: e.target.gender.value,
+      race: e.target.race.value,
+      location: e.target.location.value,
+      species: e.target.species.value,
+    };
+    try {
+      await updateAnimal(animalId, updatedAnimal);
+      setEditMode(false);
+      // Mettre à jour l'état local avec les nouvelles données de l'animal
+      const updatedAnimals = animals.map((animal) => {
+        if (animal.id === animalId) {
+          return { ...animal, ...updatedAnimal };
+        }
+        return animal;
+      });
+      setAnimals(updatedAnimals);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -58,17 +86,43 @@ export function EditAnimal() {
             </div>
 
             <div className="p-4">
-              <p>Nom : {animal.name}</p>
-              <p>Description : {animal.description}</p>
-              <p>Disponibilité : {animal.availability}</p>
-              <p>Genre : {animal.gender}</p>
-              <p>Race : {animal.race}</p>
-              <p>Location : {animal.location}</p>
-              <p>Espéce : {animal.species}</p>
+              {editMode ? (
+                // Afficher les champs en mode édition
+                <form
+                  onSubmit={(e) => handleSave(e, animal.id)}
+                  className="flex flex-col items-center"
+                >
+                  <input type="text" name="name" defaultValue={animal.name} />
+                  <input type="text" name="description" defaultValue={animal.description} />
+                  <input type="text" name="availability" defaultValue={animal.availability} />
+                  <input type="text" name="gender" defaultValue={animal.gender} />
+                  <input type="text" name="race" defaultValue={animal.race} />
+                  <input type="text" name="location" defaultValue={animal.location} />
+                  <input type="text" name="species" defaultValue={animal.species} />
+                  <button
+                    type="submit"
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                  >
+                    Enregistrer
+                  </button>
+                </form>
+              ) : (
+                // Afficher les champs en mode lecture
+                <>
+                  <p>Nom : {animal.name}</p>
+                  <p>Description : {animal.description}</p>
+                  <p>Disponibilité : {animal.availability}</p>
+                  <p>Genre : {animal.gender}</p>
+                  <p>Race : {animal.race}</p>
+                  <p>Location : {animal.location}</p>
+                  <p>Espéce : {animal.species}</p>
+                </>
+              )}
 
-              <div className="flex">
+              <div className="flex flex-wrap">
                 <button
                   type="button"
+                  onClick={() => setEditMode(!editMode)}
                   className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
                 >
                   Modifier
