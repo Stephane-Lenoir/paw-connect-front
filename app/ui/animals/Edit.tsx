@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getAnimalByUserId, updateAnimal } from '../../services/Animals';
+import { deleteAnimal, getAnimalByUserId, updateAnimal } from '../../services/Animals';
 import Image from 'next/image';
 
 export function EditAnimal() {
@@ -60,6 +60,17 @@ export function EditAnimal() {
         }
         return animal;
       });
+      setAnimals(updatedAnimals);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (animalId) => {
+    try {
+      await deleteAnimal(animalId);
+      // Mettre à jour l'état local pour supprimer l'animal de la liste
+      const updatedAnimals = animals.filter((animal) => animal.id !== animalId);
       setAnimals(updatedAnimals);
     } catch (error) {
       console.error(error);
@@ -130,6 +141,7 @@ export function EditAnimal() {
 
                 <button
                   type="button"
+                  onClick={() => handleDelete(animal.id)}
                   className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
                 >
                   Supprimer
