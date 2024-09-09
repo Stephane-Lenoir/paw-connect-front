@@ -10,17 +10,23 @@ export default function Filtres() {
           <input type="checkbox" name="my-accordion-2" defaultChecked />
           <div className="collapse-title text-xl font-medium ">Âge</div>
           <div className="collapse-content bg-secondary-color">
-            <label htmlFor="age-select" className="block mb-2 text-lg">
+            <label htmlFor="age-range" className="block mb-2 text-lg">
               Sélectionnez un âge :
             </label>
-            <select id="age-select" className="p-2 rounded-lg bg-white ">
-              {/* Génère une option pour chaque âge entre 1 et 25 */}
+            <input
+              type="range"
+              id="age-range"
+              min="1"
+              max="25"
+              defaultValue="1"
+              className="range"
+              step="1"
+            />
+            <div className="flex w-full justify-between px-2 text-xs">
               {[...Array(25)].map((_, index) => (
-                <option key={index + 1} value={index + 1}>
-                  {index + 1} ans
-                </option>
+                <span key={index + 1}>{index + 1}</span>
               ))}
-            </select>
+            </div>
           </div>
         </div>
         <div className="collapse collapse-arrow bg-background-color">
