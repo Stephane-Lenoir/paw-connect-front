@@ -8,7 +8,7 @@ export default function Modal({ animal }) {
     <>
       <Link
         className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
-        href={'#'}
+        href={`/${animal.id}`}
         onClick={(e) => {
           e.preventDefault();
           document.getElementById(`modal_${animal.id}`).showModal();
@@ -35,12 +35,18 @@ export default function Modal({ animal }) {
             </ul>
           </div>
           <div className="flex space-x-4 mt-4">
-            <button className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out flex-1 text-base font-caveat">
+            <Link
+              className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+              href={`/adoption`}
+            >
               Héberger
-            </button>
-            <button className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out flex-1 text-base font-caveat">
+            </Link>
+            <Link
+              className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+              href={`/accomodation`}
+            >
               Adopter
-            </button>
+            </Link>
           </div>
         </div>
       </dialog>
