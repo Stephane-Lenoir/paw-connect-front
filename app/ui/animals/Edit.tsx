@@ -8,36 +8,41 @@ export function EditAnimal() {
   const [animals, setAnimals] = useState([]);
   const [userId, setUserId] = useState(null);
   const [editMode, setEditMode] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
 
     if (token) {
-      const [header, payload, signature] = token.split('.');
+      const [, payload] = token.split('.');
       const decodedPayload = JSON.parse(atob(payload));
       setUserId(decodedPayload.id);
+    } else {
+      setError('No JWT token found. Please log in.');
+      setLoading(false);
     }
+  }, []);
 
+  useEffect(() => {
     const fetchData = async () => {
-      try {
-        const data = await getAnimalByUserId(userId);
-        setAnimals(data);
-      } catch (error) {
-        console.log(error);
+      if (userId) {
+        try {
+          setLoading(true);
+          const data = await getAnimalByUserId(userId);
+          setAnimals(data);
+          setLoading(false);
+        } catch (error) {
+          console.error(error);
+          setError('Failed to fetch animals. Please try again later.');
+          setLoading(false);
+        }
       }
     };
+
     fetchData();
   }, [userId]);
-
-  const handleChange = (e, animalId, field) => {
-    const updatedAnimals = animals.map((animal) => {
-      if (animal.id === animalId) {
-        return { ...animal, [field]: e.target.value };
-      }
-      return animal;
-    });
-    setAnimals(updatedAnimals);
-  };
 
   const handleSave = async (e, animalId) => {
     e.preventDefault();
@@ -110,6 +115,7 @@ export function EditAnimal() {
                   <input type="text" name="race" defaultValue={animal.race} />
                   <input type="text" name="location" defaultValue={animal.location} />
                   <input type="text" name="species" defaultValue={animal.species} />
+
                   <button
                     type="submit"
                     className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"

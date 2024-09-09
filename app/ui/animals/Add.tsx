@@ -51,7 +51,11 @@ export function Add() {
       <div className="container mx-auto px-4 py-8">
         <Menu />
         <h3 className="font-bold text-2xl mb-6 text-center">Ajout d'un animal</h3>
-        <form className="w-full max-w-lg mx-auto space-y-6" onSubmit={handleSubmit}>
+        <form
+          className="w-full max-w-lg mx-auto space-y-6"
+          onSubmit={handleSubmit}
+          enctype="multipart/form-data"
+        >
           <div className="mb-4">
             <Image
               src="/chien.jpg"
@@ -118,7 +122,7 @@ export function Add() {
           </div>
 
           <label className="input input-bordered flex items-center gap-2 w-full">
-            <input type="text" className="grow" name="photo" placeholder="url photo de l'animal" />
+            <input type="file" className="file-input file-input-bordered w-full max-w-xs" />
           </label>
 
           {/* <div className="mb-4">
