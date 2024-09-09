@@ -3,8 +3,6 @@ import Menu from '../dashboard/Menu';
 import { createAnimal } from '../../services/Animals';
 import { useState, useEffect } from 'react';
 
-import { EditAnimal } from './Edit';
-
 export function Add() {
   const [userId, setUserId] = useState(null);
 
@@ -136,7 +134,6 @@ export function Add() {
           </div>
         </form>
       </div>
-      <EditAnimal />
     </div>
   );
 }
