@@ -14,7 +14,8 @@ export default function Profil() {
           <input
             type="text"
             id="firstName"
-            defaultValue="firstName"
+            name="firstName"
+            placeholder="prénom"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -25,7 +26,8 @@ export default function Profil() {
           <input
             type="text"
             id="lastName"
-            defaultValue="lastName"
+            name="lastName"
+            placeholder="nom"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -36,7 +38,8 @@ export default function Profil() {
           <input
             type="email"
             id="email"
-            defaultValue="email"
+            name="email"
+            placeholder="email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
@@ -47,7 +50,8 @@ export default function Profil() {
           <input
             type="text"
             id="address"
-            defaultValue="address"
+            name="address"
+            placeholder="addresse"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
