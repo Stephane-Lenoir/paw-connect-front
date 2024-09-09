@@ -11,9 +11,14 @@ export async function getAllAnimals() {
   }
 }
 
-export async function getAnimalById(id) {
+export async function getAnimalByUserId(id) {
   try {
-    const response = await api.get(`animals/${id}`);
+    const response = await api.get(`animals/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
+      },
+    });
+
     return response.data;
   } catch (error) {
     console.error(error);

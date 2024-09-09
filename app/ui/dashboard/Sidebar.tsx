@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Profil from './Profil';
 import { useState } from 'react';
 import { Add } from '../animals/Add';
+import { EditAnimal } from '../animals/Edit';
 
 export default function Sidebar() {
   const [activeComponent, setActiveComponent] = useState('profil');
@@ -14,6 +15,8 @@ export default function Sidebar() {
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col bg-background-color ">
           {activeComponent === 'profil' && <Profil />}
+
+          {activeComponent === 'edit' && <EditAnimal />}
 
           {activeComponent === 'add' && <Add />}
 
@@ -30,8 +33,21 @@ export default function Sidebar() {
             <li onClick={() => setActiveComponent('profil')}>
               <Link href="">Mon profil</Link>
             </li>
-            <li onClick={() => setActiveComponent('add')}>
-              <Link href="">Gestion des animaux</Link>
+            <li className="dropdown dropdown-bottom">
+              <Link href="#" tabIndex={0} role="button">
+                Gestion des animaux
+              </Link>
+              <ul
+                tabIndex={0}
+                className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
+              >
+                <li className="text-lg" onClick={() => setActiveComponent('edit')}>
+                  <Link href="">Vos animaux</Link>
+                </li>
+                <li className="text-lg" onClick={() => setActiveComponent('add')}>
+                  <Link href="">Ajouter un animal</Link>
+                </li>
+              </ul>
             </li>
 
             <li>
