@@ -1,6 +1,6 @@
 'use client';
 
-export default function AccomodationForm() {
+export default function AdoptionForm() {
   return (
     <>
       <h2 className="text-center text-2xl p-4 font-bold">Formulaire d'hébergement</h2>
@@ -31,7 +31,6 @@ export default function AccomodationForm() {
             placeholder="Entrez votre texte..."
             className="textarea textarea-bordered textarea-lg w-full max-w-xs"
           ></textarea>
-          <div className="label"></div>
         </label>
         <label className="form-control p-3">
           <div className="label">
@@ -43,7 +42,6 @@ export default function AccomodationForm() {
             placeholder="Entrez votre texte..."
             className="textarea textarea-bordered textarea-lg w-full max-w-xs"
           ></textarea>
-          <div className="label"></div>
         </label>
 
         <button
