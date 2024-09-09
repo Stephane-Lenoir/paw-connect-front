@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { deleteAnimal, getAnimalByUserId, updateAnimal } from '../../services/Animals';
 import Image from 'next/image';
+import { setUrlAnimal } from '../../utils/url';
 
 export function EditAnimal() {
   const [animals, setAnimals] = useState([]);
@@ -93,7 +94,7 @@ export function EditAnimal() {
           >
             <div className="w-full h-80 relative overflow-hidden rounded-lg">
               <Image
-                src={animal.photo}
+                src={setUrlAnimal(animal.photo)}
                 alt="Animal"
                 layout="fill"
                 objectFit="cover"

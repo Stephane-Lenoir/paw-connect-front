@@ -7,6 +7,7 @@ import Title from './Title';
 import Modal from './Modal';
 import { getAnimals } from '../../services/Home';
 import { getAllAnimals } from '../../services/Animals';
+import { setUrlAnimal } from '../../utils/url';
 
 export default function Card() {
   const [animals, setAnimals] = useState([]);
@@ -47,7 +48,7 @@ export default function Card() {
             key={animal.id}
             className="w-80 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg"
           >
-            <Img photo={animal.photo} />
+            <Img photo={setUrlAnimal(animal.photo)} />
 
             <div className="p-4">
               <Title name={animal.name} gender={animal.gender} />

@@ -33,10 +33,9 @@ export function Add() {
 
     // console.log('jwt_token', localStorage.getItem('jwt_token'));
 
-    // console.log(animalData);
-
+    console.log(animalData.photo);
+    console.log(formData.get('photo'));
     animalData.user_id = userId;
-
     const fetchData = async () => {
       const data = await createAnimal(animalData);
 
@@ -45,7 +44,6 @@ export function Add() {
 
     fetchData();
   };
-
   return (
     <div>
       <div className="container mx-auto px-4 py-8">
@@ -122,7 +120,11 @@ export function Add() {
           </div>
 
           <label className="input input-bordered flex items-center gap-2 w-full">
-            <input type="file" className="file-input file-input-bordered w-full max-w-xs" />
+            <input
+              type="file"
+              className="file-input file-input-bordered w-full max-w-xs"
+              name="photo"
+            />
           </label>
 
           {/* <div className="mb-4">

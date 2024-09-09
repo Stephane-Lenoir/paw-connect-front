@@ -10,6 +10,7 @@ const nextConfig = {
       'via.placeholder.com',
       'www.google.com',
       'media.istockphoto.com',
+      'localhost',
     ],
   },
 };
