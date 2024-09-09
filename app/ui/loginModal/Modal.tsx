@@ -71,15 +71,7 @@ export default function Modal() {
                       href="dashboard"
                       className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      Dashboard
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="#"
-                      className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                    >
-                      Settings
+                      Profil
                     </Link>
                   </li>
                 </ul>

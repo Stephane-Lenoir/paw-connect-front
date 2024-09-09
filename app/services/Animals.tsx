@@ -23,7 +23,13 @@ export async function getAnimalById(id) {
 
 export async function createAnimal(animal) {
   try {
-    const response = await api.post('animals', animal);
+    const response = await api.post('animals', animal, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
+      },
+    });
+
     return response.data;
   } catch (error) {
     console.error(error);

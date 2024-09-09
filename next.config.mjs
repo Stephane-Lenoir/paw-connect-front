@@ -8,6 +8,8 @@ const nextConfig = {
       'www.publicdomainpictures.net',
       'example.com',
       'via.placeholder.com',
+      'www.google.com',
+      'media.istockphoto.com',
     ],
   },
 };

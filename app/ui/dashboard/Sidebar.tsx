@@ -28,10 +28,10 @@ export default function Sidebar() {
           <ul className="menu bg-base-200 text-2xl text-base-content min-h-full w-80 p-4">
             {/* Sidebar content here */}
             <li onClick={() => setActiveComponent('profil')}>
-              <Link href="#">Mon profil</Link>
+              <Link href="">Mon profil</Link>
             </li>
             <li onClick={() => setActiveComponent('add')}>
-              <Link href="#">Gestion des animaux</Link>
+              <Link href="">Gestion des animaux</Link>
             </li>
 
             <li>
