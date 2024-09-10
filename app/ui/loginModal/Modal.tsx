@@ -16,7 +16,7 @@ export default function Modal() {
         const users = await getUserByRole();
         console.log(users);
         users.forEach((user) => {
-          console.log(user.name);
+          // console.log(user.name);
           setUsersName(user.name);
         });
       } catch (error) {
@@ -26,7 +26,7 @@ export default function Modal() {
 
     getUsers();
   }, []);
-  console.log(UserName);
+  // console.log(UserName);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {

@@ -11,9 +11,29 @@ export async function getUser() {
   }
 }
 
+export async function getUserById(userId) {
+  try {
+    const response = await api.get(`profiles/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export async function updateUserById(id, user) {
   try {
-    const response = await api.put(`profiles/${id}`, user);
+    const response = await api.put(`profiles/${id}`, user, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('jwt_token')}`,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

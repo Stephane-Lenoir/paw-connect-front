@@ -8,9 +8,8 @@ import { setUrlAnimal } from '../../utils/url';
 export function EditAnimal() {
   const [animals, setAnimals] = useState([]);
   const [userId, setUserId] = useState(null);
-  const [editMode, setEditMode] = useState(false);
+  const [editingAnimalId, setEditingAnimalId] = useState(null);
   const [loading, setLoading] = useState(true);
-
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -58,8 +57,7 @@ export function EditAnimal() {
     };
     try {
       await updateAnimal(animalId, updatedAnimal);
-      setEditMode(false);
-      // Mettre à jour l'état local avec les nouvelles données de l'animal
+      setEditingAnimalId(null);
       const updatedAnimals = animals.map((animal) => {
         if (animal.id === animalId) {
           return { ...animal, ...updatedAnimal };
@@ -75,7 +73,6 @@ export function EditAnimal() {
   const handleDelete = async (animalId) => {
     try {
       await deleteAnimal(animalId);
-      // Mettre à jour l'état local pour supprimer l'animal de la liste
       const updatedAnimals = animals.filter((animal) => animal.id !== animalId);
       setAnimals(updatedAnimals);
     } catch (error) {
@@ -90,9 +87,9 @@ export function EditAnimal() {
         {animals.map((animal) => (
           <div
             key={animal.id}
-            className="w-80 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg"
+            className="w-80 h-[600px] bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 ease-in-out text-lg flex flex-col"
           >
-            <div className="w-full h-80 relative overflow-hidden rounded-lg">
+            <div className="w-full h-80 relative overflow-hidden rounded-t-lg">
               <Image
                 src={setUrlAnimal(animal.photo)}
                 alt="Animal"
@@ -102,89 +99,108 @@ export function EditAnimal() {
               />
             </div>
 
-            <div className="p-4">
-              {editMode ? (
-                // Afficher les champs en mode édition
-                <form
-                  onSubmit={(e) => handleSave(e, animal.id)}
-                  className="flex flex-col items-center"
-                >
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="name"
-                    defaultValue={animal.name}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="description"
-                    defaultValue={animal.description}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="availability"
-                    defaultValue={animal.availability}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="gender"
-                    defaultValue={animal.gender}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="race"
-                    defaultValue={animal.race}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="location"
-                    defaultValue={animal.location}
-                  />
-                  <input
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-                    type="text"
-                    name="species"
-                    defaultValue={animal.species}
-                  />
+            <div className="p-4 flex-grow flex flex-col overflow-hidden">
+              <div className="flex-grow overflow-y-auto mb-4">
+                {editingAnimalId === animal.id ? (
+                  <form
+                    id={`edit-form-${animal.id}`}
+                    onSubmit={(e) => handleSave(e, animal.id)}
+                    className="flex flex-col items-center"
+                    encType="multipart/form-data"
+                  >
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="name"
+                      defaultValue={animal.name}
+                    />
+                    <textarea
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      name="description"
+                      defaultValue={animal.description}
+                      rows="3"
+                    />
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="availability"
+                      defaultValue={animal.availability}
+                    />
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="gender"
+                      defaultValue={animal.gender}
+                    />
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="race"
+                      defaultValue={animal.race}
+                    />
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="location"
+                      defaultValue={animal.location}
+                    />
+                    <input
+                      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                      type="text"
+                      name="species"
+                      defaultValue={animal.species}
+                    />
+                  </form>
+                ) : (
+                  <>
+                    <p>
+                      <strong>Nom :</strong> {animal.name}
+                    </p>
+                    <p>
+                      <strong>Description :</strong> {animal.description}
+                    </p>
+                    <p>
+                      <strong>Disponibilité :</strong> {animal.availability}
+                    </p>
+                    <p>
+                      <strong>Genre :</strong> {animal.gender}
+                    </p>
+                    <p>
+                      <strong>Race :</strong> {animal.race}
+                    </p>
+                    <p>
+                      <strong>Location :</strong> {animal.location}
+                    </p>
+                    <p>
+                      <strong>Espèce :</strong> {animal.species}
+                    </p>
+                  </>
+                )}
+              </div>
 
+              <div className="flex justify-between mt-auto">
+                {editingAnimalId === animal.id ? (
                   <button
                     type="submit"
-                    className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                    form={`edit-form-${animal.id}`}
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
                   >
                     Enregistrer
                   </button>
-                </form>
-              ) : (
-                // Afficher les champs en mode lecture
-                <>
-                  <p>Nom : {animal.name}</p>
-                  <p>Description : {animal.description}</p>
-                  <p>Disponibilité : {animal.availability}</p>
-                  <p>Genre : {animal.gender}</p>
-                  <p>Race : {animal.race}</p>
-                  <p>Location : {animal.location}</p>
-                  <p>Espéce : {animal.species}</p>
-                </>
-              )}
-
-              <div className="flex flex-wrap">
+                ) : null}
                 <button
                   type="button"
-                  onClick={() => setEditMode(!editMode)}
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  onClick={() =>
+                    setEditingAnimalId(editingAnimalId === animal.id ? null : animal.id)
+                  }
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
                 >
-                  Modifier
+                  {editingAnimalId === animal.id ? 'Annuler' : 'Modifier'}
                 </button>
-
                 <button
                   type="button"
                   onClick={() => handleDelete(animal.id)}
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
                 >
                   Supprimer
                 </button>
