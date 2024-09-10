@@ -73,9 +73,20 @@ export default function Sidebar() {
               </ul>
             </li>
 
-            <li>
+            {/* <li>
               <Link href={'#'}>Historique de navigation</Link>
+            </li> */}
+
+            <li>
+              <Link href={'#'}> Demande(s) d'adoption</Link>
             </li>
+
+            {roleId === 2 ||
+              (1 && (
+                <li>
+                  <Link href={'#'}> Demande(s) d'hébergement</Link>
+                </li>
+              ))}
 
             <li>
               <Link href={'#'}>Messages</Link>
