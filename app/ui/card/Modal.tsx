@@ -37,13 +37,13 @@ export default function Modal({ animal }) {
           <div className="flex space-x-4 mt-4">
             <Link
               className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
-              href={`/adoption`}
+              href={`/accomodation`}
             >
               Héberger
             </Link>
             <Link
               className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
-              href={`/accomodation`}
+              href={`/adoption`}
             >
               Adopter
             </Link>
