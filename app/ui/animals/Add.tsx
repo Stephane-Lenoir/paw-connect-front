@@ -29,7 +29,7 @@ export function Add() {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const animalData = Object.fromEntries(formData);
+    const animalData = Object.fromEntries(formData); // ne fonctionne quand on le met dans l'appel de la fonction createAnimal
 
     // console.log('jwt_token', localStorage.getItem('jwt_token'));
 
@@ -37,7 +37,7 @@ export function Add() {
     console.log(formData.get('photo'));
     animalData.user_id = userId;
     const fetchData = async () => {
-      const data = await createAnimal(animalData);
+      const data = await createAnimal(formData);
 
       return data;
     };
@@ -52,7 +52,7 @@ export function Add() {
         <form
           className="w-full max-w-lg mx-auto space-y-6"
           onSubmit={handleSubmit}
-          enctype="multipart/form-data"
+          encType="multipart/form-data"
         >
           <div className="mb-4">
             <Image
