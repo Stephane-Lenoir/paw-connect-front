@@ -14,7 +14,7 @@ export default function Modal() {
     const getUsers = async () => {
       try {
         const users = await getUserByRole();
-        console.log(users);
+        // console.log(users);
         users.forEach((user) => {
           // console.log(user.name);
           setUsersName(user.name);

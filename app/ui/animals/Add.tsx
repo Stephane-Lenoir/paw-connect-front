@@ -33,8 +33,8 @@ export function Add() {
 
     // console.log('jwt_token', localStorage.getItem('jwt_token'));
 
-    console.log(animalData.photo);
-    console.log(formData.get('photo'));
+    // console.log(animalData.photo);
+    // console.log(formData.get('photo'));
     animalData.user_id = userId;
     const fetchData = async () => {
       const data = await createAnimal(formData);

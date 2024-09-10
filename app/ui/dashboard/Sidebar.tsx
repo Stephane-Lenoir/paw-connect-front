@@ -13,7 +13,6 @@ export default function Sidebar() {
   const [roleId, setRoleId] = useState(null);
 
   useEffect(() => {
-    // get the user role from the getUserByRole() function
     const getUserRole = async () => {
       try {
         const users = await getUserByRole();

@@ -28,7 +28,7 @@ export default function Card() {
           data = await getAllAnimals();
         }
         if (data) {
-          console.log(data);
+          // console.log(data);
           setAnimals(data);
         }
       };

@@ -41,7 +41,6 @@ export default function Profil() {
     const updatedUser = {
       name: e.target.name.value,
       firstname: e.target.firstname.value,
-      password: e.target.password.value,
     };
     try {
       setUser(updatedUser);
@@ -72,7 +71,7 @@ export default function Profil() {
         className="bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto"
       >
         <div className="mb-4">
-          <label htmlFor="firstname" className="block text-text-color text-sm font-bold mb-2">
+          <label htmlFor="firstname" className="block text-text-color text-xl font-bold mb-2">
             Prénom :
           </label>
           <input
@@ -85,7 +84,7 @@ export default function Profil() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-text-color text-sm font-bold mb-2">
+          <label htmlFor="name" className="block text-text-color text-xl font-bold mb-2">
             Nom :
           </label>
           <input
@@ -98,7 +97,7 @@ export default function Profil() {
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-text-color text-sm font-bold mb-2">
+          <label htmlFor="email" className="block text-text-color text-xl font-bold mb-2">
             Email:
           </label>
           <input
@@ -110,22 +109,16 @@ export default function Profil() {
             readOnly
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="role_id" className="block text-text-color text-sm font-bold mb-2">
-            Mot de passe :
-          </label>
-          <input
-            type="text"
-            id="password"
-            name="password"
-            defaultValue={user.password}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-            disabled={!editing}
-          />
-        </div>
 
         <div className="flex justify-between">
-          {editing ? (
+          <button
+            type="button"
+            onClick={() => setEditing(true)}
+            className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Modifier
+          </button>
+          {editing && (
             <>
               <button
                 type="submit"
@@ -141,14 +134,6 @@ export default function Profil() {
                 Annuler
               </button>
             </>
-          ) : (
-            <button
-              type="button"
-              onClick={() => setEditing(true)}
-              className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Modifier
-            </button>
           )}
         </div>
       </form>
