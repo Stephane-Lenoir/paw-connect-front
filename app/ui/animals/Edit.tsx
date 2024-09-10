@@ -109,13 +109,48 @@ export function EditAnimal() {
                   onSubmit={(e) => handleSave(e, animal.id)}
                   className="flex flex-col items-center"
                 >
-                  <input type="text" name="name" defaultValue={animal.name} />
-                  <input type="text" name="description" defaultValue={animal.description} />
-                  <input type="text" name="availability" defaultValue={animal.availability} />
-                  <input type="text" name="gender" defaultValue={animal.gender} />
-                  <input type="text" name="race" defaultValue={animal.race} />
-                  <input type="text" name="location" defaultValue={animal.location} />
-                  <input type="text" name="species" defaultValue={animal.species} />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="name"
+                    defaultValue={animal.name}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="description"
+                    defaultValue={animal.description}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="availability"
+                    defaultValue={animal.availability}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="gender"
+                    defaultValue={animal.gender}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="race"
+                    defaultValue={animal.race}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="location"
+                    defaultValue={animal.location}
+                  />
+                  <input
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+                    type="text"
+                    name="species"
+                    defaultValue={animal.species}
+                  />
 
                   <button
                     type="submit"

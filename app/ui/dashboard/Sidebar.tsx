@@ -2,12 +2,34 @@
 
 import Link from 'next/link';
 import Profil from './Profil';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Add } from '../animals/Add';
 import { EditAnimal } from '../animals/Edit';
+import Admin from './Admin';
+import { getUserByRole } from '../../services/Users';
 
 export default function Sidebar() {
   const [activeComponent, setActiveComponent] = useState('profil');
+  const [roleId, setRoleId] = useState(null);
+
+  useEffect(() => {
+    // get the user role from the getUserByRole() function
+    const getUserRole = async () => {
+      try {
+        const users = await getUserByRole();
+        users.forEach((user) => {
+          // console.log(user.role_id);
+          setRoleId(user.role_id);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUserRole();
+
+    // console.log(roleId);
+  });
 
   return (
     <>
@@ -19,6 +41,8 @@ export default function Sidebar() {
           {activeComponent === 'edit' && <EditAnimal />}
 
           {activeComponent === 'add' && <Add />}
+
+          {activeComponent === 'admin' && roleId === 1 && <Admin />}
 
           {/* Page content here */}
         </div>
@@ -57,6 +81,12 @@ export default function Sidebar() {
             <li>
               <Link href={'#'}>Messages</Link>
             </li>
+
+            {roleId === 1 && (
+              <li onClick={() => setActiveComponent('admin')}>
+                <Link href="">Gestion des utilisateurs</Link>
+              </li>
+            )}
 
             <label
               htmlFor="my-drawer-2"

@@ -4,9 +4,29 @@ import Link from 'next/link';
 import Login from './Login';
 import Subscribe from './Subscribe';
 import { useState, useEffect } from 'react';
+import { getUserByRole } from '../../services/Users';
 
 export default function Modal() {
   const [isLogged, setIsLogged] = useState(false);
+  const [UserName, setUsersName] = useState(null);
+
+  useEffect(() => {
+    const getUsers = async () => {
+      try {
+        const users = await getUserByRole();
+        console.log(users);
+        users.forEach((user) => {
+          console.log(user.name);
+          setUsersName(user.name);
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getUsers();
+  }, []);
+  console.log(UserName);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
@@ -59,9 +79,12 @@ export default function Modal() {
                 top: '120%',
                 right: '5%',
                 zIndex: 1000,
+                width: '200px',
               }}
             >
-              <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600">
+              <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600 w-full">
+                <h2 className="text-lg"> Bonjour, {UserName} </h2>
+
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
                   aria-labelledby="avatarButton"
@@ -71,7 +94,7 @@ export default function Modal() {
                       href="dashboard"
                       className="block px-4 py-2 text-stone-950 text-lg hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
                     >
-                      Profil
+                      Votre compte
                     </Link>
                   </li>
                 </ul>

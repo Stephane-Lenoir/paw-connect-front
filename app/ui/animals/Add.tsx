@@ -28,7 +28,7 @@ export function Add() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target); // ici, il n'y pas l'user_id
     const animalData = Object.fromEntries(formData); // ne fonctionne quand on le met dans l'appel de la fonction createAnimal
 
     // console.log('jwt_token', localStorage.getItem('jwt_token'));

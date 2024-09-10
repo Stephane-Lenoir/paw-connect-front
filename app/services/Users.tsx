@@ -21,6 +21,16 @@ export async function updateUserById(id, user) {
   }
 }
 
+export async function getUserByRole() {
+  try {
+    const response = await api.get('profiles/roles');
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export async function deleteUserById(id) {
   try {
     const response = await api.delete(`/profiles/${id}`);
