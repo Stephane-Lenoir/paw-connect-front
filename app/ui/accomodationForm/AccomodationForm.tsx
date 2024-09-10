@@ -65,6 +65,14 @@ export default function AccomodationForm() {
     }));
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const formdData = new FormData(event.target);
+    const data= Object.fromEntries(formdData);
+    console.log(data);
+  }
+
   // Affichage d'un message de chargement si les données ne sont pas encore prêtes
   if (isLoading) {
     return <p>Chargement des données...</p>;
@@ -74,7 +82,7 @@ export default function AccomodationForm() {
   return (
     <>
       <h2 className="text-center text-2xl p-2 font-bold">Formulaire d'hébergement</h2>
-      <form className="m-2 flex flex-col gap-px items-center">
+      <form className="m-2 flex flex-col gap-px items-center" onSubmit={handleSubmit}>
         <div className="text-xl">
           <h3 className="p-2">Nom :</h3>
           <input 
