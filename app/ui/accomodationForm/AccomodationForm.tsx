@@ -11,7 +11,7 @@ export default function AccomodationForm() {
   const [userData, setUserData] = useState({
     name: '',
     firstname: '',
-    email: ''
+    email: '',
   });
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);*/
@@ -133,7 +133,7 @@ export default function AccomodationForm() {
           </div>
           <textarea
             placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+            className="textarea textarea-bordered textarea-lg w-full max-w"
           ></textarea>
         </label>
         <label className="form-control">
@@ -144,7 +144,7 @@ export default function AccomodationForm() {
           </div>
           <textarea
             placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+            className="textarea textarea-bordered textarea-lg w-full max-w"
           ></textarea>
         </label>
 
