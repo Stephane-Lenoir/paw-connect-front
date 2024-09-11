@@ -70,10 +70,10 @@ export async function getUserByRole() {
   }
 }
 
-export async function deleteUserById() {
+export async function deleteUserById(id) {
   try {
     const token = localStorage.getItem('jwt_token');
-    const response = await api.delete('profiles', {
+    const response = await api.delete(`profiles/${id}`, {
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
