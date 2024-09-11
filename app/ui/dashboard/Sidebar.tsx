@@ -7,28 +7,11 @@ import { Add } from '../animals/Add';
 import { EditAnimal } from '../animals/Edit';
 import Admin from './Admin';
 import { getUserByRole } from '../../services/Users';
+import { useAuth } from '../../context/authContext';
 
 export default function Sidebar() {
   const [activeComponent, setActiveComponent] = useState('profil');
-  const [roleId, setRoleId] = useState(null);
-
-  useEffect(() => {
-    const getUserRole = async () => {
-      try {
-        const users = await getUserByRole();
-        users.forEach((user) => {
-          // console.log(user.role_id);
-          setRoleId(user.role_id);
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUserRole();
-
-    // console.log(roleId);
-  });
+  const { userConnected } = useAuth();
 
   return (
     <>
@@ -41,7 +24,7 @@ export default function Sidebar() {
 
           {activeComponent === 'add' && <Add />}
 
-          {activeComponent === 'admin' && roleId === 1 && <Admin />}
+          {activeComponent === 'admin' && userConnected.role_id === 1 && <Admin />}
 
           {/* Page content here */}
         </div>
@@ -68,7 +51,7 @@ export default function Sidebar() {
                   <Link href="">Vos animaux</Link>
                 </li>
 
-                {roleId === 1 && 3 && (
+                {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
                   <li className="text-lg" onClick={() => setActiveComponent('add')}>
                     <Link href="">Ajouter un animal</Link>
                   </li>
@@ -84,18 +67,17 @@ export default function Sidebar() {
               <Link href={'#'}> Demande(s) d'adoption</Link>
             </li>
 
-            {roleId === 2 ||
-              (1 && (
-                <li>
-                  <Link href={'#'}> Demande(s) d'hébergement</Link>
-                </li>
-              ))}
+            {(userConnected.role_id === 2 || userConnected.role_id === 1) && (
+              <li>
+                <Link href={'#'}> Demande(s) d'hébergement</Link>
+              </li>
+            )}
 
             <li>
               <Link href={'#'}>Messages</Link>
             </li>
 
-            {roleId === 1 && (
+            {userConnected.role_id === 1 && (
               <li onClick={() => setActiveComponent('admin')}>
                 <Link href="">Gestion des utilisateurs</Link>
               </li>

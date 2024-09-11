@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import { getUserById, updateUserById } from "../../services/Users";
-import Menu from "./Menu";
-import { useAuth } from "../../context/authContext";
+import { useEffect, useState } from 'react';
+import { getUserById, updateUserById } from '../../services/Users';
+import Menu from './Menu';
+import { useAuth } from '../../context/authContext';
 
 export default function Profil() {
   const [user, setUser] = useState(null);
@@ -52,7 +52,7 @@ export default function Profil() {
       setEditing(false);
     } catch (error) {
       console.error(error);
-      setError("Failed to update user. Please try again later.");
+      setError('Failed to update user. Please try again later.');
     }
   };
 
@@ -68,18 +68,13 @@ export default function Profil() {
     <div className="w-full min-h-screen p-8">
       <Menu />
 
-      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">
-        Votre profil
-      </h1>
+      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">Votre profil</h1>
       <form
         onSubmit={handleSave}
         className="bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto"
       >
         <div className="mb-4">
-          <label
-            htmlFor="firstname"
-            className="block text-text-color text-xl font-bold mb-2"
-          >
+          <label htmlFor="firstname" className="block text-text-color text-xl font-bold mb-2">
             Prénom :
           </label>
           <input
@@ -92,10 +87,7 @@ export default function Profil() {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="name"
-            className="block text-text-color text-xl font-bold mb-2"
-          >
+          <label htmlFor="name" className="block text-text-color text-xl font-bold mb-2">
             Nom :
           </label>
           <input
@@ -108,10 +100,7 @@ export default function Profil() {
           />
         </div>
         <div className="mb-4">
-          <label
-            htmlFor="email"
-            className="block text-text-color text-xl font-bold mb-2"
-          >
+          <label htmlFor="email" className="block text-text-color text-xl font-bold mb-2">
             Email:
           </label>
           <input

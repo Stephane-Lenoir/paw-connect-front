@@ -1,11 +1,10 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import Login from "./Login";
-import Subscribe from "./Subscribe";
-import { useState, useEffect } from "react";
-import { getUserByRole } from "../../services/Users";
-import { useAuth } from "../../context/authContext";
+import Link from 'next/link';
+import Login from './Login';
+import Subscribe from './Subscribe';
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../context/authContext';
 
 export default function Modal() {
   // const [isLogged, setIsLogged] = useState(false);
@@ -20,7 +19,7 @@ export default function Modal() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("jwt_token");
+    localStorage.clear();
     setIsLogged(false);
     setIsDropdownOpen(false);
   };
@@ -54,11 +53,11 @@ export default function Modal() {
               id="userDropdown"
               className="text-gray"
               style={{
-                position: "absolute",
-                top: "120%",
-                right: "5%",
+                position: 'absolute',
+                top: '120%',
+                right: '5%',
                 zIndex: 1000,
-                width: "200px",
+                width: '200px',
               }}
             >
               <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600 w-full">
@@ -94,7 +93,7 @@ export default function Modal() {
         <Link
           href="#"
           onClick={() => {
-            document.getElementById("my_modal_1").showModal();
+            document.getElementById('my_modal_1').showModal();
           }}
         >
           Login
