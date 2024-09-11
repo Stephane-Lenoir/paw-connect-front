@@ -1,9 +1,16 @@
+"use client";
+
 interface TitleAssociationProps {
-  title: string;  // Déclare un type pour les props
+  title: string;
+  onClick?: () => void;
 }
 
-export default function TitleAssociation({ title }: TitleAssociationProps) {
+const TitleAssociation = ({ title, onClick }: TitleAssociationProps) => {
   return (
-    <p className="font-bold">{title}</p>  // Utilise la prop `title` pour afficher le titre de l'association
+    <h2 className="text-xl font-bold cursor-pointer" onClick={onClick}>
+      {title}
+    </h2>
   );
-}
+};
+
+export default TitleAssociation;

@@ -1,20 +1,17 @@
 "use client";
 
-import { useState, useEffect } from 'react';  // Ajoute cet import
+import { useState, useEffect } from 'react';
 import CardImage from './CardImage';
 import MailtoButton from './MailtoButton';
 import TitleAssociation from './TitleAssociation';
-import { getAllAssociations } from '../../services/Associations';  // Ajoute également cet import pour récupérer les associations
-
-interface Association {
-  id: number;
-  name: string;
-  email: string;
-}
+import Modal from '../association/Modal'; // Mettez à jour l'import ici
+import { getAllAssociations, getOneAssociation } from '../../services/Associations';
 
 export default function AssociationCard() {
   const [associations, setAssociations] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedAssociation, setSelectedAssociation] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     async function fetchAssociations() {
@@ -31,6 +28,21 @@ export default function AssociationCard() {
     fetchAssociations();
   }, []);
 
+  const handleAssociationClick = async (id) => {
+    try {
+      const data = await getOneAssociation(id);
+      setSelectedAssociation(data);
+      setModalOpen(true);
+    } catch (error) {
+      console.error('Erreur lors du chargement des détails de l\'association:', error);
+    }
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
+    setSelectedAssociation(null);
+  };
+
   if (loading) {
     return <div>Chargement des associations...</div>;
   }
@@ -45,11 +57,20 @@ export default function AssociationCard() {
           <CardImage />
 
           <div className="p-4 text-center">
-            <TitleAssociation title={association.name} />
+            <TitleAssociation title={association.name} onClick={() => handleAssociationClick(association.id)} />
             <MailtoButton email={association.email} />
           </div>
         </div>
       ))}
+
+      <Modal isOpen={modalOpen} onClose={closeModal}>
+        {selectedAssociation && (
+          <div>
+            <h1>{selectedAssociation.name}</h1>
+            {/* Affichez ici les autres détails de l'association */}
+          </div>
+        )}
+      </Modal>
     </div>
   );
 }
