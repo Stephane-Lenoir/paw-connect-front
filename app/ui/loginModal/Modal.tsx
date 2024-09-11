@@ -11,7 +11,7 @@ export default function Modal() {
   const [UserName, setUsersName] = useState(null);
 
   const { isLogged, userConnected, setIsLogged } = useAuth();
-  console.log(userConnected);
+  // console.log(userConnected);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
