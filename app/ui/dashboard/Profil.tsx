@@ -1,40 +1,43 @@
-import { useEffect, useState } from 'react';
-import { getUserById, updateUserById } from '../../services/Users';
-import Menu from './Menu';
+import { useEffect, useState } from "react";
+import { getUserById, updateUserById } from "../../services/Users";
+import Menu from "./Menu";
+import { useAuth } from "../../context/authContext";
 
 export default function Profil() {
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
 
-  useEffect(() => {
-    const fetchUser = async () => {
-      const token = localStorage.getItem('jwt_token');
+  const { userConnected, setUserConnected } = useAuth();
 
-      if (token) {
-        const [, payload] = token.split('.');
-        const decodedPayload = JSON.parse(atob(payload));
-        const userId = decodedPayload.id;
+  // useEffect(() => {
+  //   const fetchUser = async () => {
+  //     const token = localStorage.getItem("jwt_token");
 
-        try {
-          setLoading(true);
-          const fetchedUser = await getUserById(userId);
-          setUser(fetchedUser);
-          setLoading(false);
-        } catch (error) {
-          console.error(error);
-          setError('Failed to fetch user. Please try again later.');
-          setLoading(false);
-        }
-      } else {
-        setError('No JWT token found. Please log in.');
-        setLoading(false);
-      }
-    };
+  //     if (token) {
+  //       const [, payload] = token.split(".");
+  //       const decodedPayload = JSON.parse(atob(payload));
+  //       const userId = decodedPayload.id;
 
-    fetchUser();
-  }, []);
+  //       try {
+  //         setLoading(true);
+  //         const fetchedUser = await getUserById(userId);
+  //         setUser(fetchedUser);
+  //         setLoading(false);
+  //       } catch (error) {
+  //         console.error(error);
+  //         setError("Failed to fetch user. Please try again later.");
+  //         setLoading(false);
+  //       }
+  //     } else {
+  //       setError("No JWT token found. Please log in.");
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchUser();
+  // }, []);
 
   const handleSave = async (e) => {
     e.preventDefault();
@@ -43,19 +46,19 @@ export default function Profil() {
       firstname: e.target.firstname.value,
     };
     try {
-      setUser(updatedUser);
-      await updateUserById(user.id, updatedUser);
+      setUserConnected(updatedUser);
+      await updateUserById(userConnected.id, updatedUser);
 
       setEditing(false);
     } catch (error) {
       console.error(error);
-      setError('Failed to update user. Please try again later.');
+      setError("Failed to update user. Please try again later.");
     }
   };
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
   if (error) {
     return <div>{error}</div>;
@@ -65,46 +68,57 @@ export default function Profil() {
     <div className="w-full min-h-screen p-8">
       <Menu />
 
-      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">Votre profil</h1>
+      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">
+        Votre profil
+      </h1>
       <form
         onSubmit={handleSave}
         className="bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto"
       >
         <div className="mb-4">
-          <label htmlFor="firstname" className="block text-text-color text-xl font-bold mb-2">
+          <label
+            htmlFor="firstname"
+            className="block text-text-color text-xl font-bold mb-2"
+          >
             Prénom :
           </label>
           <input
             type="text"
             id="firstname"
             name="firstname"
-            defaultValue={user.firstname}
+            defaultValue={userConnected.firstname}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
             disabled={!editing}
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-text-color text-xl font-bold mb-2">
+          <label
+            htmlFor="name"
+            className="block text-text-color text-xl font-bold mb-2"
+          >
             Nom :
           </label>
           <input
             type="text"
             id="name"
             name="name"
-            defaultValue={user.name}
+            defaultValue={userConnected.name}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
             disabled={!editing}
           />
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="block text-text-color text-xl font-bold mb-2">
+          <label
+            htmlFor="email"
+            className="block text-text-color text-xl font-bold mb-2"
+          >
             Email:
           </label>
           <input
             type="email"
             id="email"
             name="email"
-            defaultValue={user.email}
+            defaultValue={userConnected.email}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
             readOnly
           />

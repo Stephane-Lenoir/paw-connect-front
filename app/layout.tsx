@@ -1,13 +1,15 @@
-import type { Metadata } from 'next';
+import type { Metadata } from "next";
 
-import './globals.css';
+import { AuthProvider } from "./context/authContext";
 
-import { Caveat } from 'next/font/google';
+import "./globals.css";
 
-const caveat = Caveat({ subsets: ['latin'] });
+import { Caveat } from "next/font/google";
+
+const caveat = Caveat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Paw Connect',
+  title: "Paw Connect",
   description: 'Refuge et famille d"accueil',
 };
 
@@ -18,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr">
-      <body className={caveat.className}>{children}</body>
+      <body className={caveat.className}>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

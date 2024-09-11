@@ -1,6 +1,9 @@
-import axios from 'axios';
+import axios from "axios";
+import { useAuth } from "../../context/authContext";
 
-export default function Login({ setIsLogged }) {
+export default function Login() {
+  const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -8,26 +11,32 @@ export default function Login({ setIsLogged }) {
     const data = Object.fromEntries(formData);
 
     try {
-      const response = await axios.post('http://localhost:3000/api/login', data, {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true, // This is important
-      });
+      const response = await axios.post(
+        "http://localhost:3000/api/login",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // This is important
+        }
+      );
 
       if (response && response.status === 200) {
         // Save the token in the local storage
         // console.log(response.data.token);
-        localStorage.setItem('jwt_token', response.data.token);
-        console.log('Login succesfull');
+        const { user, token } = response.data;
+        localStorage.setItem("jwt_token", token);
+        console.log("Login succesfull");
+        setUserConnected(user);
         setIsLogged(true); // it display the avatar
-        event.target.closest('dialog').close(); // close modal
+        event.target.closest("dialog").close(); // close modal
         event.target.reset(); // reset the form
       } else {
-        console.error('Error during login');
+        console.error("Error during login");
       }
     } catch (error) {
-      console.error('Error while sending data', error);
+      console.error("Error while sending data", error);
     }
   };
 
@@ -45,7 +54,12 @@ export default function Login({ setIsLogged }) {
             <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
             <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
           </svg>
-          <input type="email" className="grow" name="email" placeholder="Email" />
+          <input
+            type="email"
+            className="grow"
+            name="email"
+            placeholder="Email"
+          />
         </label>
         <label className="input input-bordered flex items-center gap-2 w-full">
           <svg
@@ -60,9 +74,17 @@ export default function Login({ setIsLogged }) {
               clipRule="evenodd"
             />
           </svg>
-          <input type="password" className="grow" name="password" placeholder="Password" />
+          <input
+            type="password"
+            className="grow"
+            name="password"
+            placeholder="Password"
+          />
         </label>
-        <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
+        <button
+          type="submit"
+          className="btn bg-primary-color hover:bg-secondary-color w-full"
+        >
           Login
         </button>
       </form>

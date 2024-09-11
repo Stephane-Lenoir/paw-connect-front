@@ -1,9 +1,9 @@
-import api from './axiosConfig';
+import api from "./axiosConfig";
 
 // Route Auth
 export async function login(user) {
   try {
-    const response = await api.post('auth/login', user);
+    const response = await api.post("auth/login", user);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -13,7 +13,7 @@ export async function login(user) {
 
 export async function register(user) {
   try {
-    const response = await api.post('auth/register', user);
+    const response = await api.post("auth/register", user);
     return response.data;
   } catch (error) {
     console.error(error);
