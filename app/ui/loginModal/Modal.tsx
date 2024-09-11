@@ -1,47 +1,26 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import Login from './Login';
-import Subscribe from './Subscribe';
-import { useState, useEffect } from 'react';
-import { getUserByRole } from '../../services/Users';
+import Link from "next/link";
+import Login from "./Login";
+import Subscribe from "./Subscribe";
+import { useState, useEffect } from "react";
+import { getUserByRole } from "../../services/Users";
+import { useAuth } from "../../context/authContext";
 
 export default function Modal() {
-  const [isLogged, setIsLogged] = useState(false);
+  // const [isLogged, setIsLogged] = useState(false);
   const [UserName, setUsersName] = useState(null);
 
-  useEffect(() => {
-    const getUsers = async () => {
-      try {
-        const users = await getUserByRole();
-        // console.log(users);
-        users.forEach((user) => {
-          // console.log(user.name);
-          setUsersName(user.name);
-        });
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    getUsers();
-  }, []);
-  // console.log(UserName);
+  const { isLogged, userConnected, setIsLogged } = useAuth();
+  console.log(userConnected);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('jwt_token');
-    if (token) {
-      setIsLogged(true);
-    }
-  }, []);
-
   const handleLogout = () => {
-    localStorage.removeItem('jwt_token');
+    localStorage.removeItem("jwt_token");
     setIsLogged(false);
     setIsDropdownOpen(false);
   };
@@ -75,15 +54,15 @@ export default function Modal() {
               id="userDropdown"
               className="text-gray"
               style={{
-                position: 'absolute',
-                top: '120%',
-                right: '5%',
+                position: "absolute",
+                top: "120%",
+                right: "5%",
                 zIndex: 1000,
-                width: '200px',
+                width: "200px",
               }}
             >
               <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600 w-full">
-                <h2 className="text-lg"> Bonjour, {UserName} </h2>
+                <h2 className="text-lg"> Bonjour, {userConnected.name} </h2>
 
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"
@@ -115,7 +94,7 @@ export default function Modal() {
         <Link
           href="#"
           onClick={() => {
-            document.getElementById('my_modal_1').showModal();
+            document.getElementById("my_modal_1").showModal();
           }}
         >
           Login
@@ -126,7 +105,7 @@ export default function Modal() {
         <div className="modal-box absolute right-50 top-10 rounded-box flex flex-col items-center space-y-4 p-5">
           <Subscribe />
           {/* <div className="divider">OU</div> */}
-          <Login setIsLogged={setIsLogged} />
+          <Login />
         </div>
       </dialog>
     </>
