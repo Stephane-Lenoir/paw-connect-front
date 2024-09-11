@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Loader from '../loader';
 
 export default function ProtectedRoute({ children }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +23,7 @@ export default function ProtectedRoute({ children }) {
   }, [router]);
 
   if (isLoading) {
-    return <div>Chargement...</div>; // ou un spinner, ou une page de chargement
+    return <Loader />; // ou un spinner, ou une page de chargement
   }
 
   return isLogged ? children : null;

@@ -67,9 +67,12 @@ export default function Sidebar() {
                 <li className="text-lg" onClick={() => setActiveComponent('edit')}>
                   <Link href="">Vos animaux</Link>
                 </li>
-                <li className="text-lg" onClick={() => setActiveComponent('add')}>
-                  <Link href="">Ajouter un animal</Link>
-                </li>
+
+                {roleId === 1 && 3 && (
+                  <li className="text-lg" onClick={() => setActiveComponent('add')}>
+                    <Link href="">Ajouter un animal</Link>
+                  </li>
+                )}
               </ul>
             </li>
 
