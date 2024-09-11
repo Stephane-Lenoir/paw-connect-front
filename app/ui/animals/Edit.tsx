@@ -55,6 +55,7 @@ export function EditAnimal() {
       race: e.target.race.value,
       location: e.target.location.value,
       species: e.target.species.value,
+      // photo: e.target.photo.value,
     };
     try {
       await updateAnimal(animalId, updatedAnimal);
@@ -153,6 +154,15 @@ export function EditAnimal() {
                         name="species"
                         defaultValue={animal.species}
                       />
+
+                      {/* <label className="input input-bordered flex items-center gap-2 w-full">
+                        <input
+                          type="file"
+                          className="file-input file-input-bordered w-full max-w-xs"
+                          name="photo"
+                          defaultValue={animal.photo}
+                        />
+                      </label> */}
                     </form>
                   ) : (
                     <>

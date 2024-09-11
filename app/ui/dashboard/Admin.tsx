@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { getUser, deleteUserById, updateUserById } from '../../services/Users';
 import Menu from './Menu';
+import Loader from '../loader';
 
 export default function Admin() {
   const [users, setUsers] = useState(null);
@@ -54,7 +55,7 @@ export default function Admin() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
