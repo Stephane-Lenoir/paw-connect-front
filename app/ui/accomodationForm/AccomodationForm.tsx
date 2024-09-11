@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import api from '../../services/axiosConfig';
 
 export default function AccomodationForm() {
@@ -8,7 +8,7 @@ export default function AccomodationForm() {
   const [userData, setUserData] = useState({
     name: '',
     firstname: '',
-    email: ''
+    email: '',
   });
   const [token, setToken] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +16,7 @@ export default function AccomodationForm() {
   // Effet pour récupérer et décoder le token JWT du localStorage
   useEffect(() => {
     const storedToken = localStorage.getItem('jwt_token');
-    
+
     if (storedToken) {
       setToken(storedToken);
       // Décodage du payload du token JWT
@@ -38,10 +38,10 @@ export default function AccomodationForm() {
         const response = await api.get(`profiles/${userId}`, {
           headers: {
             Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-          }
+            'Content-Type': 'application/json',
+          },
         });
-        
+
         // Mise à jour de l'état avec les données reçues
         setUserData(response.data);
       } catch (error) {
@@ -59,9 +59,9 @@ export default function AccomodationForm() {
   // Même si les champs sont en lecture seule, c'est une bonne pratique de l'inclure
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserData(prevData => ({
+    setUserData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -69,9 +69,9 @@ export default function AccomodationForm() {
     event.preventDefault();
 
     const formdData = new FormData(event.target);
-    const data= Object.fromEntries(formdData);
+    const data = Object.fromEntries(formdData);
     console.log(data);
-  }
+  };
 
   // Affichage d'un message de chargement si les données ne sont pas encore prêtes
   if (isLoading) {
@@ -85,16 +85,16 @@ export default function AccomodationForm() {
       <form className="m-2 flex flex-col gap-px items-center" onSubmit={handleSubmit}>
         <div className="text-xl">
           <h3 className="p-2">Nom :</h3>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="name"
-            placeholder="Nom" 
-            className="input input-bordered w-full max-w-xs" 
+            placeholder="Nom"
+            className="input input-bordered w-full max-w-xs"
             value={userData.name}
             onChange={handleChange}
             readOnly
           />
-        </div> 
+        </div>
         <div className="text-xl">
           <h3 className="p-2">Prénom :</h3>
           <input
@@ -109,11 +109,11 @@ export default function AccomodationForm() {
         </div>
         <div className="text-xl">
           <h3 className="p-2">Email :</h3>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="email"
-            placeholder="Email" 
-            className="input input-bordered w-full max-w-xs" 
+            placeholder="Email"
+            className="input input-bordered w-full max-w-xs"
             value={userData.email}
             onChange={handleChange}
             readOnly
@@ -130,7 +130,7 @@ export default function AccomodationForm() {
           </div>
           <textarea
             placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+            className="textarea textarea-bordered textarea-lg w-full max-w"
           ></textarea>
         </label>
         <label className="form-control">
@@ -141,7 +141,7 @@ export default function AccomodationForm() {
           </div>
           <textarea
             placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w-xs"
+            className="textarea textarea-bordered textarea-lg w-full max-w"
           ></textarea>
         </label>
 
