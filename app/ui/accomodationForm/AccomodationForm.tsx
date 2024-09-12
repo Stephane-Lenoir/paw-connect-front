@@ -47,7 +47,10 @@ export default function AccommodationForm() {
   return (
     <>
       <h2 className="text-center text-2xl p-2 font-bold">Formulaire d'hébergement</h2>
-      <form className="m-2 flex flex-col gap-px items-center" onSubmit={handleSubmit}>
+      <form
+        className="m-2 flex flex-col gap-px items-center bg-background-color"
+        onSubmit={handleSubmit}
+      >
         <div className="text-xl">
           <h3 className="p-2">Nom :</h3>
           <input

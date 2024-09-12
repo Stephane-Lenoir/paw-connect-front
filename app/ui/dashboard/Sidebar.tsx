@@ -8,6 +8,8 @@ import { EditAnimal } from '../animals/Edit';
 import Admin from './Admin';
 import { getUserByRole } from '../../services/Users';
 import { useAuth } from '../../context/authContext';
+import Accomodation from '../../accomodation/[id]/page';
+import Accomodations from './Accomodations';
 
 export default function Sidebar() {
   const [activeComponent, setActiveComponent] = useState('profil');
@@ -25,6 +27,8 @@ export default function Sidebar() {
           {activeComponent === 'add' && <Add />}
 
           {activeComponent === 'admin' && userConnected.role_id === 1 && <Admin />}
+
+          {activeComponent === 'accomodations' && userConnected.role_id === 1 && <Accomodations />}
 
           {/* Page content here */}
         </div>
@@ -69,7 +73,10 @@ export default function Sidebar() {
 
             {(userConnected.role_id === 2 || userConnected.role_id === 1) && (
               <li>
-                <Link href={'#'}> Demande(s) d'hébergement</Link>
+                <Link href={'#'} onClick={() => setActiveComponent('accomodations')}>
+                  {' '}
+                  Demande(s) d'hébergement
+                </Link>
               </li>
             )}
 
