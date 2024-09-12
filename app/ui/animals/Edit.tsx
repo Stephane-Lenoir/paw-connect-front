@@ -55,6 +55,7 @@ export function EditAnimal() {
       race: e.target.race.value,
       location: e.target.location.value,
       species: e.target.species.value,
+      // birthday: e.target.birthday.value,
       // photo: e.target.photo.value,
     };
     try {
@@ -81,6 +82,8 @@ export function EditAnimal() {
       console.error(error);
     }
   };
+
+  console.log(animals);
 
   return (
     <>
@@ -128,14 +131,15 @@ export function EditAnimal() {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         type="text"
                         name="availability"
-                        defaultValue={animal.availability}
+                        defaultValue={animal.availability ? 'Disponible' : 'Indisponible'}
                       />
-                      <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                        type="text"
-                        name="gender"
-                        defaultValue={animal.gender}
-                      />
+                      <label className="input input-bordered flex items-center gap-2 w-full">
+                        <select className="grow" name="gender">
+                          <option value="">Sexe de l'animal</option>
+                          <option value="male">Mâle</option>
+                          <option value="female">Femelle</option>
+                        </select>
+                      </label>
                       <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         type="text"
@@ -155,6 +159,16 @@ export function EditAnimal() {
                         defaultValue={animal.species}
                       />
 
+                      {/* <label className="block text-gray-700 text-sm font-bold mb-2">
+                        (YYYY-MM-DD):
+                      </label>
+                      <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
+                        type="text"
+                        name="birthday"
+                        defaultValue={animal.birthday}
+                      /> */}
+
                       {/* <label className="input input-bordered flex items-center gap-2 w-full">
                         <input
                           type="file"
@@ -173,7 +187,8 @@ export function EditAnimal() {
                         <strong>Description :</strong> {animal.description}
                       </p>
                       <p>
-                        <strong>Disponibilité :</strong> {animal.availability}
+                        <strong>Disponibilité :</strong>{' '}
+                        {animal.availability ? 'Disponible' : 'Indisponible'}
                       </p>
                       <p>
                         <strong>Genre :</strong> {animal.gender}
@@ -187,6 +202,9 @@ export function EditAnimal() {
                       <p>
                         <strong>Espèce :</strong> {animal.species}
                       </p>
+                      {/* <p>
+                        <strong>Anniversaire :</strong> {animal.birthday}
+                      </p> */}
                     </>
                   )}
                 </div>

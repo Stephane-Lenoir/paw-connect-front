@@ -18,10 +18,10 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('jwt_token');
       if (token) {
         setIsLogged(true);
-        console.log('UE Context');
+        // console.log('UE Context');
         if (!userConnected) {
           try {
-            console.log('TryUserByToken');
+            // console.log('TryUserByToken');
             const user = await getUserByToken(token);
             setUserConnected(user);
             localStorage.setItem('userConnected', JSON.stringify(userConnected));

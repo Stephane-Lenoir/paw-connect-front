@@ -71,11 +71,15 @@ export function Add() {
             <label className="input input-bordered flex items-center gap-2 w-full">
               <input type="text" className="grow" name="species" placeholder="Espèce de l'animal" />
             </label>
-
-            <label className="input input-bordered flex items-center gap-2 w-full">
-              <input type="text" className="grow" name="race" placeholder="Race de l'animal" />
-            </label>
           </div>
+          <label className="input input-bordered flex items-center gap-2 w-full">
+            <input
+              type="text"
+              className="grow"
+              name="race"
+              placeholder="Race de l'animal (optionnel)"
+            />
+          </label>
 
           <label className="input input-bordered flex items-center gap-2 w-full">
             <input
@@ -94,17 +98,7 @@ export function Add() {
                 <option value="female">Femelle</option>
               </select>
             </label>
-            <label className="input input-bordered flex items-center gap-2 w-full">
-              <input
-                type="text"
-                className="grow"
-                name="location"
-                placeholder="Localisation de l'animal"
-              />
-            </label>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* <label className="input input-bordered flex items-center gap-2 w-full">
             <input type="number" className="grow" name="birthday" placeholder="Age de l'animal" />
           </label> */}
@@ -121,11 +115,18 @@ export function Add() {
 
           <label className="input input-bordered flex items-center gap-2 w-full">
             <input
-              type="file"
-              className="file-input file-input-bordered w-full max-w-xs"
-              name="photo"
+              type="text"
+              className="grow"
+              name="location"
+              placeholder="Localisation de l'animal"
             />
           </label>
+
+          <input
+            type="file"
+            className="file-input file-input-bordered w-full max-w "
+            name="photo"
+          />
 
           {/* <div className="mb-4">
           <label className="input input-bordered flex items-center gap-2 w-full">
@@ -133,7 +134,7 @@ export function Add() {
           </label>
         </div> */}
 
-          <div className="modal-action mt-6 flex justify-center">
+          <div className="modal-action mt-6 flex justify-center ">
             <button type="submit" className="btn bg-primary-color w-full hover:bg-secondary-color">
               Ajouter
             </button>

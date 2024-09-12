@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { getUserById, updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import { useAuth } from '../../context/authContext';
+import Loader from '../loader';
 
 export default function Profil() {
   const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
 
@@ -53,12 +54,13 @@ export default function Profil() {
     } catch (error) {
       console.error(error);
       setError('Failed to update user. Please try again later.');
+      setLoading(true);
     }
   };
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   if (error) {
     return <div>{error}</div>;

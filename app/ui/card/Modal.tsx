@@ -31,7 +31,7 @@ export default function Modal({ animal }) {
               <li>Nom : {animal.name}</li>
               <li>Anniversaire : {animal.birthday}</li>
               <li>Race : {animal.race}</li>
-              <li>Disponibilité : {animal.availabilty}</li>
+              <li>Disponibilité : {animal.availability ? 'Disponible' : 'Non disponible'}</li>
             </ul>
           </div>
           <div className="flex space-x-4 mt-4">
