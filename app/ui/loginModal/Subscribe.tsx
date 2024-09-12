@@ -7,7 +7,7 @@ export default function Subscribe() {
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-
+    console.log(data);
     try {
       const response = await axios.post('http://localhost:3000/api/register', data, {
         headers: {
