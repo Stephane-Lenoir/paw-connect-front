@@ -4,7 +4,7 @@ import { useFilter } from '../../context/filterContex';
 import { usePathname } from 'next/navigation';
 
 export default function Filtres({ onReload }) {
-  const { filters, setFilters, applyFilters } = useFilter();
+  const { filters, setFilters, applyFilters, resetFilters } = useFilter();
   const [animals, setAnimals] = useState([]);
   const pathname = usePathname();
 
@@ -24,24 +24,12 @@ export default function Filtres({ onReload }) {
     fetchAnimals();
   }, [applyFilters, pathname]);
 
-  // const handleFilter = () => {
-  //   if (pathname === '/animals') {
-  //     applyFilters(animals);
-  //   }
-  // };
-
-  const resetFilters = () => {
-    setFilters({
-      age: '',
-      gender: '',
-      species: '',
-      availability: '',
-    });
+  const handleResetFilters = () => {
+    resetFilters();
     if (pathname === '/animals') {
       applyFilters(animals);
     }
     onReload();
-    // window.location.reload();
   };
 
   const getUniqueSpecies = () => {
@@ -160,18 +148,10 @@ export default function Filtres({ onReload }) {
             </label>
           </div>
         </div>
-        {/* <button
-          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-8 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
-          type="button"
-          onClick={handleFilter}
-        >
-          Appliquer les filtres
-        </button> */}
-
         <button
           className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
           type="button"
-          onClick={resetFilters}
+          onClick={handleResetFilters}
         >
           Réinitialiser les filtres
         </button>

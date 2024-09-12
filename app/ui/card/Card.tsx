@@ -1,6 +1,5 @@
 'use client';
 
-// Card.js
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Img from './Img';
@@ -15,14 +14,20 @@ import { useFilter } from '../../context/filterContex';
 
 export default function Card({ onReload }) {
   const [animals, setAnimals] = useState([]);
+  const [internalReload, setInternalReload] = useState(false);
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { filteredAnimals } = useFilter();
+  const { filteredAnimals, applyFilters, filters, resetFilters } = useFilter();
+  const [prevFilters, setPrevFilters] = useState(filters);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  useEffect(() => {
+    setInternalReload(onReload);
+  }, [onReload]);
 
   useEffect(() => {
     if (isClient) {
@@ -35,12 +40,13 @@ export default function Card({ onReload }) {
         }
         if (data) {
           setAnimals(data);
+          applyFiltersIfNeeded(data);
         }
         setLoading(false);
       };
       fetchData();
     }
-  }, [pathname, isClient, onReload]);
+  }, [pathname, isClient, internalReload]);
 
   useEffect(() => {
     if (pathname === '/animals' && filteredAnimals.length > 0) {
@@ -48,8 +54,19 @@ export default function Card({ onReload }) {
     }
   }, [filteredAnimals, pathname]);
 
+  const applyFiltersIfNeeded = (data) => {
+    if (JSON.stringify(filters) !== JSON.stringify(prevFilters)) {
+      applyFilters(data);
+      setPrevFilters(filters);
+    }
+  };
+
+  const handleResetFilters = () => {
+    resetFilters();
+    applyFilters(animals);
+  };
   if (!isClient) {
-    return null; // or a loading indicator
+    return <Loader />; // or a loading indicator
   }
 
   return (

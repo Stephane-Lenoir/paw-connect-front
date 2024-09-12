@@ -1,6 +1,5 @@
 'use client';
 
-// FilterContext.js
 import { createContext, useContext, useState } from 'react';
 
 const FilterContext = createContext();
@@ -16,7 +15,6 @@ export const FilterProvider = ({ children }) => {
   const [filteredAnimals, setFilteredAnimals] = useState([]);
 
   const applyFilters = async (animals) => {
-    // Logique de filtrage ici
     const filtered = animals.filter((animal) => {
       return (
         (filters.age === '' || animal.age <= parseInt(filters.age)) &&
@@ -29,8 +27,20 @@ export const FilterProvider = ({ children }) => {
     setFilteredAnimals(filtered);
   };
 
+  const resetFilters = () => {
+    setFilters({
+      age: '',
+      gender: '',
+      species: '',
+      race: '',
+      availability: '',
+    });
+  };
+
   return (
-    <FilterContext.Provider value={{ filters, setFilters, filteredAnimals, applyFilters }}>
+    <FilterContext.Provider
+      value={{ filters, setFilters, filteredAnimals, applyFilters, resetFilters }}
+    >
       {children}
     </FilterContext.Provider>
   );
