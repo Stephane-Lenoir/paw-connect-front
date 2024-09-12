@@ -1,87 +1,35 @@
 'use client';
 import { useEffect, useState } from 'react';
-import api from '../../services/axiosConfig';
 import { useAnimal } from '../../context/animalContext';
+import { useParams } from 'next/navigation';
 
-export default function AccomodationForm() {
-  const { animalData, setAnimalData } = useAnimal();
-  console.log('Animal data in component:', animalData);
-  // États pour gérer les données utilisateur, le token, et l'état de chargement
-  /*const [userId, setUserId] = useState(null);
-  const [userData, setUserData] = useState({
-    name: '',
-    firstname: '',
-    email: '',
-  });
-  const [token, setToken] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);*/
+export default function AccommodationForm() {
+  const { animalData } = useAnimal();
+  const params = useParams();
+  const [animal, setAnimal] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // Effet pour récupérer et décoder le token JWT du localStorage
-  // useEffect(() => {
-  //   const storedToken = localStorage.getItem('jwt_token');
-
-  //   if (storedToken) {
-  //     setToken(storedToken);
-  //     // Décodage du payload du token JWT
-  //     const [, payload] = storedToken.split('.');
-  //     const decodedPayload = JSON.parse(atob(payload));
-  //     setUserId(decodedPayload.id);
-  //   } else {
-  //     // Si pas de token, on arrête le chargement
-  //     setIsLoading(false);
-  //   }
-  // }, []);
-
-  // // Effet pour charger les données utilisateur une fois que nous avons l'ID et le token
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     if (!userId || !token) return;
-
-  //     try {
-  //       const response = await api.get(`profiles/${userId}`, {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //           'Content-Type': 'application/json',
-  //         },
-  //       });
-
-  //       // Mise à jour de l'état avec les données reçues
-  //       setUserData(response.data);
-  //     } catch (error) {
-  //       console.error('Erreur lors de la récupération des données:', error);
-  //     } finally {
-  //       // Dans tous les cas, on arrête le chargement
-  //       setIsLoading(false);
-  //     }
-  //   };
-
-  //   fetchUserData();
-  // }, [userId, token]);
-
-  // // Gestionnaire pour les changements dans les champs du formulaire
-  // // Même si les champs sont en lecture seule, c'est une bonne pratique de l'inclure
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setUserData((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
+  useEffect(() => {
+    if (animalData && params.id) {
+      console.log('Searching for animal with id:', params.id);
+      const foundAnimal = animalData.find((animal) => animal.id === parseInt(params.id));
+      console.log('Found Animal:', foundAnimal);
+      setAnimal(foundAnimal);
+      setIsLoading(false);
+    }
+  }, [params, animalData]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const formdData = new FormData(event.target);
-    const data = Object.fromEntries(formdData);
-    console.log(data);
+    const formData = new FormData(event.target);
+    const data = Object.fromEntries(formData);
+    console.log('Form Data:', data);
+    // Ici, vous enverriez normalement ces données à votre API
   };
 
-  // Affichage d'un message de chargement si les données ne sont pas encore prêtes
-  // if (isLoading) {
-  //   return <p>Chargement des données...</p>;
-  // }
+  if (isLoading) return <p>Chargement...</p>;
+  if (!animal) return <p>Aucun animal trouvé avec l'ID fourni.</p>;
 
-  // Rendu du formulaire
   return (
     <>
       <h2 className="text-center text-2xl p-2 font-bold">Formulaire d'hébergement</h2>
@@ -93,9 +41,7 @@ export default function AccomodationForm() {
             name="name"
             placeholder="Nom"
             className="input input-bordered w-full max-w-xs"
-            // value={userData.name}
-            // onChange={handleChange}
-            // readOnly
+            required
           />
         </div>
         <div className="text-xl">
@@ -105,50 +51,39 @@ export default function AccomodationForm() {
             name="firstname"
             placeholder="Prénom"
             className="input input-bordered w-full max-w-xs"
-            // value={userData.firstname}
-            // onChange={handleChange}
-            // readOnly
+            required
           />
         </div>
         <div className="text-xl">
           <h3 className="p-2">Email :</h3>
           <input
-            type="text"
+            type="email"
             name="email"
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
-            // value={userData.email}
-            // onChange={handleChange}
-            // readOnly
+            required
           />
         </div>
-
         <div className="text-xl">
           <h3 className="p-2">Nom de l'animal :</h3>
           <input
             type="text"
-            name="Nom de l'animal"
-            placeholder="Nom de l'animal"
+            name="animalName"
             className="input input-bordered w-full max-w-xs"
-            // value={userData.email}
-            // onChange={handleChange}
-            // readOnly
+            defaultValue={animal.name || ''}
+            readOnly
           />
         </div>
-
         <div className="text-xl">
           <h3 className="p-2">Race de l'animal :</h3>
           <input
             type="text"
-            name="Race de l'animal"
-            placeholder="Race de l'animal"
+            name="animalBreed"
             className="input input-bordered w-full max-w-xs"
-            // value={userData.email}
-            // onChange={handleChange}
-            // readOnly
+            defaultValue={animal.race || ''}
+            readOnly
           />
         </div>
-
         <button
           type="submit"
           className="text-xl btn bg-primary-color hover:bg-secondary-color w-xl m-4"
