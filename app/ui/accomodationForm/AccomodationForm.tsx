@@ -2,12 +2,16 @@
 import { useEffect, useState } from 'react';
 import { useAnimal } from '../../context/animalContext';
 import { useParams } from 'next/navigation';
+import { useAuth } from '../../context/authContext';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
   const params = useParams();
   const [animal, setAnimal] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { userConnected } = useAuth();
+
+  console.log(userConnected);
 
   useEffect(() => {
     if (animalData && params.id) {
@@ -41,7 +45,8 @@ export default function AccommodationForm() {
             name="name"
             placeholder="Nom"
             className="input input-bordered w-full max-w-xs"
-            required
+            defaultValue={userConnected.name || ''}
+            readOnly
           />
         </div>
         <div className="text-xl">
@@ -51,7 +56,8 @@ export default function AccommodationForm() {
             name="firstname"
             placeholder="Prénom"
             className="input input-bordered w-full max-w-xs"
-            required
+            defaultValue={userConnected.firstname || ''}
+            readOnly
           />
         </div>
         <div className="text-xl">
@@ -61,6 +67,8 @@ export default function AccommodationForm() {
             name="email"
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
+            defaultValue={userConnected.email || ''}
+            readOnly
             required
           />
         </div>
