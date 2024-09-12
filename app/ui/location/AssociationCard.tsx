@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
 import { useState, useEffect } from 'react';
 import CardImage from './CardImage';
 import MailtoButton from './MailtoButton';
 import TitleAssociation from './TitleAssociation';
-import Modal from '../association/Modal'; // Mettez à jour l'import ici
+import Modal from './Modal';
 import { getAllAssociations, getOneAssociation } from '../../services/Associations';
 
 export default function AssociationCard() {
@@ -34,7 +34,7 @@ export default function AssociationCard() {
       setSelectedAssociation(data);
       setModalOpen(true);
     } catch (error) {
-      console.error('Erreur lors du chargement des détails de l\'association:', error);
+      console.error("Erreur lors du chargement des détails de l'association:", error);
     }
   };
 
@@ -57,20 +57,16 @@ export default function AssociationCard() {
           <CardImage />
 
           <div className="p-4 text-center">
-            <TitleAssociation title={association.name} onClick={() => handleAssociationClick(association.id)} />
+            <TitleAssociation
+              title={association.name}
+              onClick={() => handleAssociationClick(association.id)}
+            />
             <MailtoButton email={association.email} />
           </div>
         </div>
       ))}
 
-      <Modal isOpen={modalOpen} onClose={closeModal}>
-        {selectedAssociation && (
-          <div>
-            <h1>{selectedAssociation.name}</h1>
-            {/* Affichez ici les autres détails de l'association */}
-          </div>
-        )}
-      </Modal>
+      <Modal isOpen={modalOpen} onClose={closeModal} isUnderConstruction={true} />
     </div>
   );
 }
