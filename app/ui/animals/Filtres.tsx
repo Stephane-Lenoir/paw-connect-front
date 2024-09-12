@@ -47,7 +47,7 @@ export default function Filtres({ onReload }) {
 
   return (
     <>
-      <div className="w-4/5 sm:w-1/6 md:w-4/5 lg:w-1/6 bg-background-color flex flex-col items-center min-h-screen mt-5 mb-5 rounded-xl">
+      <div className="w-4/5 sm:w-1/6 md:w-4/5 lg:w-1/6 bg-background-color flex flex-col items-center max-h-screen mt-5 mb-5 rounded-xl">
         <h3 className="text-center text-3xl mt-6 mb-6">Filtres</h3>
         <div className="collapse collapse-arrow bg-background-color">
           <input type="checkbox" name="my-accordion-2" defaultChecked />
@@ -149,7 +149,7 @@ export default function Filtres({ onReload }) {
           </div>
         </div>
         <button
-          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
+          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 mb-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
           type="button"
           onClick={handleResetFilters}
         >
