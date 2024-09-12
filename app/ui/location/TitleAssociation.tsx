@@ -1,7 +1,16 @@
-export default function TitleAssociation() {
-  return (
-    <>
-      <p className="font-bold">Le refuge pour Animaux APAK</p>
-    </>
-  );
+"use client";
+
+interface TitleAssociationProps {
+  title: string;
+  onClick?: () => void;
 }
+
+const TitleAssociation = ({ title, onClick }: TitleAssociationProps) => {
+  return (
+    <h2 className="text-xl font-bold cursor-pointer" onClick={onClick}>
+      {title}
+    </h2>
+  );
+};
+
+export default TitleAssociation;
