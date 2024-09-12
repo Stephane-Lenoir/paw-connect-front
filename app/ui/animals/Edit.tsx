@@ -55,7 +55,7 @@ export function EditAnimal() {
       race: e.target.race.value,
       location: e.target.location.value,
       species: e.target.species.value,
-      // birthday: e.target.birthday.value,
+      birthday: e.target.birthday.value,
       // photo: e.target.photo.value,
     };
     try {
@@ -131,13 +131,13 @@ export function EditAnimal() {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         type="text"
                         name="availability"
-                        defaultValue={animal.availability ? 'Disponible' : 'Indisponible'}
+                        defaultValue={animal.availability ? 'true' : 'false'}
                       />
                       <label className="input input-bordered flex items-center gap-2 w-full">
                         <select className="grow" name="gender">
                           <option value="">Sexe de l'animal</option>
-                          <option value="male">Mâle</option>
-                          <option value="female">Femelle</option>
+                          <option value="Mâle">Mâle</option>
+                          <option value="Femelle">Femelle</option>
                         </select>
                       </label>
                       <input
@@ -159,7 +159,7 @@ export function EditAnimal() {
                         defaultValue={animal.species}
                       />
 
-                      {/* <label className="block text-gray-700 text-sm font-bold mb-2">
+                      <label className="block text-gray-700 text-sm font-bold mb-2">
                         (YYYY-MM-DD):
                       </label>
                       <input
@@ -167,7 +167,7 @@ export function EditAnimal() {
                         type="text"
                         name="birthday"
                         defaultValue={animal.birthday}
-                      /> */}
+                      />
 
                       {/* <label className="input input-bordered flex items-center gap-2 w-full">
                         <input
@@ -202,9 +202,9 @@ export function EditAnimal() {
                       <p>
                         <strong>Espèce :</strong> {animal.species}
                       </p>
-                      {/* <p>
+                      <p>
                         <strong>Anniversaire :</strong> {animal.birthday}
-                      </p> */}
+                      </p>
                     </>
                   )}
                 </div>
