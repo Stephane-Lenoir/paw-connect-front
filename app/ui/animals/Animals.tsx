@@ -52,7 +52,7 @@ export default function Animals() {
       <Rules />
       <div className="flex flex-wrap gap-5 justify-center  mb-5">
         <Filtres onReload={handleReload} />
-        <Cards onReload={reload} />
+        <Cards reload={reload} />
       </div>
     </>
   );

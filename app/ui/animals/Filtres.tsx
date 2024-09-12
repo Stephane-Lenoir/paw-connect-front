@@ -41,6 +41,7 @@ export default function Filtres({ onReload }) {
       applyFilters(animals);
     }
     onReload();
+    // window.location.reload();
   };
 
   const getUniqueSpecies = () => {

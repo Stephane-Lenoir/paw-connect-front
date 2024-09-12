@@ -19,7 +19,7 @@ export const FilterProvider = ({ children }) => {
     // Logique de filtrage ici
     const filtered = animals.filter((animal) => {
       return (
-        (filters.age === '' || animal.age === filters.age) &&
+        (filters.age === '' || animal.age <= parseInt(filters.age)) &&
         (filters.gender === '' || animal.gender === filters.gender) &&
         (filters.species === '' || animal.species === filters.species) &&
         (filters.race === '' || animal.race === filters.race) &&
