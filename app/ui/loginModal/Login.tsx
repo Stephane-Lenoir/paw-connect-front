@@ -1,6 +1,9 @@
 import axios from 'axios';
+import { useAuth } from '../../context/authContext';
 
-export default function Login({ setIsLogged }) {
+export default function Login() {
+  const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth();
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -18,8 +21,11 @@ export default function Login({ setIsLogged }) {
       if (response && response.status === 200) {
         // Save the token in the local storage
         // console.log(response.data.token);
-        localStorage.setItem('jwt_token', response.data.token);
+        const { user, token } = response.data;
+        localStorage.setItem('jwt_token', token);
+        localStorage.setItem('userConnected', JSON.stringify(user));
         console.log('Login succesfull');
+        setUserConnected(user);
         setIsLogged(true); // it display the avatar
         event.target.closest('dialog').close(); // close modal
         event.target.reset(); // reset the form
