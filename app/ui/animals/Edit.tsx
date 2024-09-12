@@ -201,9 +201,9 @@ export function EditAnimal() {
                       <p>
                         <strong>Espèce :</strong> {animal.species}
                       </p>
-                      <p>
+                      {/* <p>
                         <strong>Anniversaire :</strong> {animal.birthday}
-                      </p>
+                      </p> */}
                     </>
                   )}
                 </div>
