@@ -11,6 +11,12 @@ export default function Animals() {
   const [animals, setAnimals] = useState([]);
   const [error, setError] = useState(null);
 
+  const [reload, setReload] = useState(false);
+
+  const handleReload = () => {
+    setReload(!reload);
+  };
+
   // const fetchData = async () => {
   //   try {
   // Get the token from the local storage
@@ -45,8 +51,8 @@ export default function Animals() {
     <>
       <Rules />
       <div className="flex flex-wrap gap-5 justify-center  mb-5">
-        <Filtres />
-        <Cards />
+        <Filtres onReload={handleReload} />
+        <Cards onReload={reload} />
       </div>
     </>
   );

@@ -1,46 +1,46 @@
-import Link from 'next/link';
-import { searchAnimal } from '../../services/Search';
 import { useEffect, useState } from 'react';
 import { getAllAnimals } from '../../services/Animals';
+import { useFilter } from '../../context/filterContex';
+import { usePathname } from 'next/navigation';
 
-export default function Filtres() {
-  const [age, setAge] = useState('');
-  const [gender, setGender] = useState('');
-  const [species, setSpecies] = useState('');
-  const [race, setRace] = useState('');
-  const [availability, setAvailability] = useState('');
-  const [results, setResults] = useState([]);
-
+export default function Filtres({ onReload }) {
+  const { filters, setFilters, applyFilters } = useFilter();
   const [animals, setAnimals] = useState([]);
+  const pathname = usePathname();
 
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
         const data = await getAllAnimals();
         setAnimals(data);
+        if (pathname === '/animals') {
+          applyFilters(data);
+        }
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchAnimals();
-  }, []);
+  }, [applyFilters, pathname]);
 
-  const handleFilter = async () => {
-    const query = {
-      age,
-      gender,
-      species,
-      race,
-      availability,
-    };
+  // const handleFilter = () => {
+  //   if (pathname === '/animals') {
+  //     applyFilters(animals);
+  //   }
+  // };
 
-    try {
-      const data = await searchAnimal(query);
-      setResults(data);
-    } catch (error) {
-      console.error(error);
+  const resetFilters = () => {
+    setFilters({
+      age: '',
+      gender: '',
+      species: '',
+      availability: '',
+    });
+    if (pathname === '/animals') {
+      applyFilters(animals);
     }
+    onReload();
   };
 
   const getUniqueSpecies = () => {
@@ -54,14 +54,7 @@ export default function Filtres() {
     return Object.values(speciesMap);
   };
 
-  // const getUniqueSpecies = () => {
-  //   const speciesSet = new Set([...animals.map((animal) => animal.species)]);
-  //   return Array.from(speciesSet);
-  // };
-
   const uniqueSpecies = getUniqueSpecies();
-
-  console.log(results);
 
   return (
     <>
@@ -79,10 +72,10 @@ export default function Filtres() {
               id="age-range"
               min="1"
               max="20"
-              value={age}
+              value={filters.age}
               className="range"
               step="1"
-              onChange={(e) => setAge(e.target.value)}
+              onChange={(e) => setFilters({ ...filters, age: e.target.value })}
             />
             <div className="flex w-full justify-between px-2 text-xs">
               {[...Array(20)].map((_, index) => (
@@ -99,9 +92,10 @@ export default function Filtres() {
               <input
                 type="radio"
                 name="gender"
-                value="male"
+                value="Mâle"
                 className="mt-5"
-                onChange={(e) => setGender(e.target.value)}
+                checked={filters.gender === 'Mâle'}
+                onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
               />
               Mâle
             </label>
@@ -109,9 +103,10 @@ export default function Filtres() {
               <input
                 type="radio"
                 name="gender"
-                value="female"
+                value="Femelle"
                 className="mt-5"
-                onChange={(e) => setGender(e.target.value)}
+                checked={filters.gender === 'Femelle'}
+                onChange={(e) => setFilters({ ...filters, gender: e.target.value })}
               />
               Femelle
             </label>
@@ -127,7 +122,8 @@ export default function Filtres() {
                   type="radio"
                   name="species"
                   value={species}
-                  onChange={(e) => setSpecies(e.target.value)}
+                  checked={filters.species === species}
+                  onChange={(e) => setFilters({ ...filters, species: e.target.value })}
                   className="mr-2"
                 />
                 {species}
@@ -135,16 +131,6 @@ export default function Filtres() {
             ))}
           </div>
         </div>
-        {/* <div className="collapse collapse-arrow bg-background-color">
-          <input type="checkbox" name="my-accordion-2" />
-          <div className="collapse-title text-xl font-medium">Races</div>
-          <div className="collapse-content bg-secondary-color">
-            
-            <Link href="">
-              <p>Chartreux</p>
-            </Link>
-          </div>
-        </div> */}
         <div className="collapse collapse-arrow bg-background-color">
           <input type="checkbox" name="my-accordion-2" />
           <div className="collapse-title text-xl font-medium">Disponibilité</div>
@@ -155,7 +141,8 @@ export default function Filtres() {
                 name="availability"
                 value="true"
                 className="mt-5"
-                onChange={(e) => setAvailability(e.target.value)}
+                checked={filters.availability === 'true'}
+                onChange={(e) => setFilters({ ...filters, availability: e.target.value })}
               />
               Oui
             </label>
@@ -164,20 +151,28 @@ export default function Filtres() {
                 type="radio"
                 name="availability"
                 value="false"
-                checked={availability === 'false'}
-                onChange={() => setAvailability('false')}
+                checked={filters.availability === 'false'}
+                onChange={(e) => setFilters({ ...filters, availability: e.target.value })}
                 className="mt-5"
               />
               Non
             </label>
           </div>
         </div>
-        <button
+        {/* <button
           className="bg-secondary-color text-white px-4 py-2 rounded-full mt-8 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
           type="button"
           onClick={handleFilter}
         >
           Appliquer les filtres
+        </button> */}
+
+        <button
+          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
+          type="button"
+          onClick={resetFilters}
+        >
+          Réinitialiser les filtres
         </button>
       </div>
     </>
