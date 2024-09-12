@@ -14,10 +14,22 @@ export const FilterProvider = ({ children }) => {
   });
   const [filteredAnimals, setFilteredAnimals] = useState([]);
 
+  const calculateAge = (birthday) => {
+    const today = new Date();
+    const birthDate = new Date(birthday);
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
+    }
+    return age;
+  };
+
   const applyFilters = async (animals) => {
     const filtered = animals.filter((animal) => {
+      const age = calculateAge(animal.birthday);
       return (
-        (filters.age === '' || animal.age <= parseInt(filters.age)) &&
+        (filters.age === '' || age <= parseInt(filters.age)) &&
         (filters.gender === '' || animal.gender === filters.gender) &&
         (filters.species === '' || animal.species === filters.species) &&
         (filters.race === '' || animal.race === filters.race) &&
