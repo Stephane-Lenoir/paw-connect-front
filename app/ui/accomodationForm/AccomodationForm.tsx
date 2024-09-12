@@ -123,30 +123,31 @@ export default function AccomodationForm() {
           />
         </div>
 
-        {/* Ces champs de textarea ne sont pas contrôlés. 
-            Vous pourriez vouloir les contrôler de la même manière que les inputs ci-dessus */}
-        <label className="form-control">
-          <div className="label">
-            <span className="label-text text-xl p-2">
-              Indiquez vos expériences avec des animaux :
-            </span>
-          </div>
-          <textarea
-            placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w"
-          ></textarea>
-        </label>
-        <label className="form-control">
-          <div className="label">
-            <span className="label-text text-xl p-2">
-              Pouvez vous détailler l'environnement pour l'animal :
-            </span>
-          </div>
-          <textarea
-            placeholder="Entrez votre texte..."
-            className="textarea textarea-bordered textarea-lg w-full max-w"
-          ></textarea>
-        </label>
+        <div className="text-xl">
+          <h3 className="p-2">Nom de l'animal :</h3>
+          <input
+            type="text"
+            name="Nom de l'animal"
+            placeholder="Nom de l'animal"
+            className="input input-bordered w-full max-w-xs"
+            // value={userData.email}
+            // onChange={handleChange}
+            // readOnly
+          />
+        </div>
+
+        <div className="text-xl">
+          <h3 className="p-2">Race de l'animal :</h3>
+          <input
+            type="text"
+            name="Race de l'animal"
+            placeholder="Race de l'animal"
+            className="input input-bordered w-full max-w-xs"
+            // value={userData.email}
+            // onChange={handleChange}
+            // readOnly
+          />
+        </div>
 
         <button
           type="submit"
