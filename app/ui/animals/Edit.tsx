@@ -133,12 +133,13 @@ export function EditAnimal() {
                         name="availability"
                         defaultValue={animal.availability ? 'Disponible' : 'Indisponible'}
                       />
-                      <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                        type="text"
-                        name="gender"
-                        defaultValue={animal.gender}
-                      />
+                      <label className="input input-bordered flex items-center gap-2 w-full">
+                        <select className="grow" name="gender">
+                          <option value="">Sexe de l'animal</option>
+                          <option value="male">Mâle</option>
+                          <option value="female">Femelle</option>
+                        </select>
+                      </label>
                       <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         type="text"
