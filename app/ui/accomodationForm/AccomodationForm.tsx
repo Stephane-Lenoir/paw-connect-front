@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useAnimal } from '../../context/animalContext';
 import { useParams } from 'next/navigation';
 import { useAuth } from '../../context/authContext';
+import { createRequest } from '../../services/Request';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
@@ -10,25 +11,34 @@ export default function AccommodationForm() {
   const [animal, setAnimal] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const { userConnected } = useAuth();
+  const [currentDate, setCurrentDate] = useState('');
 
   console.log(userConnected);
 
   useEffect(() => {
     if (animalData && params.id) {
-      console.log('Searching for animal with id:', params.id);
+      // console.log('Searching for animal with id:', params.id);
       const foundAnimal = animalData.find((animal) => animal.id === parseInt(params.id));
-      console.log('Found Animal:', foundAnimal);
+      // console.log('Found Animal:', foundAnimal);
       setAnimal(foundAnimal);
       setIsLoading(false);
     }
+    const today = new Date();
+    const formattedDate = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    setCurrentDate(formattedDate);
   }, [params, animalData]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log('Form Data:', data);
-    // Ici, vous enverriez normalement ces données à votre API
+    data.animal_id = parseInt(data.animal_id);
+    const fetchData = async () => {
+      const response = await createRequest(data);
+      return response;
+    };
+    fetchData();
+    // console.log('Form Data:', data);
   };
 
   if (isLoading) return <p>Chargement...</p>;
@@ -86,10 +96,30 @@ export default function AccommodationForm() {
           <h3 className="p-2">Race de l'animal :</h3>
           <input
             type="text"
-            name="animalBreed"
+            name="animalRace"
             className="input input-bordered w-full max-w-xs"
             defaultValue={animal.race || ''}
             readOnly
+          />
+        </div>
+        <div className="text-xl">
+          <h3 className="p-2">Date de la demande :</h3>
+          <input
+            type="date"
+            name="date"
+            className="input input-bordered w-full max-w-xs"
+            value={currentDate}
+            readOnly
+          />
+        </div>
+        <div className="text-xl">
+          <input
+            type="number"
+            name="animal_id"
+            className="input input-bordered w-full max-w-xs"
+            value={animal.id}
+            readOnly
+            hidden
           />
         </div>
         <button

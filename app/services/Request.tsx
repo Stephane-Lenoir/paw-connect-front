@@ -21,9 +21,15 @@ export async function getRequestById(id) {
   }
 }
 
-export async function createRequest(request) {
+export async function createRequest(data) {
   try {
-    const response = await api.post('requests', request);
+    const token = localStorage.getItem('jwt_token');
+    const response = await api.post('requests', data, {
+      headers: {
+        Authorization: token,
+        'Content-Type': 'application/json',
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
