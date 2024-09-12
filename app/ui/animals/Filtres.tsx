@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getAllAnimals } from '../../services/Animals';
 import { useFilter } from '../../context/filterContex';
 import { usePathname } from 'next/navigation';
@@ -8,20 +8,13 @@ export default function Filtres({ onReload }) {
   const [animals, setAnimals] = useState([]);
   const pathname = usePathname();
 
-  const memoizedApplyFilters = useCallback(
-    async (data) => {
-      await applyFilters(data);
-    },
-    [applyFilters],
-  );
-
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
         const data = await getAllAnimals();
         setAnimals(data);
         if (pathname === '/animals') {
-          memoizedApplyFilters(data);
+          applyFilters(data);
         }
       } catch (error) {
         console.error(error);
@@ -29,7 +22,13 @@ export default function Filtres({ onReload }) {
     };
 
     fetchAnimals();
-  }, [pathname, memoizedApplyFilters]);
+  }, [pathname]); // Appelé uniquement lorsque pathname change
+
+  useEffect(() => {
+    if (pathname === '/animals') {
+      applyFilters(animals);
+    }
+  }, [filters, pathname, animals]); // Appelé lorsque les filtres ou les animaux changent
 
   const handleResetFilters = () => {
     resetFilters();
