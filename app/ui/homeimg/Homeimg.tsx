@@ -11,10 +11,10 @@ export default function Homeimg() {
           <div className="hero-overlay bg-opacity-40"></div>
           <div className="hero-content text-neutral-content text-center">
             <div className="max-w-md">
-              <h1 className="mb-5 text-7xl font-bold">Hello there</h1>
+              <h1 className="mb-5 text-7xl font-bold">Paw Connect</h1>
               <p className="mb-5 text-3xl">
-                Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
-                exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
+                Bienvenue sur Paw Connect, l'application qui rapproche les refuges et les familles
+                d'accueil pour offrir un foyer temporaire et aimant aux animaux dans le besoin.
               </p>
             </div>
           </div>
