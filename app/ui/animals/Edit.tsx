@@ -127,12 +127,20 @@ export function EditAnimal() {
                         defaultValue={animal.description}
                         rows="3"
                       />
-                      <input
+
+                      <label className="input input-bordered flex items-center gap-2 w-full">
+                        <select className="grow" name="availability">
+                          <option value="">Disponibilité</option>
+                          <option value="false">Non Disponible</option>
+                          <option value="true">Disponible</option>
+                        </select>
+                      </label>
+                      {/* <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         type="text"
                         name="availability"
                         defaultValue={animal.availability ? 'true' : 'false'}
-                      />
+                      /> */}
                       <label className="input input-bordered flex items-center gap-2 w-full">
                         <select className="grow" name="gender">
                           <option value="">Sexe de l'animal</option>
