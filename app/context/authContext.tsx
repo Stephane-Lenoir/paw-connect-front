@@ -11,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   //!TODO : Why localStorage isn't defined ?
   const [userConnected, setUserConnected] = useState(() => {
     if (typeof localStorage !== 'undefined') {
-      const savedUser = localStorage?.getItem('userConnected');
+      const savedUser = localStorage.getItem('userConnected');
 
       return savedUser ? JSON.parse(savedUser) : null;
     }
