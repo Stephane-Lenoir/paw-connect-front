@@ -7,10 +7,14 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
+
   //!TODO : Why localStorage isn't defined ?
   const [userConnected, setUserConnected] = useState(() => {
-    const savedUser = localStorage.getItem('userConnected');
-    return savedUser ? JSON.parse(savedUser) : null;
+    if (typeof localStorage !== 'undefined') {
+      const savedUser = localStorage?.getItem('userConnected');
+
+      return savedUser ? JSON.parse(savedUser) : null;
+    }
   });
 
   useEffect(() => {
