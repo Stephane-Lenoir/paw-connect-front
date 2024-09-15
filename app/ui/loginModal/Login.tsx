@@ -22,7 +22,8 @@ export default function Login() {
         // Save the token in the local storage
         // console.log(response.data.token);
         const { user, token } = response.data;
-        localStorage.setItem('jwt_token', token);
+        localStorage.setItem('jwt_token', token.replace('Bearer ', ''));
+        console.log("Token stocké dans localStorage:", localStorage.getItem('jwt_token'));
         localStorage.setItem('userConnected', JSON.stringify(user));
         console.log('Login succesfull');
         setUserConnected(user);
