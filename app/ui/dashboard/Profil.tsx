@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { getUserById, updateUserById } from '../../services/Users';
+import { useState } from 'react';
+import { updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import { useAuth } from '../../context/authContext';
 import Loader from '../loader';
 
 export default function Profil() {
-  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [editing, setEditing] = useState(false);
@@ -47,8 +46,11 @@ export default function Profil() {
       firstname: e.target.firstname.value,
     };
     try {
-      setUserConnected(updatedUser);
-      await updateUserById(userConnected.id, updatedUser);
+      const updatedUserFromServer = await updateUserById(userConnected.id, updatedUser);
+      setUserConnected({
+        ...userConnected, // Spread existing user data
+        ...updatedUserFromServer, // Replace existing data by updated data
+      });
 
       setEditing(false);
     } catch (error) {
