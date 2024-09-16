@@ -33,22 +33,22 @@ export const getAllDonations = async () => {
   }
 };
 
-export const updateDonation = async (donationId, updateData) => {
-  try {
-    const response = await api.put(`/donations/${donationId}`, updateData);
-    return response.data;
-  } catch (error) {
-    console.error('Error updating donation:', error.response?.data || error.message);
-    throw error;
-  }
-};
+// export const updateDonation = async (donationId, updateData) => {
+//   try {
+//     const response = await api.put(`/donations/${donationId}`, updateData);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error updating donation:', error.response?.data || error.message);
+//     throw error;
+//   }
+// };
 
-export const deleteDonation = async (donationId) => {
-  try {
-    const response = await api.delete(`/donations/${donationId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error deleting donation:', error.response?.data || error.message);
-    throw error;
-  }
-};
+// export const deleteDonation = async (donationId) => {
+//   try {
+//     const response = await api.delete(`/donations/${donationId}`);
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error deleting donation:', error.response?.data || error.message);
+//     throw error;
+//   }
+// };
