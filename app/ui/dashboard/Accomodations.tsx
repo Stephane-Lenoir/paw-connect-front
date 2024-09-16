@@ -111,6 +111,7 @@ export default function Accomodations() {
         await deleteRequest(requestId);
         setRequests(requests.filter((request) => request.id !== requestId));
 <<<<<<< HEAD
+<<<<<<< HEAD
         setNotifications(notifications.filter((notification) => notification.id !== requestId));
         showToastMessage(11, true); // Index du message de succès de suppression
       } catch (error) {
@@ -122,6 +123,12 @@ export default function Accomodations() {
         console.error(error);
         showToastMessage(10, false); // Index du message d'erreur de suppression
 >>>>>>> d2d26d2 (add toast on animals and dashboards)
+=======
+        showToastMessage(11, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(11, false); // Index du message d'erreur de suppression
+>>>>>>> 2aaae76 (fix toasts bugs and font change on button)
       }
     }
   };

@@ -18,9 +18,13 @@ export default function Toast() {
     "Modification d'un utilisateur réussie.",
     'Status de la requête modifié avec succès.',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'Suppression de la requête réussie',
 =======
 >>>>>>> d2d26d2 (add toast on animals and dashboards)
+=======
+    'Suppression de la requête réussie',
+>>>>>>> 2aaae76 (fix toasts bugs and font change on button)
   ];
 
   const errorMessages = [
@@ -36,9 +40,13 @@ export default function Toast() {
     "Erreur dans la modification de l'utilisateur",
     'Erreur dans la modification du status de la requête',
 <<<<<<< HEAD
+<<<<<<< HEAD
     'Suppression de la requête échouée',
 =======
 >>>>>>> d2d26d2 (add toast on animals and dashboards)
+=======
+    'Suppression de la requête échouée',
+>>>>>>> 2aaae76 (fix toasts bugs and font change on button)
   ];
 
   const message =

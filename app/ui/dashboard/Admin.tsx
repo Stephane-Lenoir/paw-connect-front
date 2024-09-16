@@ -54,6 +54,7 @@ export default function Admin() {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
 <<<<<<< HEAD
+<<<<<<< HEAD
         showToastMessage(8, true); // Index du message de succès de suppression
       } catch (error) {
         console.error(error);
@@ -64,6 +65,12 @@ export default function Admin() {
         console.error(error);
         showToastMessage(12, false); // Index du message d'erreur de suppression
 >>>>>>> d2d26d2 (add toast on animals and dashboards)
+=======
+        showToastMessage(8, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(8, false); // Index du message d'erreur de suppression
+>>>>>>> 2aaae76 (fix toasts bugs and font change on button)
       }
     }
   };
