@@ -31,11 +31,11 @@ export default function Accomodations() {
     return <Loader />;
   }
 
-  // // Log des informations de l'utilisateur connecté
-  console.log('User Connected:', userConnected);
+  // // // Log des informations de l'utilisateur connecté
+  // console.log('User Connected:', userConnected);
 
-  // // Log des requêtes récupérées
-  console.log('Requests:', requests);
+  // // // Log des requêtes récupérées
+  // console.log('Requests:', requests);
 
   // Filtrer les requêtes en fonction du rôle de l'utilisateur
   const filteredRequests = requests.filter((request) => {
@@ -79,22 +79,35 @@ export default function Accomodations() {
               {' '}
               Status : {request.status}{' '}
             </p>
-            <div className="flex flex-wrap justify-between mt-6 ">
-              <button
-                type="button"
-                className="bg-secondary-color text-white px-4 py-2 rounded-full  hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
-              >
-                {' '}
-                Accepter{' '}
-              </button>
-              <button
-                type="button"
-                className="bg-secondary-color text-white px-4 py-2 rounded-full  hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
-              >
-                {' '}
-                Refuser{' '}
-              </button>
-            </div>
+
+            {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
+              <div className="flex flex-wrap justify-between gap-2 mt-6 ">
+                <button
+                  type="button"
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                >
+                  {' '}
+                  Accepter{' '}
+                </button>
+                <button
+                  type="button"
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                >
+                  {' '}
+                  Refuser{' '}
+                </button>
+
+                {userConnected.role_id === 1 && (
+                  <button
+                    type="button"
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  >
+                    {' '}
+                    Supprimer{' '}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       ))}
