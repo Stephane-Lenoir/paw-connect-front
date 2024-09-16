@@ -56,7 +56,7 @@ export function Add() {
         >
           <div className="mb-4">
             <Image
-              src="/chien.jpg"
+              src="/chien.webp"
               alt="Chien"
               className="w-full h-auto object-cover rounded-lg shadow-md"
               width={400}

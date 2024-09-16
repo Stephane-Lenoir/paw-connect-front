@@ -5,7 +5,7 @@ export default function Homeimg() {
         <div
           className="hero h-96 mt-8 mb-8 w-11/12 align-middle"
           style={{
-            backgroundImage: 'url(/chien.jpg)',
+            backgroundImage: 'url(/chien.webp)',
           }}
         >
           <div className="hero-overlay bg-opacity-40"></div>
