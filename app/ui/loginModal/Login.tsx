@@ -1,8 +1,25 @@
 import axios from 'axios';
 import { useAuth } from '../../context/authContext';
+import { useEffect } from 'react';
 
 export default function Login() {
   const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth();
+
+  useEffect(() => {
+    const checkTokenExpiration = () => {
+      const tokenExpiration = localStorage.getItem('tokenExpiration');
+      if (tokenExpiration && Date.now() > Number(tokenExpiration)) {
+        localStorage.clear();
+        setIsLogged(false);
+        setUserConnected(null);
+      }
+    };
+
+    // Check token expiration every second
+    const intervalId = setInterval(checkTokenExpiration, 1000);
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [setIsLogged, setUserConnected]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -19,14 +36,14 @@ export default function Login() {
       });
 
       if (response && response.status === 200) {
-        // Save the token in the local storage
-        // console.log(response.data.token);
-        const { user, token } = response.data;
+        const { user, token, expirationTime } = response.data;
         localStorage.setItem('jwt_token', token);
         localStorage.setItem('userConnected', JSON.stringify(user));
-        console.log('Login succesfull');
+        localStorage.setItem('tokenExpiration', expirationTime);
+
         setUserConnected(user);
         setIsLogged(true); // it display the avatar
+
         event.target.closest('dialog').close(); // close modal
         event.target.reset(); // reset the form
       } else {
