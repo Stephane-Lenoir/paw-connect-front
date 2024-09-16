@@ -2,13 +2,11 @@
 
 import Link from 'next/link';
 import Profil from './Profil';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Add } from '../animals/Add';
 import { EditAnimal } from '../animals/Edit';
 import Admin from './Admin';
-import { getUserByRole } from '../../services/Users';
 import { useAuth } from '../../context/authContext';
-import Accomodation from '../../accomodation/[id]/page';
 import Accomodations from './Accomodations';
 import Modal from '../location/Modal';
 
