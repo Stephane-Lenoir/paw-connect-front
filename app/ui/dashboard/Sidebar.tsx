@@ -28,7 +28,7 @@ export default function Sidebar() {
 
           {activeComponent === 'admin' && userConnected.role_id === 1 && <Admin />}
 
-          {activeComponent === 'accomodations' && userConnected.role_id === 1 && <Accomodations />}
+          {activeComponent === 'accomodations' && <Accomodations />}
 
           {/* Page content here */}
         </div>
@@ -71,14 +71,12 @@ export default function Sidebar() {
               <Link href={'#'}> Demande(s) d'adoption</Link>
             </li>
 
-            {(userConnected.role_id === 2 || userConnected.role_id === 1) && (
-              <li>
-                <Link href={'#'} onClick={() => setActiveComponent('accomodations')}>
-                  {' '}
-                  Demande(s) d'hébergement
-                </Link>
-              </li>
-            )}
+            <li>
+              <Link href={'#'} onClick={() => setActiveComponent('accomodations')}>
+                {' '}
+                Demande(s) d'hébergement
+              </Link>
+            </li>
 
             <li>
               <Link href={'#'}>Messages</Link>
