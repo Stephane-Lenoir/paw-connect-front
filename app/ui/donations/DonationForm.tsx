@@ -41,9 +41,7 @@ export default function DonationForm({ associations }) {
     setSuccess('');
 
     try {
-      console.log("Calling createDonation with:", formData);
       const result = await createDonation(formData);
-      console.log("Donation result:", result);
       setSuccess('Donation enregistrée avec succès !');
       setModalMessage('Votre don a été enregistré. La possibilité de réaliser des paiements en ligne sera bientôt disponible. Merci de votre générosité !');
       setShowModal(true);
