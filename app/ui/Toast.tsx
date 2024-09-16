@@ -16,6 +16,7 @@ export default function Toast() {
     "Suppression d'un animal réussie.",
     "Suppression d'un utilisateur réussie.",
     "Modification d'un utilisateur réussie.",
+    'Status de la requête modifié avec succès.',
   ];
 
   const errorMessages = [
@@ -29,6 +30,7 @@ export default function Toast() {
     "Erreur dans la suppression de l'animal",
     "Erreur dans la suppression de l'utilisateur",
     "Erreur dans la modification de l'utilisateur",
+    'Erreur dans la modification du status de la requête',
   ];
 
   const message =

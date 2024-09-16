@@ -3,12 +3,14 @@ import { deleteRequest, getAllRequests, updateRequest } from '../../services/Req
 import Loader from '../loader';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
+import { useToast } from '../../context/toastContext';
 
 export default function Accomodations() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { userConnected } = useAuth();
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,13 +33,6 @@ export default function Accomodations() {
     return <Loader />;
   }
 
-  // // // Log des informations de l'utilisateur connecté
-  // console.log('User Connected:', userConnected);
-
-  // // // Log des requêtes récupérées
-  // console.log('Requests:', requests);
-
-  // Filtrer les requêtes en fonction du rôle de l'utilisateur
   const filteredRequests = requests.filter((request) => {
     if (userConnected.role_id === 1) {
       // Admin voit toutes les requêtes
@@ -54,42 +49,47 @@ export default function Accomodations() {
     return false;
   });
 
-  // fonction de validation d'une requete :
-
   const handleAccept = async (requestId) => {
     try {
-      console.log(requestId);
       await updateRequest(requestId, { status: 'Acceptée' });
       setRequests(
         requests.map((request) =>
           request.id === requestId ? { ...request, status: 'Acceptée' } : request,
         ),
       );
+      showToastMessage(10, true); // Index du message de succès d'acceptation
     } catch (error) {
       console.error(error);
+      showToastMessage(10, false); // Index du message d'erreur d'acceptation
     }
   };
 
   const handleRefused = async (requestId) => {
     try {
-      console.log(requestId);
       await updateRequest(requestId, { status: 'Refusée' });
       setRequests(
         requests.map((request) =>
           request.id === requestId ? { ...request, status: 'Refusée' } : request,
         ),
       );
+      showToastMessage(10, true); // Index du message de succès de refus
     } catch (error) {
       console.error(error);
+      showToastMessage(10, false); // Index du message d'erreur de refus
     }
   };
 
   const handleDelete = async (requestId) => {
-    try {
-      await deleteRequest(requestId);
-      setRequests(requests.filter((request) => request.id !== requestId));
-    } catch (error) {
-      console.error(error);
+    const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette requête ?');
+    if (isConfirmed) {
+      try {
+        await deleteRequest(requestId);
+        setRequests(requests.filter((request) => request.id !== requestId));
+        showToastMessage(10, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(10, false); // Index du message d'erreur de suppression
+      }
     }
   };
 

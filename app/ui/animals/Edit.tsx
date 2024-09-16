@@ -5,6 +5,7 @@ import { deleteAnimal, getAnimalByUserId, updateAnimal } from '../../services/An
 import Image from 'next/image';
 import { setUrlAnimal } from '../../utils/url';
 import Menu from '../dashboard/Menu';
+import { useToast } from '../../context/toastContext';
 
 export function EditAnimal() {
   const [animals, setAnimals] = useState([]);
@@ -12,6 +13,7 @@ export function EditAnimal() {
   const [editingAnimalId, setEditingAnimalId] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
@@ -45,19 +47,51 @@ export function EditAnimal() {
     fetchData();
   }, [userId]);
 
+  const validateForm = (formData) => {
+    const requiredFields = [
+      'name',
+      'description',
+      'availability',
+      'gender',
+      'race',
+      'location',
+      'species',
+      'birthday',
+    ];
+    const missingFields = requiredFields.filter((field) => !formData.get(field));
+
+    if (missingFields.length > 0) {
+      showToastMessage(
+        null,
+        false,
+        `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
+      );
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSave = async (e, animalId) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+
+    if (!validateForm(formData)) {
+      return;
+    }
+
     const updatedAnimal = {
-      name: e.target.name.value,
-      description: e.target.description.value,
-      availability: e.target.availability.value,
-      gender: e.target.gender.value,
-      race: e.target.race.value,
-      location: e.target.location.value,
-      species: e.target.species.value,
-      birthday: e.target.birthday.value,
-      // photo: e.target.photo.value,
+      name: formData.get('name'),
+      description: formData.get('description'),
+      availability: formData.get('availability'),
+      gender: formData.get('gender'),
+      race: formData.get('race'),
+      location: formData.get('location'),
+      species: formData.get('species'),
+      birthday: formData.get('birthday'),
+      // photo: formData.get('photo'),
     };
+
     try {
       await updateAnimal(animalId, updatedAnimal);
       setEditingAnimalId(null);
@@ -68,22 +102,27 @@ export function EditAnimal() {
         return animal;
       });
       setAnimals(updatedAnimals);
+      showToastMessage(6, true); // Index du message à afficher, succès
     } catch (error) {
       console.error(error);
+      showToastMessage(6, false); // Index du message d'erreur, erreur
     }
   };
 
   const handleDelete = async (animalId) => {
-    try {
-      await deleteAnimal(animalId);
-      const updatedAnimals = animals.filter((animal) => animal.id !== animalId);
-      setAnimals(updatedAnimals);
-    } catch (error) {
-      console.error(error);
+    const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');
+    if (isConfirmed) {
+      try {
+        await deleteAnimal(animalId);
+        const updatedAnimals = animals.filter((animal) => animal.id !== animalId);
+        setAnimals(updatedAnimals);
+        showToastMessage(7, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(7, false); // Index du message d'erreur de suppression
+      }
     }
   };
-
-  console.log(animals);
 
   return (
     <>
@@ -135,12 +174,6 @@ export function EditAnimal() {
                           <option value="true">Disponible</option>
                         </select>
                       </label>
-                      {/* <input
-                        className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                        type="text"
-                        name="availability"
-                        defaultValue={animal.availability ? 'true' : 'false'}
-                      /> */}
                       <label className="input input-bordered flex items-center gap-2 w-full">
                         <select className="grow" name="gender">
                           <option value="">Sexe de l'animal</option>

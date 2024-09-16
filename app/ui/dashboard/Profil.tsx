@@ -3,6 +3,7 @@ import { getUserById, updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import { useAuth } from '../../context/authContext';
 import Loader from '../loader';
+import { useToast } from '../../context/toastContext';
 
 export default function Profil() {
   const [user, setUser] = useState(null);
@@ -11,6 +12,7 @@ export default function Profil() {
   const [editing, setEditing] = useState(false);
 
   const { userConnected, setUserConnected } = useAuth();
+  const { showToastMessage } = useToast();
 
   // useEffect(() => {
   //   const fetchUser = async () => {
@@ -40,21 +42,45 @@ export default function Profil() {
   //   fetchUser();
   // }, []);
 
+  const validateForm = (formData) => {
+    const requiredFields = ['name', 'firstname'];
+    const missingFields = requiredFields.filter((field) => !formData.get(field));
+
+    if (missingFields.length > 0) {
+      showToastMessage(
+        null,
+        false,
+        `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
+      );
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+
+    if (!validateForm(formData)) {
+      return;
+    }
+
     const updatedUser = {
-      name: e.target.name.value,
-      firstname: e.target.firstname.value,
+      name: formData.get('name'),
+      firstname: formData.get('firstname'),
     };
+
     try {
       setUserConnected(updatedUser);
       await updateUserById(userConnected.id, updatedUser);
-
       setEditing(false);
+      showToastMessage(9, true); // Index du message à afficher, succès
     } catch (error) {
       console.error(error);
       setError('Failed to update user. Please try again later.');
       setLoading(true);
+      showToastMessage(9, false); // Index du message d'erreur, erreur
     }
   };
 
