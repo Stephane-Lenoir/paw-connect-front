@@ -7,6 +7,7 @@ import { useAuth } from '../../context/authContext';
 import { createRequest } from '../../services/Request';
 import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
+import Link from 'next/link';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
@@ -36,7 +37,7 @@ export default function AccommodationForm() {
     const fetchData = async () => {
       const response = await createRequest(data);
       if (response) {
-        showToastMessage(1, true); // Index du message à afficher, succès
+        showToastMessage(0, true); // Index du message à afficher, succès
       } else {
         showToastMessage(0, false); // Index du message d'erreur, erreur
       }
@@ -131,6 +132,12 @@ export default function AccommodationForm() {
         >
           Envoyer la demande
         </button>
+        <Link
+          href="/"
+          className="text-xl btn bg-primary-color items-center hover:bg-secondary-color w-xl m-4"
+        >
+          Retour à l'accueil
+        </Link>
       </form>
     </>
   );

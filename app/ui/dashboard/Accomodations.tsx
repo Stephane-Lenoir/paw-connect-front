@@ -85,10 +85,10 @@ export default function Accomodations() {
       try {
         await deleteRequest(requestId);
         setRequests(requests.filter((request) => request.id !== requestId));
-        showToastMessage(10, true); // Index du message de succès de suppression
+        showToastMessage(11, true); // Index du message de succès de suppression
       } catch (error) {
         console.error(error);
-        showToastMessage(10, false); // Index du message d'erreur de suppression
+        showToastMessage(11, false); // Index du message d'erreur de suppression
       }
     }
   };
@@ -118,19 +118,18 @@ export default function Accomodations() {
               {' '}
               Status : {request.status}{' '}
             </p>
-
             {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
               <div className="flex flex-wrap justify-between gap-2 mt-6 ">
                 <button
                   type="button"
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
                   onClick={() => handleAccept(request.id)}
                 >
                   Accepter
                 </button>
                 <button
                   type="button"
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
                   onClick={() => handleRefused(request.id)}
                 >
                   Refuser
@@ -139,7 +138,7 @@ export default function Accomodations() {
                 {userConnected.role_id === 1 && (
                   <button
                     type="button"
-                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
                     onClick={() => handleDelete(request.id)}
                   >
                     Supprimer

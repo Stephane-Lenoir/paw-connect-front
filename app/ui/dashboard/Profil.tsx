@@ -71,17 +71,12 @@ export default function Profil() {
     };
 
     try {
-<<<<<<< HEAD
       const updatedUserFromServer = await updateUserById(userConnected.id, updatedUser);
       setUserConnected({
         ...userConnected, // Spread existing user data
         ...updatedUserFromServer, // Replace existing data by updated data
       });
 
-=======
-      setUserConnected(updatedUser);
-      await updateUserById(userConnected.id, updatedUser);
->>>>>>> 6cb3016 (add toast on animals and dashboards)
       setEditing(false);
       showToastMessage(9, true); // Index du message à afficher, succès
     } catch (error) {
@@ -153,7 +148,7 @@ export default function Profil() {
           <button
             type="button"
             onClick={() => setEditing(true)}
-            className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-secondary-color hover:bg-primary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Modifier
           </button>
@@ -161,14 +156,14 @@ export default function Profil() {
             <>
               <button
                 type="submit"
-                className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-primary-color hover:bg-secondary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Sauvegarder les modifications
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(false)}
-                className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-secondary-color hover:bg-primary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Annuler
               </button>

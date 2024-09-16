@@ -53,10 +53,10 @@ export default function Admin() {
       try {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
-        showToastMessage(12, true); // Index du message de succès de suppression
+        showToastMessage(8, true); // Index du message de succès de suppression
       } catch (error) {
         console.error(error);
-        showToastMessage(12, false); // Index du message d'erreur de suppression
+        showToastMessage(8, false); // Index du message d'erreur de suppression
       }
     }
   };
@@ -143,7 +143,7 @@ export default function Admin() {
                       <button
                         type="submit"
                         form={`edit-form-${user.id}`}
-                        className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                        className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                       >
                         Enregistrer
                       </button>
@@ -151,7 +151,7 @@ export default function Admin() {
                     <button
                       type="button"
                       onClick={() => setEditingUserId(editingUserId === user.id ? null : user.id)}
-                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                     >
                       {editingUserId === user.id ? 'Annuler' : 'Modifier'}
                     </button>
@@ -159,7 +159,7 @@ export default function Admin() {
                   <button
                     type="button"
                     onClick={() => handleDelete(user.id)}
-                    className="bg-secondary-color text-white mt-4 px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                    className="bg-secondary-color text-white mt-4 px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                   >
                     Supprimer
                   </button>

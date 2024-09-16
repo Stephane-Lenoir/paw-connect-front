@@ -17,6 +17,7 @@ export default function Toast() {
     "Suppression d'un utilisateur réussie.",
     "Modification d'un utilisateur réussie.",
     'Status de la requête modifié avec succès.',
+    'Suppression de la requête réussie',
   ];
 
   const errorMessages = [
@@ -31,6 +32,7 @@ export default function Toast() {
     "Erreur dans la suppression de l'utilisateur",
     "Erreur dans la modification de l'utilisateur",
     'Erreur dans la modification du status de la requête',
+    'Suppression de la requête échouée',
   ];
 
   const message =

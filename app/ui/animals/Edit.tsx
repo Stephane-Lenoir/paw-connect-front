@@ -255,7 +255,7 @@ export function EditAnimal() {
                     <button
                       type="submit"
                       form={`edit-form-${animal.id}`}
-                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                     >
                       Enregistrer
                     </button>
@@ -265,14 +265,14 @@ export function EditAnimal() {
                     onClick={() =>
                       setEditingAnimalId(editingAnimalId === animal.id ? null : animal.id)
                     }
-                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                   >
                     {editingAnimalId === animal.id ? 'Annuler' : 'Modifier'}
                   </button>
                   <button
                     type="button"
                     onClick={() => handleDelete(animal.id)}
-                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                   >
                     Supprimer
                   </button>

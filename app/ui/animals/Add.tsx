@@ -1,3 +1,5 @@
+'use client';
+
 import { createAnimal } from '../../services/Animals';
 import { useState, useEffect } from 'react';
 import { useToast } from '../../context/toastContext';
@@ -148,7 +150,10 @@ export function Add() {
           />
 
           <div className="modal-action mt-6 flex justify-center ">
-            <button type="submit" className="btn bg-primary-color w-full hover:bg-secondary-color">
+            <button
+              type="submit"
+              className="btn bg-primary-color w-full text-2xl  font-bold hover:bg-secondary-color"
+            >
               Ajouter
             </button>
           </div>
