@@ -71,17 +71,12 @@ export default function Profil() {
     };
 
     try {
-<<<<<<< HEAD
       const updatedUserFromServer = await updateUserById(userConnected.id, updatedUser);
       setUserConnected({
         ...userConnected, // Spread existing user data
         ...updatedUserFromServer, // Replace existing data by updated data
       });
 
-=======
-      setUserConnected(updatedUser);
-      await updateUserById(userConnected.id, updatedUser);
->>>>>>> 6cb3016 (add toast on animals and dashboards)
       setEditing(false);
       showToastMessage(9, true); // Index du message à afficher, succès
     } catch (error) {
