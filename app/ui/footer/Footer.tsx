@@ -2,68 +2,90 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <>
-      <div className="footer bg-base-100 text-text-color  ">
-        <footer className="footer bg-primary-color text-text-color p-10 text-lg justify-evenly">
-          <nav className="">
-            <h6 className="footer-title">Crédits</h6>
-            <Link href={'https://www.linkedin.com/in/st%C3%A9phane-lenoir-dev77/'} className="link link-hover" target="_blank">
-              Stéphane
-            </Link>
-            <Link href={'https://www.linkedin.com/in/matthieu-rault-dev/'} className="link link-hover" target="_blank">
-              Matthieu
-            </Link>
-            <Link href={'https://www.linkedin.com/in/paulus--julien/'} className="link link-hover" target="_blank">
-              Julien
-            </Link>
-            <Link href={'https://www.linkedin.com/in/dylan-gavaud/'} className="link link-hover" target="_blank">
-              Dylan
-            </Link>
-            <Link href={'https://www.linkedin.com/in/fabien-bourdais/'} className="link link-hover" target="_blank">
-              Fabien
-            </Link>
-          </nav>
+    <div className="bg-primary-color">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 text-gray-600 flex flex-wrap justify-center text-lg flex justify-between">
+        <div className="p-5">
+          <div className="text-xl uppercase text-gray-900 font-medium">Crédits</div>
+          <Link
+            href={'https://www.linkedin.com/in/st%C3%A9phane-lenoir-dev77/'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Stéphane
+          </Link>
+          <Link
+            href={'https://www.linkedin.com/in/matthieu-rault-dev/'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Matthieu
+          </Link>
+          <Link
+            href={'https://www.linkedin.com/in/paulus--julien/'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Julien
+          </Link>
+          <Link
+            href={'https://www.linkedin.com/in/dylan-gavaud/'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Dylan
+          </Link>
+          <Link
+            href={'https://www.linkedin.com/in/fabien-bourdais/'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Fabien
+          </Link>
+        </div>
 
-          <nav>
-            <h6 className="footer-title">Liens</h6>
-            <Link href={'/'} className="link link-hover">
-              Accueil
-            </Link>
-            <Link href={'/animals'} className="link link-hover">
-              Adopter
-            </Link>
+        <div className="p-5">
+          <div className="text-xl uppercase text-gray-900 font-medium">Liens</div>
+          <Link href={'/'} className="my-3 block link link-hover">
+            Accueil
+          </Link>
+          <Link href={'/animals'} className="my-3 block link link-hover">
+            Adopter
+          </Link>
+          <Link href={'/location'} className="my-3 block link link-hover">
+            Localiser
+          </Link>
+          <Link href={'#'} className="my-3 block link link-hover">
+            Dons
+          </Link>
+        </div>
 
-            <Link href={'/location'} className="link link-hover">
-              Localiser
-            </Link>
-            <Link href={'#'} className="link link-hover">
-              Dons
-            </Link>
-          </nav>
-          <nav>
-            <h6 className="footer-title">Legal</h6>
-            <Link href={'/terms'} className="link link-hover">
-             Conditions d'utilisation
-            </Link>
-            <Link href={'/privacy'} className="link link-hover">
-              Politique de confidentialité
-            </Link>
-            <Link href={'/cookies'} className="link link-hover">
-              Politique de cookies
-            </Link>
-          </nav>
+        <div className="p-5">
+          <div className="text-xl uppercase text-gray-900 font-medium">Legal</div>
+          <Link href={'/terms'} className="my-3 block link link-hover">
+            Conditions d'utilisation
+          </Link>
+          <Link href={'/privacy'} className="my-3 block link link-hover">
+            Politique de confidentialité
+          </Link>
+          <Link href={'/cookies'} className="my-3 block link link-hover">
+            Politique de cookies
+          </Link>
+        </div>
 
-          <nav>
-            <h6 className="footer-title">Company</h6>
-            <Link href={'/about'} className="link link-hover">
-             À propos
-            </Link>
-            <Link href={'mailto:pawconnect@gamil.com'} className="link link-hover" target="_blank">
-              Contact
-            </Link>
-          </nav>
-        </footer>
+        <div className="p-5">
+          <div className="text-xl uppercase text-gray-900 font-medium">Company</div>
+          <Link href={'/about'} className="my-3 block link link-hover">
+            À propos
+          </Link>
+          <Link
+            href={'mailto:pawconnect@gamil.com'}
+            className="my-3 block link link-hover"
+            target="_blank"
+          >
+            Contact
+          </Link>
+        </div>
       </div>
-    </>
+    </div>
   );
 }
