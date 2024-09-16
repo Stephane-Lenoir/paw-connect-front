@@ -10,10 +10,21 @@ import { getUserByRole } from '../../services/Users';
 import { useAuth } from '../../context/authContext';
 import Accomodation from '../../accomodation/[id]/page';
 import Accomodations from './Accomodations';
+import Modal from '../location/Modal';
 
 export default function Sidebar() {
   const [activeComponent, setActiveComponent] = useState('profil');
   const { userConnected } = useAuth();
+
+  const [modalOpen, setModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
+  const openModal = () => {
+    setModalOpen(true);
+  };
 
   return (
     <>
@@ -25,6 +36,14 @@ export default function Sidebar() {
           {activeComponent === 'edit' && <EditAnimal />}
 
           {activeComponent === 'add' && <Add />}
+
+          {activeComponent === 'adoption' && (
+            <Modal isOpen={modalOpen} onClose={closeModal} isUnderConstruction={true} />
+          )}
+
+          {activeComponent === 'messages' && (
+            <Modal isOpen={modalOpen} onClose={closeModal} isUnderConstruction={true} />
+          )}
 
           {activeComponent === 'admin' && userConnected.role_id === 1 && <Admin />}
 
@@ -68,18 +87,34 @@ export default function Sidebar() {
             </li> */}
 
             <li>
-              <Link href={'#'}> Demande(s) d'adoption</Link>
+              <Link
+                href={'#'}
+                onClick={() => {
+                  setActiveComponent('adoption');
+                  openModal();
+                }}
+              >
+                {' '}
+                Demande(s) d'adoption
+              </Link>
             </li>
 
             <li>
               <Link href={'#'} onClick={() => setActiveComponent('accomodations')}>
-                {' '}
                 Demande(s) d'hébergement
               </Link>
             </li>
 
             <li>
-              <Link href={'#'}>Messages</Link>
+              <Link
+                href={'#'}
+                onClick={() => {
+                  setActiveComponent('messages');
+                  openModal();
+                }}
+              >
+                Messages
+              </Link>
             </li>
 
             {userConnected.role_id === 1 && (
