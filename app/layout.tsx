@@ -1,15 +1,13 @@
-import type { Metadata } from "next";
+import { ToastProvider } from './context/toastContext';
+import './globals.css';
+import { Caveat } from 'next/font/google';
+import Toast from './ui/Toast';
+import { AuthProvider } from './context/authContext';
 
-import { AuthProvider } from "./context/authContext";
+const caveat = Caveat({ subsets: ['latin'] });
 
-import "./globals.css";
-
-import { Caveat } from "next/font/google";
-
-const caveat = Caveat({ subsets: ["latin"] });
-
-export const metadata: Metadata = {
-  title: "Paw Connect",
+export const metadata = {
+  title: 'Paw Connect',
   description: 'Refuge et famille d"accueil',
 };
 
@@ -21,7 +19,12 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={caveat.className}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <ToastProvider>
+            {children}
+            <Toast /> {/* Assurez-vous que le composant Toast est rendu ici */}
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -1,9 +1,12 @@
+// components/AccommodationForm.js
 'use client';
 import { useEffect, useState } from 'react';
 import { useAnimal } from '../../context/animalContext';
 import { useParams } from 'next/navigation';
 import { useAuth } from '../../context/authContext';
 import { createRequest } from '../../services/Request';
+import Loader from '../loader';
+import { useToast } from '../../context/toastContext';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
@@ -12,14 +15,11 @@ export default function AccommodationForm() {
   const [isLoading, setIsLoading] = useState(true);
   const { userConnected } = useAuth();
   const [currentDate, setCurrentDate] = useState('');
-
-  // console.log(userConnected);
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
     if (animalData && params.id) {
-      // console.log('Searching for animal with id:', params.id);
       const foundAnimal = animalData.find((animal) => animal.id === parseInt(params.id));
-      // console.log('Found Animal:', foundAnimal);
       setAnimal(foundAnimal);
       setIsLoading(false);
     }
@@ -35,18 +35,21 @@ export default function AccommodationForm() {
     data.animal_id = parseInt(data.animal_id);
     const fetchData = async () => {
       const response = await createRequest(data);
-      return response;
+      if (response) {
+        showToastMessage(1, true); // Index du message à afficher, succès
+      } else {
+        showToastMessage(0, false); // Index du message d'erreur, erreur
+      }
     };
     fetchData();
-    // console.log('Form Data:', data);
   };
 
-  if (isLoading) return <p>Chargement...</p>;
+  if (isLoading) return <Loader />;
   if (!animal) return <p>Aucun animal trouvé avec l'ID fourni.</p>;
-
   return (
     <>
       <h2 className="text-center text-2xl p-2 font-bold">Formulaire d'hébergement</h2>
+
       <form className="m-2 flex flex-col gap-px items-center" onSubmit={handleSubmit}>
         <div className="text-xl">
           <h3 className="p-2">Nom :</h3>
