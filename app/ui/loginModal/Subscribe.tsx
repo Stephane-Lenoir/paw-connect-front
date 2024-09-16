@@ -17,6 +17,11 @@ export default function Subscribe() {
       return;
     }
 
+    if (data.password.length < 12) {
+      showToastMessage(3, false, 'Le mot de passe doit contenir au moins 12 caractères.'); // Show error toast for password length
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/register', data, {
         headers: {
