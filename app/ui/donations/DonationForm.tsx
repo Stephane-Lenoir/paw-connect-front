@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { createDonation } from '../../services/Donations';
 import { useAuth } from '../../context/authContext';
+import { useRouter } from 'next/navigation';
 
 export default function DonationForm({ associations }) {
   const [formData, setFormData] = useState({
@@ -12,10 +13,9 @@ export default function DonationForm({ associations }) {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [modalMessage, setModalMessage] = useState('');
   
   const { isLogged, userConnected } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     if (isLogged && userConnected) {
@@ -42,30 +42,32 @@ export default function DonationForm({ associations }) {
 
     try {
       const result = await createDonation(formData);
-      setSuccess('Donation enregistrée avec succès !');
-      setModalMessage('Votre don a été enregistré. La possibilité de réaliser des paiements en ligne sera bientôt disponible. Merci de votre générosité !');
-      setShowModal(true);
-      // Réinitialiser le formulaire
+      setSuccess('Donation effectuée avec succès !');
       setFormData(prevState => ({
         ...prevState,
         amount: '',
         message: '',
         userId: ''
       }));
+      if (!isLogged) {
+        setFormData(prevState => ({
+          ...prevState,
+          donorName: '',
+          donorEmail: ''
+        }));
+      }
     } catch (err) {
-      console.error("Error in handleSubmit:", err);
-      setError('Une erreur est survenue lors de l\'enregistrement de la donation.');
-      setModalMessage('Désolé, une erreur est survenue lors de l\'enregistrement de votre don. Veuillez réessayer plus tard.');
-      setShowModal(true);
+      setError('Une erreur est survenue lors de la donation.');
     }
   };
 
-  if (!isLogged) {
-    return <p className="text-red-500">Veuillez vous connecter pour faire un don.</p>;
-  }
+  const handleViewHistory = () => {
+    // Rediriger vers la page d'historique des dons
+    router.push('/donation-history');
+  };
 
   return (
-    <>
+    <div>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="amount">
@@ -82,36 +84,40 @@ export default function DonationForm({ associations }) {
             required
           />
         </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="donorName">
-            Nom
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="donorName"
-            type="text"
-            placeholder="Votre nom"
-            name="donorName"
-            value={formData.donorName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="donorEmail">
-            Email
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="donorEmail"
-            type="email"
-            placeholder="Votre email"
-            name="donorEmail"
-            value={formData.donorEmail}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        {!isLogged && (
+          <>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="donorName">
+                Nom
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="donorName"
+                type="text"
+                placeholder="Votre nom"
+                name="donorName"
+                value={formData.donorName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="donorEmail">
+                Email
+              </label>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                id="donorEmail"
+                type="email"
+                placeholder="Votre email"
+                name="donorEmail"
+                value={formData.donorEmail}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </>
+        )}
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="message">
             Message (optionnel)
@@ -156,18 +162,7 @@ export default function DonationForm({ associations }) {
           </button>
         </div>
       </form>
-
-      {/* Modal daisyUI */}
-      <input type="checkbox" id="my-modal" className="modal-toggle" checked={showModal} onChange={() => setShowModal(false)} />
-      <div className="modal">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Information</h3>
-          <p className="py-4">{modalMessage}</p>
-          <div className="modal-action">
-            <label htmlFor="my-modal" className="btn" onClick={() => setShowModal(false)}>Fermer</label>
-          </div>
-        </div>
-      </div>
-    </>
+      
+    </div>
   );
 }
