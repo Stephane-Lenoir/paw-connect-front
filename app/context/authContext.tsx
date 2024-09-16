@@ -7,12 +7,9 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false);
-
-  //!TODO : Why localStorage isn't defined ?
   const [userConnected, setUserConnected] = useState(() => {
     if (typeof window !== 'undefined') {
       const savedUser = localStorage.getItem('userConnected');
-
       return savedUser ? JSON.parse(savedUser) : null;
     }
   });
@@ -22,13 +19,11 @@ export const AuthProvider = ({ children }) => {
       const token = localStorage.getItem('jwt_token');
       if (token) {
         setIsLogged(true);
-        // console.log('UE Context');
         if (!userConnected) {
           try {
-            // console.log('TryUserByToken');
             const user = await getUserByToken(token);
             setUserConnected(user);
-            localStorage.setItem('userConnected', JSON.stringify(userConnected));
+            localStorage.setItem('userConnected', JSON.stringify(user));
           } catch (error) {
             console.log(error);
             throw error;
@@ -39,8 +34,19 @@ export const AuthProvider = ({ children }) => {
     fetchUser();
   }, [userConnected]);
 
+  const handleLogout = () => {
+    localStorage.clear();
+    setIsLogged(false);
+    setUserConnected(null);
+    if (window.location.pathname === '/dashboard') {
+      window.location.href = '/'; // Redirige vers la page d'accueil
+    }
+  };
+
   return (
-    <AuthContext.Provider value={{ isLogged, setIsLogged, userConnected, setUserConnected }}>
+    <AuthContext.Provider
+      value={{ isLogged, setIsLogged, userConnected, setUserConnected, handleLogout }}
+    >
       {children}
     </AuthContext.Provider>
   );

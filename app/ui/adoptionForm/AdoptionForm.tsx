@@ -1,9 +1,16 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import Modal from '../location/Modal';
 
 export default function AdoptionForm() {
   const [userId, setUserId] = useState(null);
+  const [modalOpen, setModalOpen] = useState(true);
+
+  const closeModal = () => {
+    setModalOpen(false);
+    window.location.href = '/'; // Redirige vers la page d'accueil
+  };
 
   useEffect(() => {
     console.log('useEffect est entrain de tourner');
@@ -112,6 +119,8 @@ export default function AdoptionForm() {
           Envoyer la demande
         </button>
       </form>
+
+      <Modal isOpen={modalOpen} onClose={closeModal} isUnderConstruction={true} />
     </>
   );
 }

@@ -49,7 +49,7 @@ export async function updateRequest(id, request) {
 
 export async function deleteRequest(id) {
   try {
-    const response = await axios.delete(`requests/${id}`);
+    const response = await api.delete(`requests/${id}`);
     return response.data;
   } catch (error) {
     console.error(error);

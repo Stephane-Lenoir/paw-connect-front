@@ -1,5 +1,5 @@
 import Menu from './Menu';
-import { getAllRequests } from '../../services/Request';
+import { deleteRequest, getAllRequests, updateRequest } from '../../services/Request';
 import Loader from '../loader';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
@@ -54,6 +54,45 @@ export default function Accomodations() {
     return false;
   });
 
+  // fonction de validation d'une requete :
+
+  const handleAccept = async (requestId) => {
+    try {
+      console.log(requestId);
+      await updateRequest(requestId, { status: 'Acceptée' });
+      setRequests(
+        requests.map((request) =>
+          request.id === requestId ? { ...request, status: 'Acceptée' } : request,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleRefused = async (requestId) => {
+    try {
+      console.log(requestId);
+      await updateRequest(requestId, { status: 'Refusée' });
+      setRequests(
+        requests.map((request) =>
+          request.id === requestId ? { ...request, status: 'Refusée' } : request,
+        ),
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (requestId) => {
+    try {
+      await deleteRequest(requestId);
+      setRequests(requests.filter((request) => request.id !== requestId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="w-full min-h-screen p-8">
       <Menu />
@@ -85,25 +124,25 @@ export default function Accomodations() {
                 <button
                   type="button"
                   className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  onClick={() => handleAccept(request.id)}
                 >
-                  {' '}
-                  Accepter{' '}
+                  Accepter
                 </button>
                 <button
                   type="button"
                   className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                  onClick={() => handleRefused(request.id)}
                 >
-                  {' '}
-                  Refuser{' '}
+                  Refuser
                 </button>
 
                 {userConnected.role_id === 1 && (
                   <button
                     type="button"
                     className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                    onClick={() => handleDelete(request.id)}
                   >
-                    {' '}
-                    Supprimer{' '}
+                    Supprimer
                   </button>
                 )}
               </div>

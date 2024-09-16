@@ -8,20 +8,13 @@ import { useAuth } from '../../context/authContext';
 
 export default function Modal() {
   // const [isLogged, setIsLogged] = useState(false);
-  const [UserName, setUsersName] = useState(null);
 
-  const { isLogged, userConnected, setIsLogged } = useAuth();
+  const { isLogged, userConnected, handleLogout } = useAuth();
   // console.log(userConnected);
 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-
-  const handleLogout = () => {
-    localStorage.clear();
-    setIsLogged(false);
-    setIsDropdownOpen(false);
   };
 
   return (

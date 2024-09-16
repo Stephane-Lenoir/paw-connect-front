@@ -13,7 +13,7 @@ export default function AccommodationForm() {
   const { userConnected } = useAuth();
   const [currentDate, setCurrentDate] = useState('');
 
-  console.log(userConnected);
+  // console.log(userConnected);
 
   useEffect(() => {
     if (animalData && params.id) {

@@ -35,18 +35,37 @@ export default function Modal({ animal }) {
             </ul>
           </div>
           <div className="flex space-x-4 mt-4">
-            <Link
-              className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
-              href={`/accomodation/${animal.id}`}
-            >
-              Héberger
-            </Link>
-            <Link
-              className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
-              href={`/adoption`}
-            >
-              Adopter
-            </Link>
+            {animal.availability ? (
+              <Link
+                className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+                href={`/accomodation/${animal.id}`}
+              >
+                Héberger
+              </Link>
+            ) : (
+              <button
+                className="bg-gray-600 text-white text-center px-4 py-2 rounded-full mt-4 transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+                disabled
+              >
+                Héberger
+              </button>
+            )}
+
+            {animal.availability ? (
+              <Link
+                className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+                href={'/adoption'}
+              >
+                Adopter
+              </Link>
+            ) : (
+              <button
+                className="bg-gray-600 text-white text-center px-4 py-2 rounded-full mt-4 transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-base font-caveat"
+                disabled
+              >
+                Adopter
+              </button>
+            )}
           </div>
         </div>
       </dialog>
