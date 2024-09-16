@@ -1,13 +1,22 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useToast } from '../../context/toastContext';
 
 export default function Subscribe() {
+  const { showToastMessage } = useToast(); // Use the toast context
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
-    console.log(data);
+
+    // Check if all fields are filled
+    if (!data.name || !data.firstname || !data.email || !data.password || !data.isAssociation) {
+      showToastMessage(3, false, 'Veuillez remplir tous les champs.'); // Show error toast for signup
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/register', data, {
         headers: {
@@ -15,15 +24,18 @@ export default function Subscribe() {
         },
       });
 
-      if (response) {
-        console.log('Signup succesfull');
+      if (response && response.status === 201) {
+        console.log('Signup successful');
         event.target.closest('dialog').close(); // close modal
         event.target.reset(); // reset the form
+
+        showToastMessage(3, true, 'Inscription réussie.'); // Show success toast for signup
       } else {
-        console.error('Error during signup');
+        showToastMessage(3, false, "Erreur lors de l'inscription."); // Show error toast for signup
       }
     } catch (error) {
       console.error('Error while sending data', error);
+      showToastMessage(3, false, "Erreur lors de l'inscription."); // Show error toast for signup
     }
   };
 
