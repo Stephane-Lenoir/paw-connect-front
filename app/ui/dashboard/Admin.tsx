@@ -53,10 +53,17 @@ export default function Admin() {
       try {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
+<<<<<<< HEAD
         showToastMessage(8, true); // Index du message de succès de suppression
       } catch (error) {
         console.error(error);
         showToastMessage(8, false); // Index du message d'erreur de suppression
+=======
+        showToastMessage(12, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(12, false); // Index du message d'erreur de suppression
+>>>>>>> d2d26d2 (add toast on animals and dashboards)
       }
     }
   };
