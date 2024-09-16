@@ -1,49 +1,71 @@
-import Image from 'next/image';
-import Menu from '../dashboard/Menu';
 import { createAnimal } from '../../services/Animals';
 import { useState, useEffect } from 'react';
+import { useToast } from '../../context/toastContext';
+import Menu from '../dashboard/Menu';
+import Image from 'next/image';
 
 export function Add() {
   const [userId, setUserId] = useState(null);
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
-    // Récupérez le token JWT à partir du stockage local lorsque le composant est monté
     const token = localStorage.getItem('jwt_token');
 
     if (token) {
-      // Divisez le token en trois parties : en-tête, charge utile et signature
       const [header, payload, signature] = token.split('.');
-
-      // console.log(signature);
-
-      // La charge utile est la partie du token qui contient les données utilisateur, qui est encodée en base64
-      // Décodez la charge utile en JSON
       const decodedPayload = JSON.parse(atob(payload));
-
-      // Extrayez l'ID utilisateur de la charge utile
-      setUserId(decodedPayload.id); // Assurez-vous que votre token contient une propriété 'id'
+      setUserId(decodedPayload.id);
     }
   }, []);
+
+  const validateForm = (formData) => {
+    const requiredFields = [
+      'name',
+      'species',
+      'description',
+      'gender',
+      'availability',
+      'location',
+      'photo',
+    ];
+    const missingFields = requiredFields.filter((field) => !formData.get(field));
+
+    if (missingFields.length > 0) {
+      showToastMessage(
+        null,
+        false,
+        `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
+      );
+      return false;
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target); // ici, il n'y pas l'user_id
-    const animalData = Object.fromEntries(formData); // ne fonctionne quand on le met dans l'appel de la fonction createAnimal
+    const formData = new FormData(event.target);
+    formData.append('user_id', userId);
 
-    // console.log('jwt_token', localStorage.getItem('jwt_token'));
+    if (!validateForm(formData)) {
+      return;
+    }
 
-    // console.log(animalData.photo);
-    // console.log(formData.get('photo'));
-    animalData.user_id = userId;
     const fetchData = async () => {
       const data = await createAnimal(formData);
+      if (data) {
+        showToastMessage(5, true); // Index du message à afficher, succès
+      } else {
+        showToastMessage(5, false); // Index du message d'erreur, erreur
+      }
 
       return data;
     };
 
     fetchData();
   };
+
   return (
     <div>
       <div className="container mx-auto px-4 py-8">
@@ -99,9 +121,6 @@ export function Add() {
               </select>
             </label>
 
-            {/* <label className="input input-bordered flex items-center gap-2 w-full">
-            <input type="number" className="grow" name="birthday" placeholder="Age de l'animal" />
-          </label> */}
             <label className="input input-bordered flex items-center gap-2 w-full">
               <select className="grow" name="availability">
                 <option value="">Disponibilité de l'animal</option>
@@ -127,12 +146,6 @@ export function Add() {
             className="file-input file-input-bordered w-full max-w "
             name="photo"
           />
-
-          {/* <div className="mb-4">
-          <label className="input input-bordered flex items-center gap-2 w-full">
-            <input type="file" className="grow" />
-          </label>
-        </div> */}
 
           <div className="modal-action mt-6 flex justify-center ">
             <button type="submit" className="btn bg-primary-color w-full hover:bg-secondary-color">

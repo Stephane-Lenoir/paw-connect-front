@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState } from 'react';
 
 const ToastContext = createContext();
 
@@ -11,19 +11,25 @@ export const useToast = () => {
 export const ToastProvider = ({ children }) => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessageIndex, setToastMessageIndex] = useState(null);
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [customMessage, setCustomMessage] = useState(null);
 
-  const showToastMessage = useCallback((messageIndex, success) => {
-    setToastMessageIndex(messageIndex);
+  const showToastMessage = (index, success, customMsg = null) => {
+    setToastMessageIndex(index);
     setIsSuccess(success);
+    setCustomMessage(customMsg);
     setShowToast(true);
+
     setTimeout(() => {
       setShowToast(false);
-    }, 3000); // Le toast disparaîtra après 3 secondes
-  }, []);
+      setCustomMessage(null);
+    }, 3000);
+  };
 
   return (
-    <ToastContext.Provider value={{ showToast, toastMessageIndex, isSuccess, showToastMessage }}>
+    <ToastContext.Provider
+      value={{ showToast, toastMessageIndex, isSuccess, customMessage, showToastMessage }}
+    >
       {children}
     </ToastContext.Provider>
   );

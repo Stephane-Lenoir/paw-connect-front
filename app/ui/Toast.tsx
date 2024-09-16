@@ -1,10 +1,9 @@
-// components/Toast.js
 'use client';
 
 import { useToast } from '../context/toastContext';
 
 export default function Toast() {
-  const { showToast, toastMessageIndex, isSuccess } = useToast();
+  const { showToast, toastMessageIndex, isSuccess, customMessage } = useToast();
 
   const successMessages = [
     "Formulaire d'hébergement envoyé avec succés.",
@@ -12,7 +11,7 @@ export default function Toast() {
     'Login réussi.',
     'Inscription réussie.',
     'logout réussi.',
-    "Création d'un animal réussie.",
+    "Ajout d'un animal réussie.",
     "Modification d'un animal réussie.",
     "Suppression d'un animal réussie.",
     "Suppression d'un utilisateur réussie.",
@@ -25,14 +24,16 @@ export default function Toast() {
     'Erreur dans le login',
     "Erreur dans l'inscription",
     'Erreur dans le logout',
-    "Erreur dans la création de l'animal",
+    "Erreur dans l'ajout de l'animal",
     "Erreur dans la modification de l'animal",
     "Erreur dans la suppression de l'animal",
     "Erreur dans la suppression de l'utilisateur",
     "Erreur dans la modification de l'utilisateur",
   ];
 
-  const message = isSuccess ? successMessages[toastMessageIndex] : errorMessages[toastMessageIndex];
+  const message =
+    customMessage ||
+    (isSuccess ? successMessages[toastMessageIndex] : errorMessages[toastMessageIndex]);
 
   if (!showToast) return null;
 
