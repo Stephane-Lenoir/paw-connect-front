@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import Img from '../card/Img';
+import { setUrlAnimal } from '../../utils/url';
 
 export default function Modal({ animal }) {
   return (
@@ -24,7 +25,7 @@ export default function Modal({ animal }) {
           </form>
           <h3 className="font-bold text-2xl text-center m-4">{animal.name}</h3>
 
-          <Img photo={animal.photo} />
+          <Img photo={setUrlAnimal(animal.photo)} />
           <div className="bg-primary-color rounded-xl mt-4">
             <h3 className="font-bold text-center p-2 m-5 mb-0 text-2xl">Description de l'animal</h3>
             <ul className="p-4 text-xl font-bold">
