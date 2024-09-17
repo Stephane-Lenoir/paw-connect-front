@@ -8,10 +8,7 @@ import { createRequest } from '../../services/Request';
 import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
 import Link from 'next/link';
-<<<<<<< HEAD
 import NeedLogin from '../needLogin';
-=======
->>>>>>> 2aaae76 (fix toasts bugs and font change on button)
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
