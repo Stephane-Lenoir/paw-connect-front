@@ -5,6 +5,7 @@ import Logo from './Logo';
 
 import { useState } from 'react';
 import Modal from '../loginModal/Modal';
+import SearchBar from './SearchBar';
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -78,18 +79,7 @@ export default function NavBar() {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
-          {isOpen && (
-            <div className="m-2 w-full sm:w-64 z-10">
-              <input
-                type="text"
-                placeholder="Rechercher..."
-                className="input input-bordered input-accent w-full max-w-xs"
-                name="search"
-              />
-            </div>
-          )}
-        </div>
+        <div className="navbar-end">{isOpen && <SearchBar />}</div>
         <button type="button" className="btn btn-ghost btn-circle" onClick={toggle}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
