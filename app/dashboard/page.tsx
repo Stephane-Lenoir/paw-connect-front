@@ -1,3 +1,4 @@
+import { AnimalProvider } from '../context/animalContext';
 import ProtectedRoute from '../ui/animals/ProtectedRoute';
 import Dashboard from '../ui/dashboard/Dashboard';
 import Footer from '../ui/footer/Footer';
@@ -7,9 +8,11 @@ export default function dashboardPage() {
   return (
     <>
       <ProtectedRoute>
-        <Header />
-        <Dashboard />
-        <Footer />
+        <AnimalProvider>
+          <Header />
+          <Dashboard />
+          <Footer />
+        </AnimalProvider>
       </ProtectedRoute>
     </>
   );

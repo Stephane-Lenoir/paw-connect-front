@@ -1,9 +1,11 @@
 import axios from 'axios';
 import { useAuth } from '../../context/authContext';
 import { useEffect } from 'react';
+import { useToast } from '../../context/toastContext';
 
 export default function Login() {
   const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth();
+  const { showToastMessage } = useToast(); // Use the toast context
 
   useEffect(() => {
     const checkTokenExpiration = () => {
@@ -27,6 +29,12 @@ export default function Login() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
+    // Check if all fields are filled
+    if (!data.email || !data.password) {
+      showToastMessage(2, false, 'Veuillez remplir tous les champs.'); // Show error toast for login
+      return;
+    }
+
     try {
       const response = await axios.post('http://localhost:3000/api/login', data, {
         headers: {
@@ -45,12 +53,16 @@ export default function Login() {
         setIsLogged(true); // it display the avatar
 
         event.target.closest('dialog').close(); // close modal
+
         event.target.reset(); // reset the form
+
+        showToastMessage(2, true, 'Login réussi.'); // Show success toast for login
       } else {
-        console.error('Error during login');
+        showToastMessage(2, false, 'Erreur lors de la connexion.'); // Show error toast for login
       }
     } catch (error) {
       console.error('Error while sending data', error);
+      showToastMessage(2, false, 'Erreur lors de la connexion.'); // Show error toast for login
     }
   };
 
@@ -85,14 +97,17 @@ export default function Login() {
           </svg>
           <input type="password" className="grow" name="password" placeholder="Password" />
         </label>
-        <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
+        <button
+          type="submit"
+          className="btn bg-primary-color hover:bg-secondary-color text-xl w-full"
+        >
           Login
         </button>
       </form>
 
       <div className="modal-action mt-6">
         <form method="dialog">
-          <button className="btn">Fermer</button>
+          <button className="btn text-xl">Fermer</button>
         </form>
       </div>
     </>

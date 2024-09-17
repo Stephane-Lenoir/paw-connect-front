@@ -2,12 +2,14 @@ import { useEffect, useState } from 'react';
 import { getUser, deleteUserById, updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import Loader from '../loader';
+import { useToast } from '../../context/toastContext';
 
 export default function Admin() {
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingUserId, setEditingUserId] = useState(null);
+  const { showToastMessage } = useToast();
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -38,19 +40,24 @@ export default function Admin() {
       await updateUserById(userId, updatedUser);
       setEditingUserId(null);
       setUsers(users.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
+      showToastMessage(9, true); // Index du message de succès de mise à jour
     } catch (error) {
       console.error(error);
-      setError('Failed to update user. Please try again later.');
+      showToastMessage(9, false); // Index du message d'erreur de mise à jour
     }
   };
 
   const handleDelete = async (userId) => {
-    try {
-      await deleteUserById(userId);
-      setUsers(users.filter((user) => user.id !== userId));
-    } catch (error) {
-      console.error(error);
-      setError('Failed to delete user. Please try again later.');
+    const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');
+    if (isConfirmed) {
+      try {
+        await deleteUserById(userId);
+        setUsers(users.filter((user) => user.id !== userId));
+        showToastMessage(8, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(8, false); // Index du message d'erreur de suppression
+      }
     }
   };
 
@@ -136,7 +143,7 @@ export default function Admin() {
                       <button
                         type="submit"
                         form={`edit-form-${user.id}`}
-                        className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                        className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                       >
                         Enregistrer
                       </button>
@@ -144,7 +151,7 @@ export default function Admin() {
                     <button
                       type="button"
                       onClick={() => setEditingUserId(editingUserId === user.id ? null : user.id)}
-                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                     >
                       {editingUserId === user.id ? 'Annuler' : 'Modifier'}
                     </button>
@@ -152,7 +159,7 @@ export default function Admin() {
                   <button
                     type="button"
                     onClick={() => handleDelete(user.id)}
-                    className="bg-secondary-color text-white mt-4 px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-base font-caveat"
+                    className="bg-secondary-color text-white mt-4 px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out text-lg  font-bold font-caveat"
                   >
                     Supprimer
                   </button>

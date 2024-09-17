@@ -3,12 +3,17 @@ import { deleteRequest, getAllRequests, updateRequest } from '../../services/Req
 import Loader from '../loader';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
+import { useToast } from '../../context/toastContext';
+import { useAnimal } from '../../context/animalContext';
 
 export default function Accomodations() {
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [notifications, setNotifications] = useState([]);
   const { userConnected } = useAuth();
+  const { showToastMessage } = useToast();
+  const { animalData } = useAnimal(); // Utilisez le contexte pour obtenir les données des animaux
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +22,10 @@ export default function Accomodations() {
         const data = await getAllRequests();
         setRequests(data);
         setLoading(false);
+
+        // Vérifiez les nouvelles demandes et ajoutez-les aux notifications
+        const newRequests = data.filter((request) => request.status === 'En attente');
+        setNotifications(newRequests);
       } catch (error) {
         console.error(error);
         setError('Failed to fetch requests. Please try again later.');
@@ -31,13 +40,6 @@ export default function Accomodations() {
     return <Loader />;
   }
 
-  // // // Log des informations de l'utilisateur connecté
-  // console.log('User Connected:', userConnected);
-
-  // // // Log des requêtes récupérées
-  // console.log('Requests:', requests);
-
-  // Filtrer les requêtes en fonction du rôle de l'utilisateur
   const filteredRequests = requests.filter((request) => {
     if (userConnected.role_id === 1) {
       // Admin voit toutes les requêtes
@@ -49,47 +51,61 @@ export default function Accomodations() {
     }
     if (userConnected.role_id === 3) {
       // Association voit les requêtes qu'elle a reçues
-      return request.user_id === userConnected.id;
+      const associationAnimals = animalData.filter(
+        (animal) => animal.association_id === userConnected.association_id,
+      );
+      const associationAnimalIds = associationAnimals.map((animal) => animal.id);
+      return associationAnimalIds.includes(request.animal_id);
     }
     return false;
   });
 
-  // fonction de validation d'une requete :
-
   const handleAccept = async (requestId) => {
     try {
-      console.log(requestId);
       await updateRequest(requestId, { status: 'Acceptée' });
       setRequests(
         requests.map((request) =>
           request.id === requestId ? { ...request, status: 'Acceptée' } : request,
         ),
       );
+      setNotifications(notifications.filter((notification) => notification.id !== requestId));
+      showToastMessage(10, true); // Index du message de succès d'acceptation
     } catch (error) {
       console.error(error);
+      showToastMessage(10, false); // Index du message d'erreur d'acceptation
     }
   };
 
   const handleRefused = async (requestId) => {
     try {
-      console.log(requestId);
       await updateRequest(requestId, { status: 'Refusée' });
       setRequests(
         requests.map((request) =>
           request.id === requestId ? { ...request, status: 'Refusée' } : request,
         ),
       );
+
+      setNotifications(notifications.filter((notification) => notification.id !== requestId));
+
+      showToastMessage(10, true); // Index du message de succès de refus
     } catch (error) {
       console.error(error);
+      showToastMessage(10, false); // Index du message d'erreur de refus
     }
   };
 
   const handleDelete = async (requestId) => {
-    try {
-      await deleteRequest(requestId);
-      setRequests(requests.filter((request) => request.id !== requestId));
-    } catch (error) {
-      console.error(error);
+    const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette requête ?');
+    if (isConfirmed) {
+      try {
+        await deleteRequest(requestId);
+        setRequests(requests.filter((request) => request.id !== requestId));
+        setNotifications(notifications.filter((notification) => notification.id !== requestId));
+        showToastMessage(11, true); // Index du message de succès de suppression
+      } catch (error) {
+        console.error(error);
+        showToastMessage(11, false); // Index du message d'erreur de suppression
+      }
     }
   };
 
@@ -97,7 +113,17 @@ export default function Accomodations() {
     <div className="w-full min-h-screen p-8">
       <Menu />
 
-      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">Requêtes</h1>
+
+      <h1 className="text-3xl font-bold text-text-color mb-6 text-center">
+        Demande(s) d'hébergement
+      </h1>
+
+      {notifications.length > 0 && (
+        <div className="mb-4 bg-green-300 text-gray-800 p-4 text-xl font-bold rounded-lg shadow-md">
+          Vous avez <span className="text-red-600">{notifications.length}</span> nouvelle(s)
+          demande(s) d'hébergement en attente.
+        </div>
+      )}
 
       {filteredRequests.map(
         (request) => (

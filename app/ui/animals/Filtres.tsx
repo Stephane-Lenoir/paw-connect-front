@@ -155,7 +155,7 @@ export default function Filtres({ onReload }) {
           </div>
         </div>
         <button
-          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 mb-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-base font-bold font-caveat"
+          className="bg-secondary-color text-white px-4 py-2 rounded-full mt-4 mb-4 hover:bg-primary-color transition-colors duration-300 ease-in-out block mx-auto text-xl font-bold font-caveat"
           type="button"
           onClick={handleResetFilters}
         >

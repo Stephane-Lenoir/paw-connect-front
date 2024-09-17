@@ -3,6 +3,7 @@ import { updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import { useAuth } from '../../context/authContext';
 import Loader from '../loader';
+import { useToast } from '../../context/toastContext';
 
 export default function Profil() {
   const [loading, setLoading] = useState(false);
@@ -10,6 +11,7 @@ export default function Profil() {
   const [editing, setEditing] = useState(false);
 
   const { userConnected, setUserConnected } = useAuth();
+  const { showToastMessage } = useToast();
 
   // useEffect(() => {
   //   const fetchUser = async () => {
@@ -39,12 +41,35 @@ export default function Profil() {
   //   fetchUser();
   // }, []);
 
+  const validateForm = (formData) => {
+    const requiredFields = ['name', 'firstname'];
+    const missingFields = requiredFields.filter((field) => !formData.get(field));
+
+    if (missingFields.length > 0) {
+      showToastMessage(
+        null,
+        false,
+        `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
+      );
+      return false;
+    }
+
+    return true;
+  };
+
   const handleSave = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
+
+    if (!validateForm(formData)) {
+      return;
+    }
+
     const updatedUser = {
-      name: e.target.name.value,
-      firstname: e.target.firstname.value,
+      name: formData.get('name'),
+      firstname: formData.get('firstname'),
     };
+
     try {
       const updatedUserFromServer = await updateUserById(userConnected.id, updatedUser);
       setUserConnected({
@@ -53,10 +78,12 @@ export default function Profil() {
       });
 
       setEditing(false);
+      showToastMessage(9, true); // Index du message à afficher, succès
     } catch (error) {
       console.error(error);
       setError('Failed to update user. Please try again later.');
       setLoading(true);
+      showToastMessage(9, false); // Index du message d'erreur, erreur
     }
   };
 
@@ -121,7 +148,7 @@ export default function Profil() {
           <button
             type="button"
             onClick={() => setEditing(true)}
-            className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="bg-secondary-color hover:bg-primary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Modifier
           </button>
@@ -129,14 +156,14 @@ export default function Profil() {
             <>
               <button
                 type="submit"
-                className="bg-primary-color hover:bg-secondary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-primary-color hover:bg-secondary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Sauvegarder les modifications
               </button>
               <button
                 type="button"
                 onClick={() => setEditing(false)}
-                className="bg-secondary-color hover:bg-primary-color text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                className="bg-secondary-color hover:bg-primary-color text-white text-2xl m-2 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
                 Annuler
               </button>

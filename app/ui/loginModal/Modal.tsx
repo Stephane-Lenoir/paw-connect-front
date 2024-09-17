@@ -7,15 +7,18 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/authContext';
 
 export default function Modal() {
-  // const [isLogged, setIsLogged] = useState(false);
-
   const { isLogged, userConnected, handleLogout } = useAuth();
-  // console.log(userConnected);
-
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
+  useEffect(() => {
+    if (isLogged) {
+      document.getElementById('my_modal_1').close(); // Fermer la modal si l'utilisateur est connecté
+    }
+  }, [isLogged]);
 
   return (
     <>
@@ -96,7 +99,6 @@ export default function Modal() {
       <dialog id="my_modal_1" className="modal h-auto">
         <div className="modal-box absolute right-50 top-10 rounded-box flex flex-col items-center space-y-4 p-5">
           <Subscribe />
-          {/* <div className="divider">OU</div> */}
           <Login />
         </div>
       </dialog>

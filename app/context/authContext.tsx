@@ -26,19 +26,21 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('userConnected', JSON.stringify(user));
           } catch (error) {
             console.log(error);
-            throw error;
+            handleLogout(); // Déconnecter l'utilisateur en cas d'erreur
           }
         }
       }
     };
     fetchUser();
-  }, [userConnected]);
+  }, [isLogged]);
 
   const handleLogout = () => {
     localStorage.clear();
     setIsLogged(false);
     setUserConnected(null);
-    if (window.location.pathname === '/dashboard') {
+
+    const protectedPaths = ['/dashboard', '/accomodation/:id'];
+    if (protectedPaths.some((path) => window.location.pathname.startsWith(path))) {
       window.location.href = '/'; // Redirige vers la page d'accueil
     }
   };
