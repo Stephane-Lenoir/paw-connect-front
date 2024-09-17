@@ -43,17 +43,17 @@ export default function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link href="animals" className="text-lg">
+                <Link href="/animals" className="text-lg">
                   Les animaux
                 </Link>
               </li>
               <li>
-                <Link href="location" className="text-lg">
+                <Link href="/location" className="text-lg">
                   Localiser
                 </Link>
               </li>
               <li>
-                <Link href={'#'} className="text-lg">
+                <Link href="/dons" className="text-lg">
                   Dons
                 </Link>
               </li>
@@ -71,10 +71,10 @@ export default function NavBar() {
               <Link href="/animals">Les animaux</Link>
             </li>
             <li>
-              <Link href="location">Localiser</Link>
+              <Link href="/location">Localiser</Link>
             </li>
             <li>
-              <Link href={'#'}>Dons</Link>
+              <Link href={'/dons'}>Dons</Link>
             </li>
           </ul>
         </div>
