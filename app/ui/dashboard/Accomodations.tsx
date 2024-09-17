@@ -4,10 +4,7 @@ import Loader from '../loader';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { useToast } from '../../context/toastContext';
-<<<<<<< HEAD
 import { useAnimal } from '../../context/animalContext';
-=======
->>>>>>> d2d26d2 (add toast on animals and dashboards)
 
 export default function Accomodations() {
   const [requests, setRequests] = useState([]);
@@ -16,10 +13,7 @@ export default function Accomodations() {
   const [notifications, setNotifications] = useState([]);
   const { userConnected } = useAuth();
   const { showToastMessage } = useToast();
-<<<<<<< HEAD
   const { animalData } = useAnimal(); // Utilisez le contexte pour obtenir les données des animaux
-=======
->>>>>>> d2d26d2 (add toast on animals and dashboards)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,10 +68,7 @@ export default function Accomodations() {
           request.id === requestId ? { ...request, status: 'Acceptée' } : request,
         ),
       );
-<<<<<<< HEAD
       setNotifications(notifications.filter((notification) => notification.id !== requestId));
-=======
->>>>>>> d2d26d2 (add toast on animals and dashboards)
       showToastMessage(10, true); // Index du message de succès d'acceptation
     } catch (error) {
       console.error(error);
@@ -93,10 +84,9 @@ export default function Accomodations() {
           request.id === requestId ? { ...request, status: 'Refusée' } : request,
         ),
       );
-<<<<<<< HEAD
+
       setNotifications(notifications.filter((notification) => notification.id !== requestId));
-=======
->>>>>>> d2d26d2 (add toast on animals and dashboards)
+
       showToastMessage(10, true); // Index du message de succès de refus
     } catch (error) {
       console.error(error);
@@ -110,25 +100,11 @@ export default function Accomodations() {
       try {
         await deleteRequest(requestId);
         setRequests(requests.filter((request) => request.id !== requestId));
-<<<<<<< HEAD
-<<<<<<< HEAD
         setNotifications(notifications.filter((notification) => notification.id !== requestId));
         showToastMessage(11, true); // Index du message de succès de suppression
       } catch (error) {
         console.error(error);
         showToastMessage(11, false); // Index du message d'erreur de suppression
-=======
-        showToastMessage(10, true); // Index du message de succès de suppression
-      } catch (error) {
-        console.error(error);
-        showToastMessage(10, false); // Index du message d'erreur de suppression
->>>>>>> d2d26d2 (add toast on animals and dashboards)
-=======
-        showToastMessage(11, true); // Index du message de succès de suppression
-      } catch (error) {
-        console.error(error);
-        showToastMessage(11, false); // Index du message d'erreur de suppression
->>>>>>> 2aaae76 (fix toasts bugs and font change on button)
       }
     }
   };
