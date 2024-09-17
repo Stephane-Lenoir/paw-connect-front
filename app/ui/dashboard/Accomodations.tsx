@@ -4,6 +4,7 @@ import Loader from '../loader';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { useToast } from '../../context/toastContext';
+import { useAnimal } from '../../context/animalContext';
 
 export default function Accomodations() {
   const [requests, setRequests] = useState([]);
@@ -11,6 +12,7 @@ export default function Accomodations() {
   const [error, setError] = useState(null);
   const { userConnected } = useAuth();
   const { showToastMessage } = useToast();
+  const { animalData } = useAnimal(); // Utilisez le contexte pour obtenir les données des animaux
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +46,11 @@ export default function Accomodations() {
     }
     if (userConnected.role_id === 3) {
       // Association voit les requêtes qu'elle a reçues
-      return request.user_id === userConnected.id;
+      const associationAnimals = animalData.filter(
+        (animal) => animal.association_id === userConnected.association_id,
+      );
+      const associationAnimalIds = associationAnimals.map((animal) => animal.id);
+      return associationAnimalIds.includes(request.animal_id);
     }
     return false;
   });
