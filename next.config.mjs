@@ -13,6 +13,14 @@ const nextConfig = {
       'localhost',
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/donation-success',
+        destination: '/donation-success',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

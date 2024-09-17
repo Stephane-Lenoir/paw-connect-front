@@ -1,7 +1,12 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
-import { createDonation } from '../../services/Donations';
+import { createStripeSession } from '../../services/Donations';
 import { useAuth } from '../../context/authContext';
 import { useRouter } from 'next/navigation';
+import { loadStripe } from '@stripe/stripe-js';
+
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
 
 export default function DonationForm({ associations }) {
   const [formData, setFormData] = useState({
@@ -41,28 +46,34 @@ export default function DonationForm({ associations }) {
     setSuccess('');
 
     try {
-      const result = await createDonation(formData);
-      setSuccess('Donation effectuée avec succès !');
-      setFormData(prevState => ({
-        ...prevState,
-        amount: '',
-        message: '',
-        userId: ''
-      }));
-      if (!isLogged) {
-        setFormData(prevState => ({
-          ...prevState,
-          donorName: '',
-          donorEmail: ''
-        }));
+      const stripe = await stripePromise;
+      if (!stripe) {
+        throw new Error("Stripe couldn't be loaded.");
+      }
+
+      const session = await createStripeSession({
+        amount: Number(formData.amount),
+        userId: isLogged ? userConnected.id : 'anonymous',
+        donorName: formData.donorName,
+        donorEmail: formData.donorEmail,
+        message: formData.message,
+        associationId: formData.userId
+      });
+
+      const result = await stripe.redirectToCheckout({
+        sessionId: session.id,
+      });
+
+      if (result.error) {
+        setError(result.error.message);
       }
     } catch (err) {
-      setError('Une erreur est survenue lors de la donation.');
+      console.error("Error in handleSubmit:", err);
+      setError('Une erreur est survenue lors de la préparation du paiement.');
     }
   };
 
   const handleViewHistory = () => {
-    // Rediriger vers la page d'historique des dons
     router.push('/donation-history');
   };
 
@@ -144,11 +155,11 @@ export default function DonationForm({ associations }) {
             required
           >
             <option value="">Sélectionnez une association</option>
-            {associations.map(association => (
+            {associations && associations.length > 0 ? associations.map(association => (
               <option key={association.id} value={association.id}>
                 {association.name}
               </option>
-            ))}
+            )) : <option disabled>Chargement des associations...</option>}
           </select>
         </div>
         {error && <p className="text-red-500 text-xs italic">{error}</p>}
@@ -160,9 +171,17 @@ export default function DonationForm({ associations }) {
           >
             Faire un don
           </button>
+          {isLogged && (
+            <button
+              type="button"
+              onClick={handleViewHistory}
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Historique des donations
+            </button>
+          )}
         </div>
       </form>
-      
     </div>
   );
 }

@@ -8,9 +8,11 @@
     "start": "next start",
     "lint": "biome lint .",
     "lint:fix": "biome lint . --apply",
-    "format": "biome format . --write"
+    "format": "biome format . --write",
+    "clean": "rm -rf .next"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^4.5.0",
     "axios": "^1.7.5",
     "next": "14.2.7",
     "react": "^18",
