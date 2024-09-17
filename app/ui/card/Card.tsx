@@ -20,6 +20,7 @@ export default function Card({ onReload }) {
   const [loading, setLoading] = useState(true);
   const { filteredAnimals, applyFilters, filters, resetFilters } = useFilter();
   const [prevFilters, setPrevFilters] = useState(filters);
+  const [selectedAnimal, setSelectedAnimal] = useState(null);
 
   useEffect(() => {
     setIsClient(true);
@@ -65,6 +66,15 @@ export default function Card({ onReload }) {
     resetFilters();
     applyFilters(animals);
   };
+
+  const handleOpenModal = (animal) => {
+    setSelectedAnimal(animal);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedAnimal(null);
+  };
+
   if (!isClient) {
     return <Loader />; // or a loading indicator
   }
@@ -92,12 +102,19 @@ export default function Card({ onReload }) {
                     <span className="text-red-500"> ❌</span>
                   )}
                 </p>
-                <Modal animal={animal} />
+                <button
+                  className="bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 block mx-auto text-2xl  font-bold font-caveat"
+                  onClick={() => handleOpenModal(animal)}
+                >
+                  Détails
+                </button>
               </div>
             </div>
           ))}
         </div>
       )}
+
+      {selectedAnimal && <Modal isOpen={true} onClose={handleCloseModal} animal={selectedAnimal} />}
     </>
   );
 }
