@@ -6,6 +6,7 @@ import MailtoButton from './MailtoButton';
 import TitleAssociation from './TitleAssociation';
 import Modal from './Modal';
 import { getAllAssociations, getOneAssociation } from '../../services/Associations';
+import Loader from '../loader';
 
 export default function AssociationCard() {
   const [associations, setAssociations] = useState([]);
@@ -44,7 +45,7 @@ export default function AssociationCard() {
   };
 
   if (loading) {
-    return <div>Chargement des associations...</div>;
+    return <Loader />;
   }
 
   return (

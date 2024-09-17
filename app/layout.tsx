@@ -3,6 +3,7 @@ import './globals.css';
 import { Caveat } from 'next/font/google';
 import Toast from './ui/Toast';
 import { AuthProvider } from './context/authContext';
+import 'leaflet/dist/leaflet.css';
 
 const caveat = Caveat({ subsets: ['latin'] });
 
