@@ -113,6 +113,7 @@ export default function Accomodations() {
     <div className="w-full min-h-screen p-8">
       <Menu />
 
+
       <h1 className="text-3xl font-bold text-text-color mb-6 text-center">
         Demande(s) d'hébergement
       </h1>
