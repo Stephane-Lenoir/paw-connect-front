@@ -8,6 +8,7 @@ import { createRequest } from '../../services/Request';
 import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
 import Link from 'next/link';
+import NeedLogin from '../needLogin';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
@@ -47,6 +48,15 @@ export default function AccommodationForm() {
 
   if (isLoading) return <Loader />;
   if (!animal) return <p>Aucun animal trouvé avec l'ID fourni.</p>;
+
+  if (!userConnected) {
+    return (
+      <>
+        <NeedLogin />
+      </>
+    );
+  }
+
   return (
     <>
       <h2 className="text-center text-2xl p-2 font-bold">Formulaire d'hébergement</h2>

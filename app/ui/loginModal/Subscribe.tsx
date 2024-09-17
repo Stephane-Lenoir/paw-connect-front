@@ -118,7 +118,10 @@ export default function Subscribe() {
           <option>Oui</option>
           <option>Non</option>
         </select>
-        <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
+        <button
+          type="submit"
+          className="btn bg-primary-color hover:bg-secondary-color w-full text-xl"
+        >
           S'inscrire
         </button>
       </form>

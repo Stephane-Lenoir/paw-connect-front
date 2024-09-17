@@ -97,14 +97,17 @@ export default function Login() {
           </svg>
           <input type="password" className="grow" name="password" placeholder="Password" />
         </label>
-        <button type="submit" className="btn bg-primary-color hover:bg-secondary-color w-full">
+        <button
+          type="submit"
+          className="btn bg-primary-color hover:bg-secondary-color text-xl w-full"
+        >
           Login
         </button>
       </form>
 
       <div className="modal-action mt-6">
         <form method="dialog">
-          <button className="btn">Fermer</button>
+          <button className="btn text-xl">Fermer</button>
         </form>
       </div>
     </>
