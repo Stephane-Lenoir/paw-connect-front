@@ -122,56 +122,62 @@ export default function Accomodations() {
         </div>
       )}
 
-      {filteredRequests.map((request) => (
-        <div key={request.id}>
-          <div className="mb-4 bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto">
-            <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
-              {' '}
-              Identification utilisateur : {request.user_id}
-            </p>
-            <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
-              {' '}
-              Identification animal : {request.animal_id}
-            </p>
-            <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
-              {' '}
-              Date : {request.date}
-            </p>
-            <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
-              {' '}
-              Status : {request.status}{' '}
-            </p>
-            {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
-              <div className="flex flex-wrap justify-between gap-2 mt-6 ">
-                <button
-                  type="button"
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
-                  onClick={() => handleAccept(request.id)}
-                >
-                  Accepter
-                </button>
-                <button
-                  type="button"
-                  className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
-                  onClick={() => handleRefused(request.id)}
-                >
-                  Refuser
-                </button>
+      {filteredRequests.map(
+        (request) => (
+          console.log(request.user.name),
+          (
+            <div key={request.id}>
+              <div className="mb-4 bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto">
+                <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
+                  {' '}
+                  Identification utilisateur : {request.user.name}
+                </p>
+                <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
+                  {' '}
+                  Identification animal : {request.animal.name}
+                </p>
+                <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
+                  {' '}
+                  Date : {request.date}
+                </p>
+                <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
+                  {' '}
+                  Status : {request.status}{' '}
+                </p>
 
-                {userConnected.role_id === 1 && (
-                  <button
-                    type="button"
-                    className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-xl  font-bold font-caveat"
-                    onClick={() => handleDelete(request.id)}
-                  >
-                    Supprimer
-                  </button>
+                {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
+                  <div className="flex flex-wrap justify-between gap-2 mt-6 ">
+                    <button
+                      type="button"
+                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                      onClick={() => handleAccept(request.id)}
+                    >
+                      Accepter
+                    </button>
+                    <button
+                      type="button"
+                      className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                      onClick={() => handleRefused(request.id)}
+                    >
+                      Refuser
+                    </button>
+
+                    {userConnected.role_id === 1 && (
+                      <button
+                        type="button"
+                        className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
+                        onClick={() => handleDelete(request.id)}
+                      >
+                        Supprimer
+                      </button>
+                    )}
+                  </div>
                 )}
               </div>
-            )}
-          </div>
-        </div>
-      ))}
+            </div>
+          )
+        ),
+      )}
     </div>
   );
 }
