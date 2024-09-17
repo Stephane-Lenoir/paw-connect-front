@@ -53,7 +53,7 @@ export default function DonationForm({ associations }) {
 
       const session = await createStripeSession({
         amount: Number(formData.amount),
-        userId: isLogged ? userConnected.id : 'anonymous',
+        userId: isLogged ? userConnected.id.toString() : 'anonymous',
         donorName: formData.donorName,
         donorEmail: formData.donorEmail,
         message: formData.message,
