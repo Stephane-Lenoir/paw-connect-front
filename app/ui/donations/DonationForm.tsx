@@ -18,6 +18,7 @@ export default function DonationForm({ associations }) {
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   const { isLogged, userConnected } = useAuth();
   const router = useRouter();
@@ -42,6 +43,8 @@ export default function DonationForm({ associations }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     setError('');
     setSuccess('');
 
@@ -70,6 +73,8 @@ export default function DonationForm({ associations }) {
     } catch (err) {
       console.error("Error in handleSubmit:", err);
       setError('Une erreur est survenue lors de la préparation du paiement.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -168,8 +173,9 @@ export default function DonationForm({ associations }) {
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
+            disabled={isSubmitting}
           >
-            Faire un don
+            {isSubmitting ? 'En cours...' : 'Faire un don'}
           </button>
           {isLogged && (
             <button

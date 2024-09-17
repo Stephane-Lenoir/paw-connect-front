@@ -12,7 +12,7 @@ export default function DonationSuccessPage() {
 
   useEffect(() => {
     const sessionId = searchParams.get('session_id');
-    if (sessionId) {
+    if (sessionId && status === 'loading') {
       checkSessionStatus(sessionId)
         .then((data) => {
           setStatus('success');
@@ -22,10 +22,10 @@ export default function DonationSuccessPage() {
           console.error('Error checking session status:', error);
           setStatus('error');
         });
-    } else {
+    } else if (!sessionId) {
       setStatus('error');
     }
-  }, [searchParams]);
+  }, [searchParams, status]);
 
   const handleReturnHome = () => {
     router.push('/');
