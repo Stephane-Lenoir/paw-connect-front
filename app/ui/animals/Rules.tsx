@@ -17,7 +17,9 @@ export default function Rules() {
               passHref
               target="_blank"
             >
-              <h1 className="text-center text-5xl mt-8 mb-8">Les règles d'adoption</h1>
+              <h1 className="text-center text-5xl mt-8 mb-8">
+                Cliquez ici pour consulter les règles d'adoption
+              </h1>
             </Link>
           </div>
         </div>
