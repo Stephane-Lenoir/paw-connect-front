@@ -23,6 +23,10 @@ export default function Accomodations() {
         setRequests(data);
         setLoading(false);
 
+        console.log('Data fetched:', data);
+        console.log('User connected:', userConnected);
+        console.log('Animal data:', animalData);
+
         // Filtrer les notifications en fonction du rôle de l'utilisateur connecté
         const filteredNotifications = data.filter((request) => {
           if (userConnected.role_id === 1) {
@@ -36,7 +40,9 @@ export default function Accomodations() {
           if (userConnected.role_id === 3) {
             // Association voit les notifications qu'elle a reçues
             const associationAnimals = animalData.filter(
-              (animal) => animal.association_id === userConnected.association_id,
+              (animal) =>
+                animal.user.role_id === userConnected.role_id &&
+                animal.user_id === userConnected.id,
             );
             const associationAnimalIds = associationAnimals.map((animal) => animal.id);
             return (
@@ -46,6 +52,7 @@ export default function Accomodations() {
           return false;
         });
 
+        console.log('Filtered notifications:', filteredNotifications);
         setNotifications(filteredNotifications);
       } catch (error) {
         console.error(error);
@@ -73,13 +80,16 @@ export default function Accomodations() {
     if (userConnected.role_id === 3) {
       // Association voit les requêtes qu'elle a reçues
       const associationAnimals = animalData.filter(
-        (animal) => animal.association_id === userConnected.association_id,
+        (animal) =>
+          animal.user.role_id === userConnected.role_id && animal.user_id === userConnected.id,
       );
       const associationAnimalIds = associationAnimals.map((animal) => animal.id);
       return associationAnimalIds.includes(request.animal_id);
     }
     return false;
   });
+
+  console.log('Filtered requests:', filteredRequests);
 
   const handleAccept = async (requestId) => {
     try {
