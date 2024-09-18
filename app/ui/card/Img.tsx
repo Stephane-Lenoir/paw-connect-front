@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-export default function Img({ photo }) {
+export default function Img({ photo, isOpen }) {
   if (!photo) {
     return '';
   }
@@ -12,8 +12,7 @@ export default function Img({ photo }) {
           src={photo}
           alt="Animal"
           fill
-          style={{ objectFit: 'contain' }}
-          
+          style={{ objectFit: isOpen ? 'contain' : 'cover' }}
         />
       </div>
     </>
