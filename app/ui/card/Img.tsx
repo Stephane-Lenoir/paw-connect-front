@@ -12,8 +12,8 @@ export default function Img({ photo }) {
           src={photo}
           alt="Animal"
           fill
-          style={{ objectFit: 'cover' }}
-          className="bg-primary-color"
+          style={{ objectFit: 'contain' }}
+          
         />
       </div>
     </>
