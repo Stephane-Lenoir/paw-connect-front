@@ -23,9 +23,30 @@ export default function Accomodations() {
         setRequests(data);
         setLoading(false);
 
-        // Vérifiez les nouvelles demandes et ajoutez-les aux notifications
-        const newRequests = data.filter((request) => request.status === 'En attente');
-        setNotifications(newRequests);
+        // Filtrer les notifications en fonction du rôle de l'utilisateur connecté
+        const filteredNotifications = data.filter((request) => {
+          if (userConnected.role_id === 1) {
+            // Admin voit toutes les notifications
+            return request.status === 'En attente';
+          }
+          if (userConnected.role_id === 2) {
+            // Membre voit les notifications qu'il a faites
+            return request.status === 'En attente' && request.user_id === userConnected.id;
+          }
+          if (userConnected.role_id === 3) {
+            // Association voit les notifications qu'elle a reçues
+            const associationAnimals = animalData.filter(
+              (animal) => animal.association_id === userConnected.association_id,
+            );
+            const associationAnimalIds = associationAnimals.map((animal) => animal.id);
+            return (
+              request.status === 'En attente' && associationAnimalIds.includes(request.animal_id)
+            );
+          }
+          return false;
+        });
+
+        setNotifications(filteredNotifications);
       } catch (error) {
         console.error(error);
         setError('Failed to fetch requests. Please try again later.');
@@ -34,7 +55,7 @@ export default function Accomodations() {
     };
 
     fetchData();
-  }, []);
+  }, [userConnected, animalData]);
 
   if (loading) {
     return <Loader />;
@@ -109,10 +130,11 @@ export default function Accomodations() {
     }
   };
 
+  console.log('notifications', notifications);
+
   return (
     <div className="w-full min-h-screen p-8">
       <Menu />
-
 
       <h1 className="text-3xl font-bold text-text-color mb-6 text-center">
         Demande(s) d'hébergement
