@@ -143,10 +143,15 @@ export function Add() {
             />
           </label>
 
+          <p className="text-center text-lg">
+            {' '}
+            <span className="font-bold">Formats acceptés : </span> jpg, png. Maximum 1MB
+          </p>
           <input
             type="file"
             className="file-input file-input-bordered w-full max-w "
             name="photo"
+            required
           />
 
           <div className="modal-action mt-6 flex justify-center ">
