@@ -78,10 +78,6 @@ export default function DonationForm({ associations }) {
     }
   };
 
-  const handleViewHistory = () => {
-    router.push('/donation-history');
-  };
-
   return (
     <div>
       <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -171,21 +167,12 @@ export default function DonationForm({ associations }) {
         {success && <p className="text-green-500 text-xs italic">{success}</p>}
         <div className="flex items-center justify-between">
           <button
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="font-bold bg-primary-color hover:bg-secondary-color transition-colors duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             disabled={isSubmitting}
           >
             {isSubmitting ? 'En cours...' : 'Faire un don'}
           </button>
-          {isLogged && (
-            <button
-              type="button"
-              onClick={handleViewHistory}
-              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Historique des donations
-            </button>
-          )}
         </div>
       </form>
     </div>
