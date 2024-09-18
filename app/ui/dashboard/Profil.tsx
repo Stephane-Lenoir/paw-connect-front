@@ -139,6 +139,7 @@ export default function Profil() {
             id="email"
             name="email"
             defaultValue={userConnected.email}
+            autocomplete="email"
             className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
             readOnly
           />

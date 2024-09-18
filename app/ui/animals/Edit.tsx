@@ -139,8 +139,8 @@ export function EditAnimal() {
                 <Image
                   src={setUrlAnimal(animal.photo)}
                   alt="Animal"
-                  layout="fill"
-                  objectFit="cover"
+                  fill
+                  style={{ objectFit: 'cover' }}
                   className="bg-primary-color"
                 />
               </div>

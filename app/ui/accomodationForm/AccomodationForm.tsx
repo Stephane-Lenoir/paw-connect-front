@@ -91,6 +91,7 @@ export default function AccommodationForm() {
             name="email"
             placeholder="Email"
             className="input input-bordered w-full max-w-xs"
+            autocomplete="email"
             defaultValue={userConnected.email || ''}
             readOnly
             required
