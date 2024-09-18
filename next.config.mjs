@@ -12,7 +12,7 @@ const nextConfig = {
       'media.istockphoto.com',
       'localhost',
       'www.woopets.fr',
-      'files.oaiusercontent.com',
+      'image.noelshack.com',
     ],
   },
 };
