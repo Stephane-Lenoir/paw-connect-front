@@ -11,6 +11,8 @@ const nextConfig = {
       'www.google.com',
       'media.istockphoto.com',
       'localhost',
+      'www.woopets.fr',
+      'files.oaiusercontent.com',
     ],
   },
 };
