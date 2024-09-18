@@ -98,7 +98,7 @@ export default function Subscribe() {
             placeholder="Email"
             name="email"
             required
-            autocomplete="email"
+            autoComplete="email"
           />
         </label>
         <label className="input input-bordered flex items-center gap-2 w-full">
@@ -120,7 +120,7 @@ export default function Subscribe() {
             placeholder="Password"
             name="password"
             required
-            autocomplete="current-password"
+            autoComplete="current-password"
           />
         </label>
         <select

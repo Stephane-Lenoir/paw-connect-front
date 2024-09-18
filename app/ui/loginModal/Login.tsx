@@ -85,7 +85,7 @@ export default function Login() {
             className="grow"
             name="email"
             placeholder="Email"
-            autocomplete="email"
+            autoComplete="email"
           />
         </label>
         <label className="input input-bordered flex items-center gap-2 w-full">
@@ -106,7 +106,7 @@ export default function Login() {
             className="grow"
             name="password"
             placeholder="Password"
-            autocomplete="current-password"
+            autoComplete="current-password"
           />
         </label>
         <button
