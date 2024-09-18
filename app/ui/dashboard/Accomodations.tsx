@@ -23,9 +23,9 @@ export default function Accomodations() {
         setRequests(data);
         setLoading(false);
 
-        console.log('Data fetched:', data);
-        console.log('User connected:', userConnected);
-        console.log('Animal data:', animalData);
+        // console.log('Data fetched:', data);
+        // console.log('User connected:', userConnected);
+        // console.log('Animal data:', animalData);
 
         // Filtrer les notifications en fonction du rôle de l'utilisateur connecté
         const filteredNotifications = data.filter((request) => {
@@ -52,7 +52,7 @@ export default function Accomodations() {
           return false;
         });
 
-        console.log('Filtered notifications:', filteredNotifications);
+        // console.log('Filtered notifications:', filteredNotifications);
         setNotifications(filteredNotifications);
       } catch (error) {
         console.error(error);
@@ -89,7 +89,7 @@ export default function Accomodations() {
     return false;
   });
 
-  console.log('Filtered requests:', filteredRequests);
+  // console.log('Filtered requests:', filteredRequests);
 
   const handleAccept = async (requestId) => {
     try {
@@ -140,7 +140,7 @@ export default function Accomodations() {
     }
   };
 
-  console.log('notifications', notifications);
+  // console.log('notifications', notifications);
 
   return (
     <div className="w-full min-h-screen p-8">
@@ -159,7 +159,7 @@ export default function Accomodations() {
 
       {filteredRequests.map(
         (request) => (
-          console.log(request.user.name),
+          // console.log(request.user.name),
           (
             <div key={request.id}>
               <div className="mb-4 bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto">

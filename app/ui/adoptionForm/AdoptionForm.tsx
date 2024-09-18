@@ -13,17 +13,17 @@ export default function AdoptionForm() {
   };
 
   useEffect(() => {
-    console.log('useEffect est entrain de tourner');
+    // console.log('useEffect est entrain de tourner');
     const token = localStorage.getItem('jwt_token');
-    console.log('token récupéré:', token);
+    // console.log('token récupéré:', token);
     if (token) {
       const [header, payload, signature] = token.split('.');
-      console.log('Parties du token:', { header, payload, signature });
+      // console.log('Parties du token:', { header, payload, signature });
       const decodedPayload = JSON.parse(atob(payload));
-      console.log('Payload décodé:', decodedPayload);
+      // console.log('Payload décodé:', decodedPayload);
       setUserId(decodedPayload.id);
-      console.log(userId);
-      console.log(header, payload, signature);
+      // console.log(userId);
+      // console.log(header, payload, signature);
     }
   }, []);
   /*useEffect(() => {

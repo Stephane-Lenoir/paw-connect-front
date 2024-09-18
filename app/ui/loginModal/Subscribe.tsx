@@ -30,7 +30,7 @@ export default function Subscribe() {
       });
 
       if (response && response.status === 201) {
-        console.log('Signup successful');
+        // console.log('Signup successful');
         event.target.closest('dialog').close(); // close modal
         event.target.reset(); // reset the form
 

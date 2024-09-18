@@ -27,7 +27,7 @@ export default function SearchBar() {
       setResults([]);
     }
   };
-  console.log(results);
+  // console.log(results);
 
   const handleKeyDown = (e) => {
     if (e.key === 'Enter') {
