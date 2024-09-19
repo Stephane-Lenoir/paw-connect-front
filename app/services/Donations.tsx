@@ -1,48 +1,45 @@
+import axios from 'axios';
 import api from './axiosConfig';
+import { Donation, StripeSessionData, DonationCheckResponse } from '../@types/donation';
 
-let lastSessionId = null;
+let lastSessionId: string | null = null;
 
-export const createDonation = async (donationData) => {
+export const createDonation = async (donationData: Donation): Promise<Donation> => {
   try {
-    const response = await api.post('/donations', donationData);
+    const response = await api.post<Donation>('/donations', donationData);
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error))
     console.error('Error creating donation:', error.response?.data || error.message);
     throw error;
   }
 };
 
-export const getDonationsByUser = async () => {
-  console.log("Fetching donations for logged-in user");
+export const getDonationsByUser = async (): Promise<Donation[]> => {
   try {
-    const response = await api.get(`/donations/user/me`);
-    console.log("Donations response:", response.data);
+    const response = await api.get<Donation[]>(`/donations/user/me`);
+    
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error))
     console.error('Error fetching donations:', error.response?.data || error.message);
     console.error('Full error object:', error);
     throw error;
   }
 };
 
-export const getAllDonations = async () => {
+export const getAllDonations = async (): Promise<Donation[]> => {
   try {
-    const response = await api.get('/donations');
+    const response = await api.get<Donation[]>('/donations');
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error))
     console.error('Error fetching all donations:', error.response?.data || error.message);
     throw error;
   }
 };
 
-export const createStripeSession = async (donationData: {
-  amount: number;
-  userId: string;
-  donorName: string;
-  donorEmail: string;
-  message: string;
-  associationId: string;
-}) => {
+export const createStripeSession = async (donationData: StripeSessionData) => {
   try {
     const response = await api.post('/donations/create-stripe-session', donationData);
     if (response.data.id === lastSessionId) {
@@ -52,6 +49,7 @@ export const createStripeSession = async (donationData: {
     lastSessionId = response.data.id;
     return response.data;
   } catch (error) {
+    if (axios.isAxiosError(error))
     console.error('Error creating Stripe session:', error.response?.data || error.message);
     throw error;
   }
@@ -59,14 +57,14 @@ export const createStripeSession = async (donationData: {
 
 let checkingSession = false;
 
-export const checkSessionStatus = async (sessionId: string) => {
+export const checkSessionStatus = async (sessionId: string): Promise<DonationCheckResponse> => {
   if (checkingSession) {
     console.log('Already checking session status');
-    return;
+    throw new Error('Session check already in progress');
   }
   checkingSession = true;
   try {
-    const response = await api.get(`/donations/check-session/${sessionId}`);
+    const response = await api.get<DonationCheckResponse>(`/donations/check-session/${sessionId}`);
     return response.data;
   } catch (error) {
     console.error('Error checking session status:', error);

@@ -5,11 +5,16 @@ import { createStripeSession } from '../../services/Donations';
 import { useAuth } from '../../context/authContext';
 import { useRouter } from 'next/navigation';
 import { loadStripe } from '@stripe/stripe-js';
+import { Association, DonationFormData } from '../../@types/donation';
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY || '');
 
-export default function DonationForm({ associations }) {
-  const [formData, setFormData] = useState({
+interface DonationFormProps {
+  associations: Association[];
+}
+
+export default function DonationForm({ associations }: DonationFormProps) {
+  const [formData, setFormData] = useState<DonationFormData>({
     amount: '',
     donorName: '',
     donorEmail: '',
@@ -33,7 +38,7 @@ export default function DonationForm({ associations }) {
     }
   }, [isLogged, userConnected]);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prevState => ({
       ...prevState,
@@ -41,7 +46,7 @@ export default function DonationForm({ associations }) {
     }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (isSubmitting) return;
     setIsSubmitting(true);
@@ -68,7 +73,7 @@ export default function DonationForm({ associations }) {
       });
 
       if (result.error) {
-        setError(result.error.message);
+        setError(result.error.message || 'An error occurred');
       }
     } catch (err) {
       console.error("Error in handleSubmit:", err);

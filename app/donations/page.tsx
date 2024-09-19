@@ -6,9 +6,10 @@ import AssociationList from '../ui/donations/AssociationList';
 import { getAllAssociations } from '../services/Associations';
 import NavBar from '../ui/header/Navbar';
 import Footer from '../ui/footer/Footer';
+import { Association } from '../@types/donation';
 
 export default function DonationsPage() {
-  const [associations, setAssociations] = useState([]);
+  const [associations, setAssociations] = useState<Association[]>([]);
 
   useEffect(() => {
     const fetchAssociations = async () => {
@@ -19,7 +20,6 @@ export default function DonationsPage() {
   }, []);
 
   return (
-    
     <div>
       <NavBar />
       <h1 className="text-3xl ml-16">Faire un don</h1>

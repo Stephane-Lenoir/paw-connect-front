@@ -5,10 +5,11 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { checkSessionStatus } from '../services/Donations';
 import NavBar from '../ui/header/Navbar';
 import Footer from '../ui/footer/Footer';
+import { DonationDetails } from '../@types/donation';
 
 export default function DonationSuccessPage() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
-  const [donationDetails, setDonationDetails] = useState(null);
+  const [donationDetails, setDonationDetails] = useState<DonationDetails | null>(null);
   const searchParams = useSearchParams();
   const router = useRouter();
 
