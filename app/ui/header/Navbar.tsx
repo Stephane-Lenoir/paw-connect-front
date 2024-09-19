@@ -18,7 +18,7 @@ export default function NavBar() {
       <div className="navbar bg-base-100 bg-primary-color text-text-color">
         <div className="navbar-start text-3xl">
           <div className="dropdown text-3xl bg-primary-color">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div aria-label="burger" tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -80,7 +80,12 @@ export default function NavBar() {
           </ul>
         </div>
         <div className="navbar-end">{isOpen && <SearchBar />}</div>
-        <button type="button" className="btn btn-ghost btn-circle" onClick={toggle}>
+        <button
+          aria-label="search"
+          type="button"
+          className="btn btn-ghost btn-circle"
+          onClick={toggle}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="h-5 w-5"
