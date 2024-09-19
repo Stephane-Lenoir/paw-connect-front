@@ -1,9 +1,9 @@
 interface MailtoButtonProps {
-  email: string; // Déclare un type pour les props
+  email: string;
 }
 
 export default function MailtoButton({ email }: MailtoButtonProps) {
-  const mailtoLink = `mailto:${email}`; // Génère le lien mailto en utilisant l'email passé en prop
+  const mailtoLink = `mailto:${email}`; // generated link mailto using the email sent in Props
 
   return (
     <a

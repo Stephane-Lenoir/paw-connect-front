@@ -22,13 +22,13 @@ export default function Filtres({ onReload }) {
     };
 
     fetchAnimals();
-  }, [pathname]); // Appelé uniquement lorsque pathname change
+  }, [pathname]); // called if pathname change
 
   useEffect(() => {
     if (pathname === '/animals') {
       applyFilters(animals);
     }
-  }, [filters, pathname, animals]); // Appelé lorsque les filtres ou les animaux changent
+  }, [filters, pathname, animals]); // Called if the filters or animals change
 
   const handleResetFilters = () => {
     resetFilters();

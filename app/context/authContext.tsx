@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('userConnected', JSON.stringify(user));
           } catch (error) {
             console.log(error);
-            handleLogout(); // Déconnecter l'utilisateur en cas d'erreur
+            handleLogout(); // Disconnect if error
           }
         }
       }
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
     const protectedPaths = ['/dashboard', '/accomodation/:id'];
     if (protectedPaths.some((path) => window.location.pathname.startsWith(path))) {
-      window.location.href = '/'; // Redirige vers la page d'accueil
+      window.location.href = '/'; // Redirection to homePage
     }
   };
 

@@ -17,36 +17,6 @@ export default function Animals() {
     setReload(!reload);
   };
 
-  // const fetchData = async () => {
-  //   try {
-  // Get the token from the local storage
-  //     const token = localStorage.getItem('jwt_token');
-
-  //     const res = await axios.post(
-  //       'http://localhost:3000/api/animals',
-  //       {},
-  //       {
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         withCredentials: true,
-  //       },
-  //     );
-
-  //     setAnimals(res.data);
-  //     console.log(res.data);
-  //   } catch (err) {
-  //     console.error('Error fetching animals:', err);
-  //     setError(err.message || 'Failed to fetch animals');
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // if (error) return <div>Error: {error}</div>;
-
   return (
     <>
       <Rules />

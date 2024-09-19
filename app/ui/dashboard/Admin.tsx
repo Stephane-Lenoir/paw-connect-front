@@ -33,17 +33,15 @@ export default function Admin() {
     const updatedUser = {
       name: e.target.name.value,
       firstname: e.target.firstname.value,
-      // email: e.target.email.value,
-      // role_id: e.target.role_id.value,
     };
     try {
       await updateUserById(userId, updatedUser);
       setEditingUserId(null);
       setUsers(users.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
-      showToastMessage(9, true); // Index du message de succès de mise à jour
+      showToastMessage(9, true); // Index of success message for update
     } catch (error) {
       console.error(error);
-      showToastMessage(9, false); // Index du message d'erreur de mise à jour
+      showToastMessage(9, false); // Index of error message for update
     }
   };
 
@@ -53,10 +51,10 @@ export default function Admin() {
       try {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
-        showToastMessage(8, true); // Index du message de succès de suppression
+        showToastMessage(8, true); // Index of success message for remove
       } catch (error) {
         console.error(error);
-        showToastMessage(8, false); // Index du message d'erreur de suppression
+        showToastMessage(8, false); // Index of error message for remove
       }
     }
   };
@@ -107,18 +105,6 @@ export default function Admin() {
                           name="firstname"
                           defaultValue={user.firstname}
                         />
-                        {/* <input
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                          type="text"
-                          name="email"
-                          defaultValue={user.email}
-                        />
-                        <input
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                          type="text"
-                          name="role_id"
-                          defaultValue={user.role_id}
-                        /> */}
                       </form>
                     ) : (
                       <>
@@ -128,12 +114,6 @@ export default function Admin() {
                         <p>
                           <strong>Prénom:</strong> {user.firstname}
                         </p>
-                        {/* <p>
-                          <strong>Email:</strong> {user.email}
-                        </p>
-                        <p>
-                          <strong>Rôle:</strong> {user.role_id}
-                        </p> */}
                       </>
                     )}
                   </div>

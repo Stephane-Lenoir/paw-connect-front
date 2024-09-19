@@ -38,9 +38,9 @@ export default function AccommodationForm() {
     const fetchData = async () => {
       const response = await createRequest(data);
       if (response) {
-        showToastMessage(0, true); // Index du message à afficher, succès
+        showToastMessage(0, true); // Index of message to display, success
       } else {
-        showToastMessage(0, false); // Index du message d'erreur, erreur
+        showToastMessage(0, false); // Index of error message to display, error
       }
     };
     fetchData();

@@ -50,7 +50,7 @@ export default function SearchBar() {
   const handleCloseModal = () => {
     setIsModalOpen(false);
     setSelectedAnimal(null);
-    resetSearch(); // Appel de la fonction pour réinitialiser la barre de recherche
+    resetSearch(); // call to function to reboot the Search bar
   };
 
   const resetSearch = () => {

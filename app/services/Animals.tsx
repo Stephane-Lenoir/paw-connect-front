@@ -1,9 +1,9 @@
-import api from "./axiosConfig";
+import api from './axiosConfig';
 
-// Route Animals
+// Animals router
 export async function getAllAnimals() {
   try {
-    const response = await api.get("animals");
+    const response = await api.get('animals');
     return response.data;
   } catch (error) {
     console.error(error);
@@ -15,7 +15,7 @@ export async function getAnimalByUserId(id) {
   try {
     const response = await api.get(`animals/${id}`, {
       headers: {
-        Authorization: localStorage.getItem("jwt_token"),
+        Authorization: localStorage.getItem('jwt_token'),
       },
     });
 
@@ -28,9 +28,9 @@ export async function getAnimalByUserId(id) {
 
 export async function createAnimal(animal) {
   try {
-    const response = await api.post("animals", animal, {
+    const response = await api.post('animals', animal, {
       headers: {
-        Authorization: localStorage.getItem("jwt_token"),
+        Authorization: localStorage.getItem('jwt_token'),
       },
     });
 

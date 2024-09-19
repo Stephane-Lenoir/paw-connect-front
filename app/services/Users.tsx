@@ -30,20 +30,6 @@ export async function getUserByToken(token) {
     throw error;
   }
 }
-export async function getUserById(userId) {
-  try {
-    const response = await api.get(`profiles/${userId}`, {
-      headers: {
-        Authorization: localStorage.getItem('jwt_token'),
-        'Content-Type': 'application/json',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
 
 export async function updateUserById(id, user) {
   try {
@@ -53,16 +39,6 @@ export async function updateUserById(id, user) {
         'Content-Type': 'application/json',
       },
     });
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-export async function getUserByRole() {
-  try {
-    const response = await api.get('profiles/roles');
     return response.data;
   } catch (error) {
     console.error(error);

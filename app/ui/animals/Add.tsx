@@ -57,9 +57,9 @@ export function Add() {
     const fetchData = async () => {
       const data = await createAnimal(formData);
       if (data) {
-        showToastMessage(5, true); // Index du message à afficher, succès
+        showToastMessage(5, true); // Index of message to display, success
       } else {
-        showToastMessage(5, false); // Index du message d'erreur, erreur
+        showToastMessage(5, false); // Index of error message to display, error
       }
 
       return data;

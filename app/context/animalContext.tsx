@@ -12,10 +12,10 @@ export const AnimalProvider = ({ children }) => {
     const fetchAnimal = async () => {
       try {
         const data = await getAllAnimals();
-        // console.log('Data fetched:', data); // Ajoutez ce console.log pour vérifier les données récupérées
+        // console.log('Data fetched:', data);
         setAnimalData(data);
       } catch (error) {
-        console.error('Error fetching data:', error); // Ajoutez ce console.log pour vérifier les erreurs
+        console.error('Error fetching data:', error);
       }
     };
     fetchAnimal();

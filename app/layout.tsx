@@ -24,8 +24,8 @@ export default function RootLayout({
         <AuthProvider>
           <ToastProvider>
             <AnimalProvider>
-            {children}
-            <Toast /> {/* Assurez-vous que le composant Toast est rendu ici */}
+              {children}
+              <Toast />
             </AnimalProvider>
           </ToastProvider>
         </AuthProvider>
