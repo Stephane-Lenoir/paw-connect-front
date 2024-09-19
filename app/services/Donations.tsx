@@ -43,7 +43,7 @@ export const createStripeSession = async (donationData: StripeSessionData) => {
   try {
     const response = await api.post('/donations/create-stripe-session', donationData);
     if (response.data.id === lastSessionId) {
-      console.warn('Duplicate session creation detected');
+      
       return response.data;
     }
     lastSessionId = response.data.id;
@@ -59,7 +59,7 @@ let checkingSession = false;
 
 export const checkSessionStatus = async (sessionId: string): Promise<DonationCheckResponse> => {
   if (checkingSession) {
-    console.log('Already checking session status');
+    
     throw new Error('Session check already in progress');
   }
   checkingSession = true;
