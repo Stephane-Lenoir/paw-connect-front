@@ -1,7 +1,16 @@
-export default function Animals() {
+import NavBar from '../ui/header/Navbar';
+import Footer from '../ui/footer/Footer';
+import Animals from '../ui/animals/Animals';
+import { FilterProvider } from '../context/filterContex';
+
+export default function animalPage() {
   return (
     <>
-      <h1> Page Animals </h1>
+      <FilterProvider>
+        <NavBar />
+        <Animals />
+        <Footer />
+      </FilterProvider>
     </>
   );
 }

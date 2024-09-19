@@ -2,7 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
 :root {
+  --primary-color: #A7C7E7;
+  --secondary-color: #89d9d1;
+  --background-color: #F0F8FF;
+  --text-color: #4A4A4A;
+  --card-bg: #FFFFFF;
+}
+
+.modal-backdrop {
+  user-select: none;
+}
+
+
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -30,4 +45,4 @@ body {
   .text-balance {
     text-wrap: balance;
   }
-}
+} */
