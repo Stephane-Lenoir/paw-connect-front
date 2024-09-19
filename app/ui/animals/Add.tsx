@@ -118,8 +118,8 @@ export function Add() {
             <label className="input input-bordered flex items-center gap-2 w-full">
               <select className="grow" name="gender">
                 <option value="">Sexe de l'animal</option>
-                <option value="male">Mâle</option>
-                <option value="female">Femelle</option>
+                <option value="Mâle">Mâle</option>
+                <option value="Femelle">Femelle</option>
               </select>
             </label>
 
