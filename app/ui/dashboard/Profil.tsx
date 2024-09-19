@@ -50,12 +50,12 @@ export default function Profil() {
       });
 
       setEditing(false);
-      showToastMessage(9, true); // Index du message à afficher, succès
+      showToastMessage(9, true); // Index of message to display, success
     } catch (error) {
       console.error(error);
       setError('Failed to update user. Please try again later.');
       setLoading(true);
-      showToastMessage(9, false); // Index du message d'erreur, erreur
+      showToastMessage(9, false); // Index of error message, error
     }
   };
 

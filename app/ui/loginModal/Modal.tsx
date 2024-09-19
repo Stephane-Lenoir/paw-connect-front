@@ -16,7 +16,7 @@ export default function Modal() {
 
   useEffect(() => {
     if (isLogged) {
-      document.getElementById('my_modal_1').close(); // Fermer la modal si l'utilisateur est connecté
+      document.getElementById('my_modal_1').close(); // Closed modal if the user is connected
     }
   }, [isLogged]);
 

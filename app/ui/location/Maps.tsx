@@ -13,7 +13,7 @@ let DefaultIcon = L.icon({
   iconAnchor: [12, 41],
 });
 
-// Définition de l'icône personnalisée pour l'utilisateur
+// Definition of customized icon for user
 let CustomUserIcon = L.icon({
   iconUrl:
     'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',

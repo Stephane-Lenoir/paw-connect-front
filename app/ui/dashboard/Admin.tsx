@@ -38,10 +38,10 @@ export default function Admin() {
       await updateUserById(userId, updatedUser);
       setEditingUserId(null);
       setUsers(users.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
-      showToastMessage(9, true); // Index du message de succès de mise à jour
+      showToastMessage(9, true); // Index of success message for update
     } catch (error) {
       console.error(error);
-      showToastMessage(9, false); // Index du message d'erreur de mise à jour
+      showToastMessage(9, false); // Index of error message for update
     }
   };
 
@@ -51,10 +51,10 @@ export default function Admin() {
       try {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
-        showToastMessage(8, true); // Index du message de succès de suppression
+        showToastMessage(8, true); // Index of success message for remove
       } catch (error) {
         console.error(error);
-        showToastMessage(8, false); // Index du message d'erreur de suppression
+        showToastMessage(8, false); // Index of error message for remove
       }
     }
   };

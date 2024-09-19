@@ -13,7 +13,7 @@ export default function Accomodations() {
   const [notifications, setNotifications] = useState([]);
   const { userConnected } = useAuth();
   const { showToastMessage } = useToast();
-  const { animalData } = useAnimal(); // Utilisez le contexte pour obtenir les données des animaux
+  const { animalData } = useAnimal(); // Use the context to get animal data
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,18 +26,18 @@ export default function Accomodations() {
         // console.log('User connected:', userConnected);
         // console.log('Animal data:', animalData);
 
-        // Filtrer les notifications en fonction du rôle de l'utilisateur connecté
+        // Filter notifications based on the connected user's role
         const filteredNotifications = data.filter((request) => {
           if (userConnected.role_id === 1) {
-            // Admin voit toutes les notifications
+            // Admin sees all pending notifications
             return request.status === 'En attente';
           }
           if (userConnected.role_id === 2) {
-            // Membre voit les notifications qu'il a faites
+            // Member sees notifications they've made
             return request.status === 'En attente' && request.user_id === userConnected.id;
           }
           if (userConnected.role_id === 3) {
-            // Association voit les notifications qu'elle a reçues
+            // Association sees notifications they've received
             const associationAnimals = animalData.filter(
               (animal) =>
                 animal.user.role_id === userConnected.role_id &&
@@ -68,15 +68,15 @@ export default function Accomodations() {
 
   const filteredRequests = requests.filter((request) => {
     if (userConnected.role_id === 1) {
-      // Admin voit toutes les requêtes
+      // Admin sees all requests
       return true;
     }
     if (userConnected.role_id === 2) {
-      // Membre voit les requêtes qu'il a faites
+      // Member sees requests they've made
       return request.user_id === userConnected.id;
     }
     if (userConnected.role_id === 3) {
-      // Association voit les requêtes qu'elle a reçues
+      // Association sees requests they've received
       const associationAnimals = animalData.filter(
         (animal) =>
           animal.user.role_id === userConnected.role_id && animal.user_id === userConnected.id,
@@ -98,10 +98,10 @@ export default function Accomodations() {
         ),
       );
       setNotifications(notifications.filter((notification) => notification.id !== requestId));
-      showToastMessage(10, true); // Index du message de succès d'acceptation
+      showToastMessage(10, true); // Index of the success message for acceptance
     } catch (error) {
       console.error(error);
-      showToastMessage(10, false); // Index du message d'erreur d'acceptation
+      showToastMessage(10, false); // Index of the error message for acceptance
     }
   };
 
@@ -116,10 +116,10 @@ export default function Accomodations() {
 
       setNotifications(notifications.filter((notification) => notification.id !== requestId));
 
-      showToastMessage(10, true); // Index du message de succès de refus
+      showToastMessage(10, true); // Index of the success message for refusal
     } catch (error) {
       console.error(error);
-      showToastMessage(10, false); // Index du message d'erreur de refus
+      showToastMessage(10, false); // Index of the error message for refusal
     }
   };
 
@@ -130,13 +130,15 @@ export default function Accomodations() {
         await deleteRequest(requestId);
         setRequests(requests.filter((request) => request.id !== requestId));
         setNotifications(notifications.filter((notification) => notification.id !== requestId));
-        showToastMessage(11, true); // Index du message de succès de suppression
+        showToastMessage(11, true); // Index of succes message to remove
       } catch (error) {
         console.error(error);
-        showToastMessage(11, false); // Index du message d'erreur de suppression
+        showToastMessage(11, false); // Index of error message to remove
       }
     }
   };
+
+  // console.log('notifications', notifications);
 
   return (
     <div className="w-full min-h-screen p-8">
@@ -154,6 +156,7 @@ export default function Accomodations() {
       )}
 
       {filteredRequests.map((request) => (
+        // console.log(request.user.name),
         <div key={request.id}>
           <div className="mb-4 bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto">
             <p className="shadow appearance-none bg-background-color border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline">
