@@ -80,10 +80,6 @@ export default function Sidebar() {
               </ul>
             </li>
 
-            {/* <li>
-              <Link href={'#'}>Historique de navigation</Link>
-            </li> */}
-
             <li>
               <Link
                 href={'#'}

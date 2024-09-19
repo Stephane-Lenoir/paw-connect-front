@@ -33,8 +33,6 @@ export default function Admin() {
     const updatedUser = {
       name: e.target.name.value,
       firstname: e.target.firstname.value,
-      // email: e.target.email.value,
-      // role_id: e.target.role_id.value,
     };
     try {
       await updateUserById(userId, updatedUser);
@@ -107,18 +105,6 @@ export default function Admin() {
                           name="firstname"
                           defaultValue={user.firstname}
                         />
-                        {/* <input
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                          type="text"
-                          name="email"
-                          defaultValue={user.email}
-                        />
-                        <input
-                          className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
-                          type="text"
-                          name="role_id"
-                          defaultValue={user.role_id}
-                        /> */}
                       </form>
                     ) : (
                       <>
@@ -128,12 +114,6 @@ export default function Admin() {
                         <p>
                           <strong>Prénom:</strong> {user.firstname}
                         </p>
-                        {/* <p>
-                          <strong>Email:</strong> {user.email}
-                        </p>
-                        <p>
-                          <strong>Rôle:</strong> {user.role_id}
-                        </p> */}
                       </>
                     )}
                   </div>

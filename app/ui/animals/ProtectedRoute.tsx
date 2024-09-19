@@ -2,11 +2,11 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Loader from '../loader';
-import { useAuth } from '../../context/authContext'; // Assurez-vous d'importer votre contexte d'authentification
+import { useAuth } from '../../context/authContext';
 
 export default function ProtectedRoute({ children }) {
   const [isLoading, setIsLoading] = useState(true);
-  const { isLogged, setIsLogged } = useAuth(); // Utilisez le contexte d'authentification
+  const { isLogged, setIsLogged } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
       const token = localStorage.getItem('jwt_token');
       if (!token) {
         setIsLogged(false);
-        router.push('/login'); // Redirigez vers la page de connexion
+        router.push('/login');
       } else {
         setIsLogged(true);
       }
@@ -25,7 +25,7 @@ export default function ProtectedRoute({ children }) {
   }, [router, setIsLogged]);
 
   if (isLoading) {
-    return <Loader />; // ou un spinner, ou une page de chargement
+    return <Loader />;
   }
 
   return isLogged ? children : null;

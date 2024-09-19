@@ -9,64 +9,20 @@ export default function AdoptionForm() {
 
   const closeModal = () => {
     setModalOpen(false);
-    window.location.href = '/'; // Redirige vers la page d'accueil
+    window.location.href = '/'; // Redirection to homePage
   };
 
   useEffect(() => {
-    // console.log('useEffect est entrain de tourner');
     const token = localStorage.getItem('jwt_token');
     // console.log('token récupéré:', token);
     if (token) {
       const [header, payload, signature] = token.split('.');
       // console.log('Parties du token:', { header, payload, signature });
       const decodedPayload = JSON.parse(atob(payload));
-      // console.log('Payload décodé:', decodedPayload);
       setUserId(decodedPayload.id);
       // console.log(userId);
-      // console.log(header, payload, signature);
     }
   }, []);
-  /*useEffect(() => {
-    const retrieveToken = () => {
-      try {
-        // Vérifiez si localStorage est disponible (important pour le SSR)
-        if (typeof window !== 'undefined') {
-          const token = localStorage.getItem('jwt_token');
-          console.log("Token récupéré:", token);
-
-          if (token) {
-            const [header, payload, signature] = token.split('.');
-            console.log("Parties du token:", { header, payload, signature });
-
-            if (payload) {
-              const decodedPayload = JSON.parse(atob(payload));
-              console.log("Payload décodé:", decodedPayload);
-
-              if (decodedPayload.id) {
-                setUserId(decodedPayload.id);
-                setTokenInfo({ header, payload, signature });
-              } else {
-                console.error("L'ID de l'utilisateur n'est pas présent dans le payload");
-              }
-            } else {
-              console.error("Le payload du token est manquant");
-            }
-          } else {
-            console.error("Aucun token trouvé dans le localStorage");
-          }
-        }
-      } catch (error) {
-        console.error("Erreur lors de la récupération ou du décodage du token:", error);
-      }
-    };
-
-    retrieveToken();
-  }, []);
-
-  // Effet pour logger userId après sa mise à jour
-  useEffect(() => {
-    console.log("userId mis à jour:", userId);
-  }, [userId]);*/
 
   return (
     <>

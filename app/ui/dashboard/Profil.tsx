@@ -13,34 +13,6 @@ export default function Profil() {
   const { userConnected, setUserConnected } = useAuth();
   const { showToastMessage } = useToast();
 
-  // useEffect(() => {
-  //   const fetchUser = async () => {
-  //     const token = localStorage.getItem("jwt_token");
-
-  //     if (token) {
-  //       const [, payload] = token.split(".");
-  //       const decodedPayload = JSON.parse(atob(payload));
-  //       const userId = decodedPayload.id;
-
-  //       try {
-  //         setLoading(true);
-  //         const fetchedUser = await getUserById(userId);
-  //         setUser(fetchedUser);
-  //         setLoading(false);
-  //       } catch (error) {
-  //         console.error(error);
-  //         setError("Failed to fetch user. Please try again later.");
-  //         setLoading(false);
-  //       }
-  //     } else {
-  //       setError("No JWT token found. Please log in.");
-  //       setLoading(false);
-  //     }
-  //   };
-
-  //   fetchUser();
-  // }, []);
-
   const validateForm = (formData) => {
     const requiredFields = ['name', 'firstname'];
     const missingFields = requiredFields.filter((field) => !formData.get(field));

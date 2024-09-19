@@ -102,10 +102,10 @@ export function EditAnimal() {
         return animal;
       });
       setAnimals(updatedAnimals);
-      showToastMessage(6, true); // Index du message à afficher, succès
+      showToastMessage(6, true); // Index of message to display, success
     } catch (error) {
       console.error(error);
-      showToastMessage(6, false); // Index du message d'erreur, erreur
+      showToastMessage(6, false); // Index of error message to display
     }
   };
 
@@ -116,10 +116,10 @@ export function EditAnimal() {
         await deleteAnimal(animalId);
         const updatedAnimals = animals.filter((animal) => animal.id !== animalId);
         setAnimals(updatedAnimals);
-        showToastMessage(7, true); // Index du message de succès de suppression
+        showToastMessage(7, true); // Index of success message to remove
       } catch (error) {
         console.error(error);
-        showToastMessage(7, false); // Index du message d'erreur de suppression
+        showToastMessage(7, false); // Index of error message if can't to remove
       }
     }
   };
@@ -209,15 +209,6 @@ export function EditAnimal() {
                         name="birthday"
                         defaultValue={animal.birthday}
                       />
-
-                      {/* <label className="input input-bordered flex items-center gap-2 w-full">
-                        <input
-                          type="file"
-                          className="file-input file-input-bordered w-full max-w-xs"
-                          name="photo"
-                          defaultValue={animal.photo}
-                        />
-                      </label> */}
                     </form>
                   ) : (
                     <>
