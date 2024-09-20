@@ -25,6 +25,7 @@ export default function Modal({ isOpen, onClose, animal }) {
           <h3 className="font-bold text-center p-2 m-5 mb-0 text-2xl">Description de l'animal</h3>
           <ul className="p-4 text-xl font-bold">
             <li>Nom : {animal.name}</li>
+            <li>Informations : {animal.description}</li>
             <li>Anniversaire : {animal.birthday}</li>
             <li>Race : {animal.race}</li>
             <li>Disponibilité : {animal.availability ? 'Disponible' : 'Non disponible'}</li>
