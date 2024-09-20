@@ -19,7 +19,8 @@ export default function Accomodations() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const data = await getAllRequests();
+        const response = await getAllRequests();
+        const { requests: data } = response;
         setRequests(data);
         setLoading(false);
 

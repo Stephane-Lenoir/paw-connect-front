@@ -43,7 +43,11 @@ export async function createAnimal(animal) {
 
 export async function updateAnimal(id, animal) {
   try {
-    const response = await api.put(`animals/${id}`, animal);
+    const response = await api.put(`animals/${id}`, animal, {
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -53,7 +57,11 @@ export async function updateAnimal(id, animal) {
 
 export async function deleteAnimal(id) {
   try {
-    const response = await api.delete(`animals/${id}`);
+    const response = await api.delete(`animals/${id}`,{
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);

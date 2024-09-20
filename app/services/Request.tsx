@@ -3,7 +3,11 @@ import api from './axiosConfig';
 // Route Requests
 export async function getAllRequests() {
   try {
-    const response = await api.get('requests');
+    const response = await api.get('requests', {
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -13,7 +17,11 @@ export async function getAllRequests() {
 
 export async function getRequestById(id) {
   try {
-    const response = await api.get(`requests/${id}`);
+    const response = await api.get(`requests/${id}`,{
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -39,7 +47,11 @@ export async function createRequest(data) {
 
 export async function updateRequest(id, request) {
   try {
-    const response = await api.put(`requests/${id}`, request);
+    const response = await api.put(`requests/${id}`, request, {
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
@@ -49,7 +61,11 @@ export async function updateRequest(id, request) {
 
 export async function deleteRequest(id) {
   try {
-    const response = await api.delete(`requests/${id}`);
+    const response = await api.delete(`requests/${id}`, {
+      headers: {
+        Authorization: localStorage.getItem('jwt_token'),
+      },
+    });
     return response.data;
   } catch (error) {
     console.error(error);
