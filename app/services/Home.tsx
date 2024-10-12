@@ -1,9 +1,8 @@
-import api from './axiosConfig';
+import api from '../services/axiosConfig';
 
-// Route Home
 export async function getAnimals() {
   try {
-    const response = await api.get('/');
+    const response = await api.get('/animals');
     return response.data;
   } catch (error) {
     console.error(error);

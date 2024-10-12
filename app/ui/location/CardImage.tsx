@@ -9,7 +9,7 @@ export default function CardImage() {
         className="max-w-auto h-auto bg-primary-color text-white flex items-center justify-center text-xl font-bold"
         width={400}
         height={500}
-      ></Image>
+      />
     </>
   );
 }
