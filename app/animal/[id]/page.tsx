@@ -1,5 +1,6 @@
 import NavBar from "../../ui/header/Navbar";
 
+
 const AnimalPage: React.FC = () => {
   return (
     <div className="flex flex-col h-screen">
