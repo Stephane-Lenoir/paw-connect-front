@@ -57,19 +57,28 @@ export const createStripeSession = async (donationData: StripeSessionData) => {
 
 let checkingSession = false;
 
+const pendingChecks = new Map();
+
 export const checkSessionStatus = async (sessionId: string): Promise<DonationCheckResponse> => {
-  if (checkingSession) {
-    
-    throw new Error('Session check already in progress');
+  // Si une vérification est déjà en cours pour cette session, retourner la promesse existante
+  if (pendingChecks.has(sessionId)) {
+    return pendingChecks.get(sessionId);
   }
-  checkingSession = true;
-  try {
-    const response = await api.get<DonationCheckResponse>(`/donations/check-session/${sessionId}`);
-    return response.data;
-  } catch (error) {
-    console.error('Error checking session status:', error);
-    throw error;
-  } finally {
-    checkingSession = false;
-  }
+
+  // Créer une nouvelle promesse pour cette vérification
+  const checkPromise = new Promise<DonationCheckResponse>(async (resolve, reject) => {
+    try {
+      const response = await api.get<DonationCheckResponse>(`/donations/check-session/${sessionId}`);
+      resolve(response.data);
+    } catch (error) {
+      reject(error);
+    } finally {
+      // Supprimer cette session de la map après résolution
+      setTimeout(() => pendingChecks.delete(sessionId), 100);
+    }
+  });
+
+  // Stocker la promesse dans la map
+  pendingChecks.set(sessionId, checkPromise);
+  return checkPromise;
 };
