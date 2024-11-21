@@ -8,12 +8,13 @@ export default function Img({ photo, isOpen }) {
   return (
     <>
       <div className="w-full h-80 relative overflow-hidden rounded-lg">
-        <Image
-          src={photo}
-          alt="Animal"
-          fill
-          style={{ objectFit: isOpen ? 'contain' : 'cover' }}
-        />
+      <Image
+        src={photo}
+        alt="Animal"
+        fill
+        style={{ objectFit: isOpen ? 'contain' : 'cover' }}
+        className="bg-primary-color"
+    />
       </div>
     </>
   );

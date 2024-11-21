@@ -2,8 +2,19 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: 'http://localhost:3000/api/',
+  withCredentials: true
 });
 
-//!TODO : Coder un intercepteur (request) pour ajouter le token a chaque request quand il existe. (Regarder intercepteur response)
-
+api.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('jwt_token');
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 export default api;

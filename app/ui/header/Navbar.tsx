@@ -54,7 +54,7 @@ export default function NavBar() {
                 </Link>
               </li>
               <li>
-                <Link href="/dons" className="text-lg">
+              <Link href="donations" className="text-lg">
                   Dons
                 </Link>
               </li>
@@ -75,7 +75,7 @@ export default function NavBar() {
               <Link href="/location">Localiser</Link>
             </li>
             <li>
-              <Link href={'/dons'}>Dons</Link>
+              <Link href="donations">Dons</Link>
             </li>
           </ul>
         </div>

@@ -45,19 +45,18 @@ export default function Login() {
 
       if (response && response.status === 200) {
         const { user, token, expirationTime } = response.data;
-        localStorage.setItem('jwt_token', token);
+        localStorage.setItem('jwt_token', token.replace('Bearer ', ''));
         localStorage.setItem('userConnected', JSON.stringify(user));
         localStorage.setItem('tokenExpiration', expirationTime);
-
+    
         setUserConnected(user);
-        setIsLogged(true); // it display the avatar
-
-        event.target.closest('dialog').close(); // close modal
-
-        event.target.reset(); // reset the form
-
-        showToastMessage(2, true, 'Login réussi.'); // Show success toast for login
-      } else {
+        setIsLogged(true);
+    
+        event.target.closest('dialog').close();
+        event.target.reset();
+    
+        showToastMessage(2, true, 'Login réussi.');
+    } else {
         showToastMessage(2, false, 'Erreur lors de la connexion.'); // Show error toast for login
       }
     } catch (error) {
