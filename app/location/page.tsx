@@ -6,23 +6,23 @@ import Location from '../ui/location/Location';
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { filterMarkersByRadius, geocodeAddress } from '../utils/mapUtils';
-
+import { GeolocationPosition, LocationState, AssociationMarker } from '../@types/location';
 import { animalAssociations } from '../data/Associations';
 import Loader from '../ui/loader';
 
 const Maps = dynamic(() => import('../ui/location/Maps'), { ssr: false });
 
 export default function LocationPage() {
-  const [center, setCenter] = useState([48.8566, 2.3522]); // Paris by default
-  const [zoom, setZoom] = useState(6); // Zoom initial to see Europe area
-  const [markers, setMarkers] = useState([]);
-  const [userLocation, setUserLocation] = useState(null);
-  const [error, setError] = useState(null);
+  const [center, setCenter] = useState<[number, number]>([48.8566, 2.3522]);
+  const [zoom, setZoom] = useState<number>(6);
+  const [markers, setMarkers] = useState<AssociationMarker[]>([]);
+  const [userLocation, setUserLocation] = useState<LocationState | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    let watchId;
+    let watchId: number;
 
-    async function updateLocation(position) {
+    async function updateLocation(position: GeolocationPosition) {
       const location = {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
@@ -40,7 +40,7 @@ export default function LocationPage() {
       setMarkers(nearbyAssociations);
     }
 
-    function handleError(error) {
+    function handleError(error: GeolocationPositionError) {
       console.error('Erreur de géolocalisation:', error);
       setError(error.message);
       setMarkers(animalAssociations); // Display all association if error

@@ -11,17 +11,18 @@ import { getAnimals } from '../../services/Home';
 import { getAllAnimals } from '../../services/Animals';
 import { setUrlAnimal } from '../../utils/url';
 import { useFilter } from '../../context/filterContex';
+import { Animal, CardProps } from '../../@types/animal';
+import { FilterContextType } from '../../@types/filter';
 
-export default function Card({ onReload }) {
-  const [animals, setAnimals] = useState([]);
-  const [internalReload, setInternalReload] = useState(false);
+export default function Card({ onReload }: CardProps) {
+  const [animals, setAnimals] = useState<Animal[]>([]);
+  const [internalReload, setInternalReload] = useState<boolean>(false);
   const pathname = usePathname();
-  const [isClient, setIsClient] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const { filteredAnimals, applyFilters, filters, resetFilters } = useFilter();
+  const [isClient, setIsClient] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
+  const { filteredAnimals, applyFilters, filters, resetFilters } = useFilter() as FilterContextType;
   const [prevFilters, setPrevFilters] = useState(filters);
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
-
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
   useEffect(() => {
     setIsClient(true);
   }, []);
@@ -55,7 +56,7 @@ export default function Card({ onReload }) {
     }
   }, [filteredAnimals, pathname]);
 
-  const applyFiltersIfNeeded = (data) => {
+  const applyFiltersIfNeeded = (data: Animal[]) => {
     if (JSON.stringify(filters) !== JSON.stringify(prevFilters)) {
       applyFilters(data);
       setPrevFilters(filters);
@@ -67,7 +68,7 @@ export default function Card({ onReload }) {
     applyFilters(animals);
   };
 
-  const handleOpenModal = (animal) => {
+  const handleOpenModal = (animal: Animal) => {
     setSelectedAnimal(animal);
   };
 
@@ -85,12 +86,12 @@ export default function Card({ onReload }) {
         <Loader />
       ) : (
         <div className="flex flex-wrap justify-center gap-10 m-">
-          {animals.map((animal) => (
+          {animals.map((animal: Animal) => (
             <div
               key={animal.id}
               className="w-80 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg"
             >
-              <Img photo={setUrlAnimal(animal.photo)} />
+              <Img photo={setUrlAnimal(animal.photo)} isOpen={false} />
               <div className="p-4">
                 <Title name={animal.name} gender={animal.gender} />
                 <Refuge refuge={animal.user.name} />

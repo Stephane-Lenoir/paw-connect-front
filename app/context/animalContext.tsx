@@ -2,17 +2,17 @@
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { getAllAnimals } from '../services/Animals';
+import { AnimalContextType, Animal } from '../@types/animal';
 
-const AnimalContext = createContext();
+const AnimalContext = createContext<AnimalContextType | undefined>(undefined);
 
-export const AnimalProvider = ({ children }) => {
-  const [animalData, setAnimalData] = useState();
+export const AnimalProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [animalData, setAnimalData] = useState<Animal[] | undefined>();
 
   useEffect(() => {
     const fetchAnimal = async () => {
       try {
         const data = await getAllAnimals();
-        // console.log('Data fetched:', data);
         setAnimalData(data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -28,4 +28,10 @@ export const AnimalProvider = ({ children }) => {
   );
 };
 
-export const useAnimal = () => useContext(AnimalContext);
+export const useAnimal = () => {
+  const context = useContext(AnimalContext);
+  if (!context) {
+    throw new Error('useAnimal must be used within an AnimalProvider');
+  }
+  return context;
+};

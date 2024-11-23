@@ -9,38 +9,45 @@ import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
 import Link from 'next/link';
 import NeedLogin from '../needLogin';
+import { Animal } from '../../@types/animal';
+import { AuthContextType } from '../../@types/auth';
+import { ToastContextType } from '../../@types/toast';
+import { AccommodationFormData } from '../../@types/request';
 
 export default function AccommodationForm() {
   const { animalData } = useAnimal();
   const params = useParams();
-  const [animal, setAnimal] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const { userConnected } = useAuth();
-  const [currentDate, setCurrentDate] = useState('');
-  const { showToastMessage } = useToast();
+  const [animal, setAnimal] = useState<Animal | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const { userConnected } = useAuth() as AuthContextType;
+  const [currentDate, setCurrentDate] = useState<string>('');
+  const { showToastMessage } = useToast() as ToastContextType;
 
   useEffect(() => {
     if (animalData && params.id) {
-      const foundAnimal = animalData.find((animal) => animal.id === parseInt(params.id));
-      setAnimal(foundAnimal);
+      const foundAnimal = animalData.find((animal) => 
+        animal.id === parseInt(params.id as string)
+      );
+      setAnimal(foundAnimal || null);
       setIsLoading(false);
     }
     const today = new Date();
-    const formattedDate = today.toISOString().split('T')[0]; // Format: YYYY-MM-DD
+    const formattedDate = today.toISOString().split('T')[0];
     setCurrentDate(formattedDate);
   }, [params, animalData]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const formData = new FormData(event.target);
-    const data = Object.fromEntries(formData);
-    data.animal_id = parseInt(data.animal_id);
+    const formData = new FormData(event.currentTarget);
+    const data = Object.fromEntries(formData.entries()) as unknown as AccommodationFormData;
+    data.animal_id = parseInt(data.animal_id.toString());
+    
     const fetchData = async () => {
       const response = await createRequest(data);
       if (response) {
-        showToastMessage(0, true); // Index of message to display, success
+        showToastMessage(0, true);
       } else {
-        showToastMessage(0, false); // Index of error message to display, error
+        showToastMessage(0, false);
       }
     };
     fetchData();

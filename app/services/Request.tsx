@@ -1,4 +1,5 @@
 import api from './axiosConfig';
+import { Request } from '../@types/request';
 
 // Route Requests
 export async function getAllRequests() {
@@ -15,7 +16,7 @@ export async function getAllRequests() {
   }
 }
 
-export async function getRequestById(id) {
+export async function getRequestById(id: string | number) {
   try {
     const response = await api.get(`requests/${id}`,{
       headers: {
@@ -29,7 +30,7 @@ export async function getRequestById(id) {
   }
 }
 
-export async function createRequest(data) {
+export async function createRequest(data: Partial<Request>) {
   try {
     const token = localStorage.getItem('jwt_token');
     const response = await api.post('requests', data, {
@@ -45,7 +46,7 @@ export async function createRequest(data) {
   }
 }
 
-export async function updateRequest(id, request) {
+export async function updateRequest(id: string | number, request: Partial<Request>) {
   try {
     const response = await api.put(`requests/${id}`, request, {
       headers: {
@@ -59,7 +60,7 @@ export async function updateRequest(id, request) {
   }
 }
 
-export async function deleteRequest(id) {
+export async function deleteRequest(id: string | number) {
   try {
     const response = await api.delete(`requests/${id}`, {
       headers: {

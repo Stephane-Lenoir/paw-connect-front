@@ -1,20 +1,22 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
+import { FilterContextType, Filters } from '../@types/filter';
+import { Animal } from '../@types/animal';
 
-const FilterContext = createContext();
+const FilterContext = createContext<FilterContextType | undefined>(undefined);
 
-export const FilterProvider = ({ children }) => {
-  const [filters, setFilters] = useState({
+export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [filters, setFilters] = useState<Filters>({
     age: '',
     gender: '',
     species: '',
     race: '',
     availability: '',
   });
-  const [filteredAnimals, setFilteredAnimals] = useState([]);
+  const [filteredAnimals, setFilteredAnimals] = useState<Animal[]>([]);
 
-  const calculateAge = (birthday) => {
+  const calculateAge = (birthday: string): number => {
     const today = new Date();
     const birthDate = new Date(birthday);
     let age = today.getFullYear() - birthDate.getFullYear();
@@ -25,9 +27,9 @@ export const FilterProvider = ({ children }) => {
     return age;
   };
 
-  const applyFilters = async (animals) => {
+  const applyFilters = (animals: Animal[]) => {
     const filtered = animals.filter((animal) => {
-      const age = calculateAge(animal.birthday);
+      const age = animal.birthday ? calculateAge(animal.birthday) : 0;
       return (
         (filters.age === '' || age <= parseInt(filters.age)) &&
         (filters.gender === '' || animal.gender === filters.gender) &&
@@ -59,5 +61,9 @@ export const FilterProvider = ({ children }) => {
 };
 
 export const useFilter = () => {
-  return useContext(FilterContext);
+  const context = useContext(FilterContext);
+  if (!context) {
+    throw new Error('useFilter must be used within a FilterProvider');
+  }
+  return context;
 };

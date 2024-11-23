@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
+
 
 import Cards from './Cards';
 import Filtres from './Filtres';

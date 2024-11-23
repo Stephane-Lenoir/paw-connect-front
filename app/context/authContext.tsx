@@ -1,17 +1,19 @@
 'use client';
 
 import React, { createContext, useState, useContext, useEffect } from 'react';
+import { User, AuthContextType } from '../@types/auth';
 import { getUserByToken } from '../services/Users';
 
-const AuthContext = createContext();
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-export const AuthProvider = ({ children }) => {
-  const [isLogged, setIsLogged] = useState(false);
-  const [userConnected, setUserConnected] = useState(() => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [userConnected, setUserConnected] = useState<User | null>(() => {
     if (typeof window !== 'undefined') {
       const savedUser = localStorage.getItem('userConnected');
       return savedUser ? JSON.parse(savedUser) : null;
     }
+    return null;
   });
 
   useEffect(() => {

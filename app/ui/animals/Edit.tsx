@@ -6,14 +6,16 @@ import Image from 'next/image';
 import { setUrlAnimal } from '../../utils/url';
 import Menu from '../dashboard/Menu';
 import { useToast } from '../../context/toastContext';
+import { ToastContextType } from '../../@types/toast';
+import { Animal } from '../../@types/animal';
 
 export function EditAnimal() {
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
   const [userId, setUserId] = useState(null);
-  const [editingAnimalId, setEditingAnimalId] = useState(null);
+  const [editingAnimalId, setEditingAnimalId] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const { showToastMessage } = useToast();
+  const [error, setError] = useState<string | null>(null);
+  const { showToastMessage } = useToast() as ToastContextType;
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
@@ -47,7 +49,7 @@ export function EditAnimal() {
     fetchData();
   }, [userId]);
 
-  const validateForm = (formData) => {
+  const validateForm = (formData: FormData) => {
     const requiredFields = [
       'name',
       'description',
@@ -62,7 +64,7 @@ export function EditAnimal() {
 
     if (missingFields.length > 0) {
       showToastMessage(
-        null,
+        0,
         false,
         `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
       );
@@ -72,30 +74,30 @@ export function EditAnimal() {
     return true;
   };
 
-  const handleSave = async (e, animalId) => {
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>, animalId: number) =>  {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as HTMLFormElement);
 
     if (!validateForm(formData)) {
       return;
     }
 
-    const updatedAnimal = {
-      name: formData.get('name'),
-      description: formData.get('description'),
-      availability: formData.get('availability'),
-      gender: formData.get('gender'),
-      race: formData.get('race'),
-      location: formData.get('location'),
-      species: formData.get('species'),
-      birthday: formData.get('birthday'),
+    const updatedAnimal: Partial<Animal> = {
+      name: formData.get('name') as string,
+      description: formData.get('description') as string,
+      availability: formData.get('availability') === 'true',
+      gender: formData.get('gender') as string,
+      race: formData.get('race') as string,
+      location: formData.get('location') as string,
+      species: formData.get('species') as string,
+      birthday: formData.get('birthday') as string,
       // photo: formData.get('photo'),
     };
 
     try {
       await updateAnimal(animalId, updatedAnimal);
       setEditingAnimalId(null);
-      const updatedAnimals = animals.map((animal) => {
+      const updatedAnimals = animals.map((animal: Animal) => {
         if (animal.id === animalId) {
           return { ...animal, ...updatedAnimal };
         }
@@ -109,7 +111,7 @@ export function EditAnimal() {
     }
   };
 
-  const handleDelete = async (animalId) => {
+  const handleDelete = async (animalId: number) => {
     const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cet animal ?');
     if (isConfirmed) {
       try {
@@ -164,7 +166,7 @@ export function EditAnimal() {
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline mb-2"
                         name="description"
                         defaultValue={animal.description}
-                        rows="3"
+                        rows={3}
                       />
 
                       <label className="input input-bordered flex items-center gap-2 w-full">

@@ -5,10 +5,13 @@ import { useState, useEffect } from 'react';
 import { useToast } from '../../context/toastContext';
 import Menu from '../dashboard/Menu';
 import Image from 'next/image';
+import { AddFormData } from '../../@types/form';
+import { ToastContextType } from '../../@types/toast';
+import { Animal } from '../../@types/animal';
 
 export function Add() {
-  const [userId, setUserId] = useState(null);
-  const { showToastMessage } = useToast();
+  const [userId, setUserId] = useState<number | null>(null);
+  const { showToastMessage } = useToast() as ToastContextType;
 
   useEffect(() => {
     const token = localStorage.getItem('jwt_token');
@@ -20,7 +23,7 @@ export function Add() {
     }
   }, []);
 
-  const validateForm = (formData) => {
+  const validateForm = (formData: AddFormData) => {
     const requiredFields = [
       'name',
       'species',
@@ -34,7 +37,7 @@ export function Add() {
 
     if (missingFields.length > 0) {
       showToastMessage(
-        null,
+        0,
         false,
         `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
       );
@@ -44,29 +47,29 @@ export function Add() {
     return true;
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    
+    const formData: FormData = new FormData(event.currentTarget);
+    formData.append('user_id', userId?.toString() || '');
 
-    const formData = new FormData(event.target);
-    formData.append('user_id', userId);
-
-    if (!validateForm(formData)) {
+    if (!validateForm(formData as AddFormData)) {
       return;
     }
 
     const fetchData = async () => {
-      const data = await createAnimal(formData);
+      const data = await createAnimal(formData as unknown as Animal);
       if (data) {
-        showToastMessage(5, true); // Index of message to display, success
+        showToastMessage(5, true);
       } else {
-        showToastMessage(5, false); // Index of error message to display, error
+        showToastMessage(5, false);
       }
 
       return data;
     };
 
     fetchData();
-  };
+};
 
   return (
     <div>

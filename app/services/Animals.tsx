@@ -1,4 +1,5 @@
 import api from './axiosConfig';
+import { Animal } from '../@types/animal';
 
 // Animals router
 export async function getAllAnimals() {
@@ -11,7 +12,7 @@ export async function getAllAnimals() {
   }
 }
 
-export async function getAnimalByUserId(id) {
+export async function getAnimalByUserId(id: string | number) {
   try {
     const response = await api.get(`animals/${id}`, {
       headers: {
@@ -26,7 +27,7 @@ export async function getAnimalByUserId(id) {
   }
 }
 
-export async function createAnimal(animal) {
+export async function createAnimal(animal: Animal) {
   try {
     const response = await api.post('animals', animal, {
       headers: {
@@ -41,7 +42,7 @@ export async function createAnimal(animal) {
   }
 }
 
-export async function updateAnimal(id, animal) {
+export async function updateAnimal(id: string | number, animal: Partial<Animal>){
   try {
     const response = await api.put(`animals/${id}`, animal, {
       headers: {
@@ -55,7 +56,7 @@ export async function updateAnimal(id, animal) {
   }
 }
 
-export async function deleteAnimal(id) {
+export async function deleteAnimal(id: string | number)  {
   try {
     const response = await api.delete(`animals/${id}`,{
       headers: {

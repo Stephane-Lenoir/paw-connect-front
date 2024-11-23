@@ -2,7 +2,7 @@ import { useFilter } from '../../context/filterContex';
 import Card from '../card/Card';
 import { usePathname } from 'next/navigation';
 
-export default function Cards({ reload }) {
+export default function Cards({ reload }: { reload: boolean }) {
   const { filteredAnimals } = useFilter();
   const pathname = usePathname();
 

@@ -3,10 +3,12 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Loader from '../loader';
 import { useAuth } from '../../context/authContext';
+import { ProtectedRouteProps } from '../../@types/props';
+import { AuthContextType } from '../../@types/auth';
 
-export default function ProtectedRoute({ children }) {
+export default function ProtectedRoute({ children }: ProtectedRouteProps) {
   const [isLoading, setIsLoading] = useState(true);
-  const { isLogged, setIsLogged } = useAuth();
+  const { isLogged, setIsLogged } = useAuth() as AuthContextType;
   const router = useRouter();
 
   useEffect(() => {

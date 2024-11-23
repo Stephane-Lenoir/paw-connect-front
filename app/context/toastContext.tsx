@@ -1,20 +1,21 @@
 'use client';
 
 import { createContext, useContext, useState } from 'react';
+import { ToastContextType } from '../@types/toast';
 
-const ToastContext = createContext();
+const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export const useToast = () => {
   return useContext(ToastContext);
 };
 
-export const ToastProvider = ({ children }) => {
+export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [showToast, setShowToast] = useState(false);
-  const [toastMessageIndex, setToastMessageIndex] = useState(null);
+  const [toastMessageIndex, setToastMessageIndex] = useState<number | null>(null);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [customMessage, setCustomMessage] = useState(null);
+  const [customMessage, setCustomMessage] = useState<string | null>(null);
 
-  const showToastMessage = (index, success, customMsg = null) => {
+  const showToastMessage = (index: number, success: boolean, customMsg: string | null = null) => {
     setToastMessageIndex(index);
     setIsSuccess(success);
     setCustomMessage(customMsg);
