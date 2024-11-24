@@ -1,5 +1,5 @@
 import { ToastProvider } from './context/toastContext';
-import './globals.css';
+import '@/app/globals.css';
 import { Caveat } from 'next/font/google';
 import Toast from './ui/Toast';
 import { AuthProvider } from './context/authContext';
