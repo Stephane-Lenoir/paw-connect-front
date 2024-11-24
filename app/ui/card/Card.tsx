@@ -91,7 +91,7 @@ export default function Card({ onReload }: CardProps) {
               key={animal.id}
               className="w-80 bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg"
             >
-              <Img photo={setUrlAnimal(animal.photo)} isOpen={false} />
+              <Img photo={setUrlAnimal(animal.photo) || ''} isOpen={false} />
               <div className="p-4">
                 <Title name={animal.name} gender={animal.gender} />
                 <Refuge refuge={animal.user.name} />

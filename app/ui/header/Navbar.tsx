@@ -15,7 +15,7 @@ export default function NavBar() {
   };
   return (
     <>
-      <div className="navbar bg-base-100 bg-primary-color text-text-color">
+      <div className="navbar bg-primary-color text-text-color">
         <div className="navbar-start text-3xl">
           <div className="dropdown text-3xl bg-primary-color">
             <div aria-label="burger" tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

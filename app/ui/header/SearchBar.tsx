@@ -1,23 +1,25 @@
 import { useState } from 'react';
 import { searchAnimal } from '../../services/Search';
 import Modal from '../card/Modal';
+import { Animal } from '../../@types/animal';
+import { SearchQuery } from '../../@types/search';
 
 export default function SearchBar() {
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [selectedAnimal, setSelectedAnimal] = useState(null);
+  const [results, setResults] = useState<Animal[]>([]);
+  const [selectedAnimal, setSelectedAnimal] = useState<Animal | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const capitalizeFirstLetter = (string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   };
 
-  const handleSearch = async (term) => {
+  const handleSearch = async (term: string) => {
     const formattedTerm = capitalizeFirstLetter(term);
     setQuery(formattedTerm);
     if (formattedTerm.length > 0) {
       try {
-        const searchFilters = { species: formattedTerm };
+        const searchFilters: SearchQuery = { term: formattedTerm };
         const response = await searchAnimal(searchFilters);
         setResults(response);
       } catch (error) {
@@ -29,20 +31,20 @@ export default function SearchBar() {
   };
   // console.log(results);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       e.preventDefault();
       handleSearch(query);
     }
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formattedTerm = e.target.value;
     setQuery(formattedTerm);
     handleSearch(formattedTerm);
   };
 
-  const handleAnimalClick = (animal) => {
+  const handleAnimalClick = (animal: Animal) => {
     setSelectedAnimal(animal);
     setIsModalOpen(true);
   };

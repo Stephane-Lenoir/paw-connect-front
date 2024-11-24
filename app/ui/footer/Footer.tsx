@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function Footer() {
   return (
     <div className="bg-primary-color">
-      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 text-gray-900 flex flex-wrap justify-center text-lg flex justify-between">
+      <div className="max-w-screen-xl mx-auto px-4 sm:px-6 text-gray-900 flex flex-wrap justify-between text-lg">
         <div className="p-5">
           <div className="text-xl uppercase text-gray-900 font-medium">Crédits</div>
           <Link
@@ -54,7 +54,7 @@ export default function Footer() {
           <Link href={'/location'} className="my-3 block link link-hover">
             Localiser
           </Link>
-          <Link href={'#'} className="my-3 block link link-hover">
+          <Link href={'/donations'} className="my-3 block link link-hover">
             Dons
           </Link>
         </div>

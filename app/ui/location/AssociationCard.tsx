@@ -7,11 +7,12 @@ import TitleAssociation from './TitleAssociation';
 import Modal from './Modal';
 import { getAllAssociations, getOneAssociation } from '../../services/Associations';
 import Loader from '../loader';
+import { Association } from '../../@types/association';
 
 export default function AssociationCard() {
-  const [associations, setAssociations] = useState([]);
+  const [associations, setAssociations] = useState<Association[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedAssociation, setSelectedAssociation] = useState(null);
+  const [selectedAssociation, setSelectedAssociation] = useState<Association | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export default function AssociationCard() {
     fetchAssociations();
   }, []);
 
-  const handleAssociationClick = async (id) => {
+  const handleAssociationClick = async (id: number) => {
     try {
       const data = await getOneAssociation(id);
       setSelectedAssociation(data);
@@ -50,7 +51,7 @@ export default function AssociationCard() {
 
   return (
     <div className="flex flex-wrap justify-center gap-10 m-8">
-      {associations.map((association) => (
+      {associations.map((association: Association) => (
         <div
           key={association.id}
           className="w-auto sm:w-auto md:w-auto lg:w-auto bg-card-bg rounded-lg overflow-hidden shadow-md hover:shadow-lg hover:-translate-y-1 transition-transform duration-300 ease-in-out text-lg"

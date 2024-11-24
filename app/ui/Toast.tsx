@@ -3,7 +3,9 @@
 import { useToast } from '../context/toastContext';
 
 export default function Toast() {
-  const { showToast, toastMessageIndex, isSuccess, customMessage } = useToast();
+  const toastContext = useToast();
+  if (!toastContext) return null;
+  const { showToast, toastMessageIndex, isSuccess, customMessage } = toastContext;
 
   const successMessages = [
     "Formulaire d'hébergement envoyé avec succés.",
@@ -37,7 +39,7 @@ export default function Toast() {
 
   const message =
     customMessage ||
-    (isSuccess ? successMessages[toastMessageIndex] : errorMessages[toastMessageIndex]);
+    (isSuccess ? successMessages[toastMessageIndex ?? 0] : errorMessages[toastMessageIndex ?? 0]);
 
   if (!showToast) return null;
 

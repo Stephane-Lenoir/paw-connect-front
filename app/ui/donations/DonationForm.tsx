@@ -25,7 +25,9 @@ export default function DonationForm({ associations }: DonationFormProps) {
   const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   
-  const { isLogged, userConnected } = useAuth();
+  const authContext = useAuth();
+  const isLogged = authContext?.isLogged;
+  const userConnected = authContext?.userConnected;
   const router = useRouter();
 
   useEffect(() => {
@@ -61,7 +63,7 @@ export default function DonationForm({ associations }: DonationFormProps) {
 
       const session = await createStripeSession({
         amount: Number(formData.amount),
-        userId: isLogged ? userConnected.id.toString() : 'anonymous',
+        userId: isLogged && userConnected ? userConnected.id.toString() : 'anonymous',
         donorName: formData.donorName,
         donorEmail: formData.donorEmail,
         message: formData.message,
@@ -172,7 +174,7 @@ export default function DonationForm({ associations }: DonationFormProps) {
         {success && <p className="text-green-500 text-xs italic">{success}</p>}
         <div className="flex items-center justify-between">
           <button
-            className="font-bold bg-primary-color hover:bg-secondary-color transition-colors duration-300 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="font-bold bg-primary-color hover:bg-secondary-color transition-colors duration-300 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
             disabled={isSubmitting}
           >

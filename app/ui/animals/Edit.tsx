@@ -139,7 +139,7 @@ export function EditAnimal() {
             >
               <div className="w-full h-80 relative overflow-hidden rounded-t-lg">
                 <Image
-                  src={setUrlAnimal(animal.photo)}
+                  src={setUrlAnimal(animal.photo) || ''}
                   alt="Animal"
                   fill
                   style={{ objectFit: 'cover' }}
