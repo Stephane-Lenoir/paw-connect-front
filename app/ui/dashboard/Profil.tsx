@@ -4,22 +4,25 @@ import Menu from './Menu';
 import { useAuth } from '../../context/authContext';
 import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
+import { ToastContextType } from '../../@types/toast';
+import { AuthContextType } from '../../@types/auth';
+import { UserUpdateData } from '../../@types/user';
 
 export default function Profil() {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [editing, setEditing] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+  const [editing, setEditing] = useState<boolean>(false);
 
-  const { userConnected, setUserConnected } = useAuth();
-  const { showToastMessage } = useToast();
+  const { userConnected, setUserConnected } = useAuth() as AuthContextType;
+  const { showToastMessage } = useToast() as ToastContextType;
 
-  const validateForm = (formData) => {
+  const validateForm = (formData: FormData) => {
     const requiredFields = ['name', 'firstname'];
     const missingFields = requiredFields.filter((field) => !formData.get(field));
 
     if (missingFields.length > 0) {
       showToastMessage(
-        null,
+        0,
         false,
         `Les champs suivants sont manquants : ${missingFields.join(', ')}`,
       );
@@ -29,17 +32,19 @@ export default function Profil() {
     return true;
   };
 
-  const handleSave = async (e) => {
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-
+    if (!userConnected) return;
+    
+    const formData = new FormData(e.currentTarget);
+ 
     if (!validateForm(formData)) {
       return;
     }
-
+ 
     const updatedUser = {
-      name: formData.get('name'),
-      firstname: formData.get('firstname'),
+      name: formData.get('name') as string,
+      firstname: formData.get('firstname') as string,
     };
 
     try {
@@ -77,44 +82,50 @@ export default function Profil() {
         className="bg-card-bg p-6 rounded-lg shadow-md w-full max-w-lg mx-auto"
       >
         <div className="mb-4">
-          <label htmlFor="firstname" className="block text-text-color text-xl font-bold mb-2">
-            Prénom :
-          </label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            defaultValue={userConnected.firstname}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-            disabled={!editing}
-          />
+  <label htmlFor="firstname" className="block text-text-color text-xl font-bold mb-2">
+    Prénom :
+  </label>
+  {userConnected && (
+    <input
+      type="text"
+      id="firstname"
+      name="firstname"
+      defaultValue={userConnected.firstname}
+      className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+      disabled={!editing}
+    />
+  )}
         </div>
         <div className="mb-4">
           <label htmlFor="name" className="block text-text-color text-xl font-bold mb-2">
             Nom :
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            defaultValue={userConnected.name}
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-            disabled={!editing}
-          />
+          {userConnected && (
+            <input
+              type="text"
+              id="name"
+              name="name"
+              defaultValue={userConnected.name}
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+              disabled={!editing}
+            />
+          )}
         </div>
         <div className="mb-4">
           <label htmlFor="email" className="block text-text-color text-xl font-bold mb-2">
             Email:
           </label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            defaultValue={userConnected.email}
-            autoComplete="email"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
-            readOnly
-          />
+          {userConnected && (
+            <input
+              type="email"
+              id="email"
+              name="email"
+              defaultValue={userConnected.email}
+              autoComplete="email"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-text-color leading-tight focus:outline-none focus:shadow-outline"
+              readOnly
+            />
+          )}
         </div>
 
         <div className="flex justify-between">

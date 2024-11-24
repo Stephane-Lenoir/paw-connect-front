@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import Img from '../card/Img';
 import { setUrlAnimal } from '../../utils/url';
+import { ModalProps } from '../../@types/props';
 
-export default function Modal({ isOpen, onClose, animal }) {
+export default function Modal({ isOpen, onClose, animal }: ModalProps) {
   if (!isOpen || !animal) return null;
 
   return (

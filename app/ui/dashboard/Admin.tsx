@@ -3,14 +3,16 @@ import { getUser, deleteUserById, updateUserById } from '../../services/Users';
 import Menu from './Menu';
 import Loader from '../loader';
 import { useToast } from '../../context/toastContext';
+import { User } from '../../@types/auth';
+import { ToastContextType } from '../../@types/toast';
 
 export default function Admin() {
-  const [users, setUsers] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [editingUserId, setEditingUserId] = useState(null);
-  const { showToastMessage } = useToast();
-
+  const [users, setUsers] = useState<User[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [editingUserId, setEditingUserId] = useState<number | null>(null);
+  const { showToastMessage } = useToast() as ToastContextType;
+  
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -28,16 +30,19 @@ export default function Admin() {
     fetchUsers();
   }, []);
 
-  const handleSave = async (e, userId) => {
+  const handleSave = async (e: React.FormEvent<HTMLFormElement>, userId: number) => {
     e.preventDefault();
+    const form = e.currentTarget;
     const updatedUser = {
-      name: e.target.name.value,
-      firstname: e.target.firstname.value,
+        name: (form.elements.namedItem('name') as HTMLInputElement).value,
+        firstname: (form.elements.namedItem('firstname') as HTMLInputElement).value,
     };
     try {
       await updateUserById(userId, updatedUser);
       setEditingUserId(null);
-      setUsers(users.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
+      if (users) {
+        setUsers(users.map((user) => (user.id === userId ? { ...user, ...updatedUser } : user)));
+    }
       showToastMessage(9, true); // Index of success message for update
     } catch (error) {
       console.error(error);
@@ -45,9 +50,9 @@ export default function Admin() {
     }
   };
 
-  const handleDelete = async (userId) => {
+  const handleDelete = async (userId: number) => {
     const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cet utilisateur ?');
-    if (isConfirmed) {
+    if (isConfirmed && users) {
       try {
         await deleteUserById(userId);
         setUsers(users.filter((user) => user.id !== userId));
@@ -73,7 +78,7 @@ export default function Admin() {
         <Menu />
         <h3 className="font-bold text-2xl mb-6 mt-6 text-center">Users</h3>
         <div className="flex flex-wrap justify-center">
-          {users.map((user) => (
+        {users && users.map((user: User) => (
             <div
               key={user.id}
               className="flex flex-col m-4 w-full sm:w-1/2 md:w-1/3 lg:w-1/4 max-w-sm"

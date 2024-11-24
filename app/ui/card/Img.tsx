@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { ImgProps } from '../../@types/props';
 
-export default function Img({ photo, isOpen }) {
+export default function Img({ photo, isOpen }: ImgProps) {
   if (!photo) {
     return '';
   }

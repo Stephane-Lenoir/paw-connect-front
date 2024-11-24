@@ -9,10 +9,11 @@ import Admin from './Admin';
 import { useAuth } from '../../context/authContext';
 import Accomodations from './Accomodations';
 import Modal from '../location/Modal';
+import { AuthContextType } from '../../@types/auth';
 
 export default function Sidebar() {
-  const [activeComponent, setActiveComponent] = useState('profil');
-  const { userConnected } = useAuth();
+    const [activeComponent, setActiveComponent] = useState('profil');
+    const { userConnected } = useAuth() as AuthContextType;
 
   const [modalOpen, setModalOpen] = useState(true);
 
@@ -43,7 +44,7 @@ export default function Sidebar() {
             <Modal isOpen={modalOpen} onClose={closeModal} isUnderConstruction={true} />
           )}
 
-          {activeComponent === 'admin' && userConnected.role_id === 1 && <Admin />}
+          {activeComponent === 'admin' && userConnected && userConnected.role_id === 1 && <Admin />}
 
           {activeComponent === 'accomodations' && <Accomodations />}
 
@@ -72,7 +73,7 @@ export default function Sidebar() {
                   <Link href="">Vos animaux</Link>
                 </li>
 
-                {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
+                {userConnected && (userConnected.role_id === 1 || userConnected.role_id === 3) && (
                   <li className="text-lg" onClick={() => setActiveComponent('add')}>
                     <Link href="">Ajouter un animal</Link>
                   </li>
@@ -111,7 +112,7 @@ export default function Sidebar() {
               </Link>
             </li>
 
-            {userConnected.role_id === 1 && (
+            {userConnected && userConnected.role_id === 1 && (
               <li onClick={() => setActiveComponent('admin')}>
                 <Link href="">Gestion des utilisateurs</Link>
               </li>

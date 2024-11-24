@@ -1,9 +1,15 @@
 export interface Request {
-  id: string | number;
-  userId: string | number;
-  animalId: string | number;
+  id: number;
+  user_id: number;
+  animal_id: number;
+  date: string;
   status: string;
-  message?: string;
+  user: {
+      name: string;
+  };
+  animal: {
+      name: string;
+  };
 }
 
 export interface AccommodationFormData extends Partial<Request> {

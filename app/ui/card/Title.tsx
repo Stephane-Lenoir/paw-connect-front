@@ -1,4 +1,6 @@
-export default function Title({ name, gender }) {
+import { TitleProps } from '../../@types/props';
+
+const Title: React.FC<TitleProps> = ({ name, gender }) => {
   return (
     <>
       <p className="font-bold">
@@ -7,3 +9,5 @@ export default function Title({ name, gender }) {
     </>
   );
 }
+
+export default Title;

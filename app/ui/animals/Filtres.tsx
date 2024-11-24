@@ -2,10 +2,13 @@ import { useEffect, useState } from 'react';
 import { getAllAnimals } from '../../services/Animals';
 import { useFilter } from '../../context/filterContex';
 import { usePathname } from 'next/navigation';
+import { Animal } from '../../@types/animal';
+import { FiltresProps } from '../../@types/props';
 
-export default function Filtres({ onReload }) {
+
+export default function Filtres({ onReload }: FiltresProps) {
   const { filters, setFilters, applyFilters, resetFilters } = useFilter();
-  const [animals, setAnimals] = useState([]);
+  const [animals, setAnimals] = useState<Animal[]>([]);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -39,15 +42,15 @@ export default function Filtres({ onReload }) {
   };
 
   const getUniqueSpecies = () => {
-    const speciesMap = {};
-    animals.forEach((animal) => {
-      const lowerCaseSpecies = animal.species.toLowerCase();
-      if (!speciesMap[lowerCaseSpecies]) {
-        speciesMap[lowerCaseSpecies] = animal.species;
-      }
+    const speciesMap: { [key: string]: string } = {};
+    animals.forEach((animal: Animal) => {
+        const lowerCaseSpecies = animal.species.toLowerCase();
+        if (!speciesMap[lowerCaseSpecies]) {
+            speciesMap[lowerCaseSpecies] = animal.species;
+        }
     });
     return Object.values(speciesMap);
-  };
+};
 
   const uniqueSpecies = getUniqueSpecies();
 

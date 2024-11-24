@@ -5,15 +5,19 @@ import { useEffect, useState } from 'react';
 import { useAuth } from '../../context/authContext';
 import { useToast } from '../../context/toastContext';
 import { useAnimal } from '../../context/animalContext';
+import { Request } from '../../@types/request';
+import { AuthContextType } from '../../@types/auth';
+import { ToastContextType } from '../../@types/toast';
+import { AnimalContextType } from '../../@types/animal';
 
 export default function Accomodations() {
-  const [requests, setRequests] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [notifications, setNotifications] = useState([]);
-  const { userConnected } = useAuth();
-  const { showToastMessage } = useToast();
-  const { animalData } = useAnimal(); // Use the context to get animal data
+  const [requests, setRequests] = useState<Request[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<Request[]>([]);
+  const { userConnected } = useAuth() as AuthContextType;
+  const { showToastMessage } = useToast() as ToastContextType;
+  const { animalData } = useAnimal() as AnimalContextType; // Use the context to get animal data
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +32,8 @@ export default function Accomodations() {
         // console.log('Animal data:', animalData);
 
         // Filter notifications based on the connected user's role
-        const filteredNotifications = data.filter((request) => {
+        const filteredNotifications = data.filter((request: Request) => {
+          if (!userConnected || !animalData) return false;
           if (userConnected.role_id === 1) {
             // Admin sees all pending notifications
             return request.status === 'En attente';
@@ -67,7 +72,9 @@ export default function Accomodations() {
     return <Loader />;
   }
 
-  const filteredRequests = requests.filter((request) => {
+  const filteredRequests = requests.filter((request: Request) => {
+    if (!userConnected || !animalData) return false;
+    
     if (userConnected.role_id === 1) {
       // Admin sees all requests
       return true;
@@ -90,7 +97,7 @@ export default function Accomodations() {
 
   // console.log('Filtered requests:', filteredRequests);
 
-  const handleAccept = async (requestId) => {
+  const handleAccept = async (requestId: number) => {
     try {
       await updateRequest(requestId, { status: 'Acceptée' });
       setRequests(
@@ -106,7 +113,7 @@ export default function Accomodations() {
     }
   };
 
-  const handleRefused = async (requestId) => {
+  const handleRefused = async (requestId: number) => {
     try {
       await updateRequest(requestId, { status: 'Refusée' });
       setRequests(
@@ -124,7 +131,7 @@ export default function Accomodations() {
     }
   };
 
-  const handleDelete = async (requestId) => {
+  const handleDelete = async (requestId: number) => {
     const isConfirmed = confirm('Êtes-vous sûr de vouloir supprimer cette requête ?');
     if (isConfirmed) {
       try {
@@ -177,7 +184,7 @@ export default function Accomodations() {
               Status : {request.status}{' '}
             </p>
 
-            {(userConnected.role_id === 1 || userConnected.role_id === 3) && (
+            {userConnected && (userConnected.role_id === 1 || userConnected.role_id === 3) && (
               <div className="flex flex-wrap justify-between gap-2 mt-6 ">
                 <button
                   type="button"
@@ -194,7 +201,7 @@ export default function Accomodations() {
                   Refuser
                 </button>
 
-                {userConnected.role_id === 1 && (
+                {userConnected && userConnected.role_id === 1 && (
                   <button
                     type="button"
                     className="bg-secondary-color text-white px-4 py-2 rounded-full hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/3 block mx-auto text-base font-caveat"
