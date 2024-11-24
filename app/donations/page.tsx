@@ -1,33 +1,35 @@
-'use client';
+import { ToastProvider } from './context/toastContext';
+import './globals.css';
+import { Caveat } from 'next/font/google';
+import Toast from './ui/Toast';
+import { AuthProvider } from './context/authContext';
+import 'leaflet/dist/leaflet.css';
+import { AnimalProvider } from './context/animalContext';
 
-import { useState, useEffect } from 'react';
-import DonationForm from '../ui/donations/DonationForm';
-import AssociationList from '../ui/donations/AssociationList';
-import { getAllAssociations } from '../services/Associations';
-import NavBar from '../ui/header/Navbar';
-import Footer from '../ui/footer/Footer';
-import { Association } from '../@types/donation';
+const caveat = Caveat({ subsets: ['latin'] });
 
-export default function DonationsPage() {
-  const [associations, setAssociations] = useState<Association[]>([]);
+export const metadata = {
+  title: 'Paw Connect',
+  description: 'Refuge et famille d"accueil',
+};
 
-  useEffect(() => {
-    const fetchAssociations = async () => {
-      const data = await getAllAssociations();
-      setAssociations(data);
-    };
-    fetchAssociations();
-  }, []);
-
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}): React.JSX.Element {
   return (
-    <div>
-      <NavBar />
-      <h1 className="text-3xl ml-16">Faire un don</h1>
-      <div className="ml-16 grid md:grid-cols-2 gap-8">
-        <AssociationList associations={associations} />
-        <DonationForm associations={associations} />
-      </div>
-      <Footer />
-    </div>
+    <html lang="fr">
+      <body className={caveat.className}>
+        <AuthProvider>
+          <ToastProvider>
+            <AnimalProvider>
+              {children}
+              <Toast />
+            </AnimalProvider>
+          </ToastProvider>
+        </AuthProvider>
+      </body>
+    </html>
   );
 }
