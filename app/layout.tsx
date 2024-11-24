@@ -5,19 +5,20 @@ import Toast from './ui/Toast';
 import { AuthProvider } from './context/authContext';
 import 'leaflet/dist/leaflet.css';
 import { AnimalProvider } from './context/animalContext';
+import type { Metadata } from 'next';
 
 const caveat = Caveat({ subsets: ['latin'] });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'Paw Connect',
   description: 'Refuge et famille d"accueil',
 };
 
-export default function RootLayout({
-  children,
-}: {
+type RootLayoutProps = {
   children: React.ReactNode;
-}) {
+};
+
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="fr">
       <body className={caveat.className}>
