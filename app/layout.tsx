@@ -5,12 +5,6 @@ import Toast from './ui/Toast';
 import { AuthProvider } from './context/authContext';
 import 'leaflet/dist/leaflet.css';
 import { AnimalProvider } from './context/animalContext';
-import { ReactNode } from 'react';
-
-
-interface LayoutProps {
-  children: ReactNode;
-}
 
 const caveat = Caveat({ subsets: ['latin'] });
 
@@ -19,7 +13,11 @@ export const metadata = {
   description: 'Refuge et famille d"accueil',
 };
 
-export default function RootLayout({ children }: LayoutProps) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr">
       <body className={caveat.className}>
