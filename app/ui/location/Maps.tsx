@@ -6,17 +6,16 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import { MapsProps } from '../../@types/location';
 
-let DefaultIcon = L.icon({
-  iconUrl: icon.src,
-  shadowUrl: iconShadow.src,
+const DefaultIcon = L.icon({
+  iconUrl: icon as unknown as string,
+  shadowUrl: iconShadow as unknown as string,
   iconSize: [20, 36],
   iconAnchor: [12, 41],
 });
 
 // Definition of customized icon for user
-let CustomUserIcon = L.icon({
-  iconUrl:
-    'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+const CustomUserIcon = L.icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
   iconSize: [30, 50],
   iconAnchor: [19, 38],
 });
@@ -36,7 +35,7 @@ const Map = ({ center, zoom, markers, userLocation }: MapsProps) => {
         </Marker>
       )}
       {markers.map((marker, index) => (
-        <Marker key={index} position={[marker.position[0], marker.position[1]]}>
+        <Marker key={index} position={[marker.position[0], marker.position[1]] as [number, number]}>
           <Popup>
             <strong>{marker.name}</strong>
             <br />
