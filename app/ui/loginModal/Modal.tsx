@@ -59,7 +59,7 @@ export default function Modal() {
               }}
             >
               <div className="bg-primary-color border-2	rounded-lg px-6 py-4 text-sm text-gray-900 dark:text-white-600 w-full">
-                <h2 className="text-lg"> Bonjour, {userConnected.name} </h2>
+                <h2 className="text-lg"> Bonjour, {userConnected?.name ?? ''} </h2>
 
                 <ul
                   className="py-2 text-sm text-gray-700 dark:text-gray-200"

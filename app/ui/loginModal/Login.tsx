@@ -28,7 +28,7 @@ export default function Login() {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
 
     // Check if all fields are filled
@@ -54,8 +54,8 @@ export default function Login() {
         setUserConnected(user);
         setIsLogged(true);
     
-        event.target.closest('dialog').close();
-        event.target.reset();
+        (event.target as HTMLFormElement).closest('dialog')?.close();
+        (event.target as HTMLFormElement).reset();
     
         showToastMessage(2, true, 'Login réussi.');
     } else {

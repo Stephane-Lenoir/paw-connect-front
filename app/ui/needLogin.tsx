@@ -1,11 +1,12 @@
 'use client';
 
+import { AuthContextType } from '../@types/auth';
 import { useAuth } from '../context/authContext';
 import Homeimg from './homeimg/Homeimg';
 import Modal from './loginModal/Modal';
 
 export default function NeedLogin() {
-  const { isLogged, userConnected, handleLogout } = useAuth();
+  const { isLogged, userConnected, handleLogout } = useAuth() as AuthContextType;
 
   return (
     <>
@@ -16,7 +17,7 @@ export default function NeedLogin() {
         <div className="flex justify-center gap-5 bg-secondary-color text-white text-center px-4 py-2 rounded-full mt-4 hover:bg-primary-color transition-colors duration-300 ease-in-out w-1/2 mx-auto text-2xl font-bold font-caveat">
           {' '}
           <Modal />
-          {isLogged ? userConnected.name : null}
+          {isLogged && userConnected ? userConnected.name : null}
         </div>
       </div>
     </>

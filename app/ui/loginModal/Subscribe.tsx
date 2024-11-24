@@ -31,8 +31,8 @@ export default function Subscribe() {
 
       if (response && response.status === 201) {
         // console.log('Signup successful');
-        event.target.closest('dialog').close(); // close modal
-        event.target.reset(); // reset the form
+        (event.target as HTMLFormElement).closest('dialog')?.close(); // close modal
+        (event.target as HTMLFormElement).reset(); // reset the form
 
         showToastMessage(3, true, 'Inscription réussie.'); // Show success toast for signup
       } else {
