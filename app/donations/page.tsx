@@ -23,7 +23,7 @@ export default function DonationsPage() {
     <div>
       <NavBar />
       <h1 className="text-3xl ml-16">Faire un don</h1>
-      <div className="ml-16 grid md:grid-cols-2 gap-8">        
+      <div className="ml-16 grid md:grid-cols-2 gap-8">
         <AssociationList associations={associations} />
         <DonationForm associations={associations} />
       </div>

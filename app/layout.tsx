@@ -16,9 +16,10 @@ export const metadata: Metadata = {
 
 type RootLayoutProps = {
   children: React.ReactNode;
+  types?: string;
 };
 
-export default async function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children, types = 'default' }: RootLayoutProps) {
   return (
     <html lang="fr">
       <body className={caveat.className}>
