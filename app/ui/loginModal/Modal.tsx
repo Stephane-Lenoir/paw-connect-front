@@ -5,9 +5,10 @@ import Login from './Login';
 import Subscribe from './Subscribe';
 import { useState, useEffect } from 'react';
 import { useAuth } from '../../context/authContext';
+import { AuthContextType } from '../../@types/auth';
 
 export default function Modal() {
-  const { isLogged, userConnected, handleLogout } = useAuth();
+  const { isLogged, userConnected, handleLogout } = useAuth() as AuthContextType;
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -16,9 +17,10 @@ export default function Modal() {
 
   useEffect(() => {
     if (isLogged) {
-      document.getElementById('my_modal_1').close(); // Closed modal if the user is connected
+        const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+        if (modal) modal.close();
     }
-  }, [isLogged]);
+}, [isLogged]);
 
   return (
     <>
@@ -89,7 +91,8 @@ export default function Modal() {
         <Link
           href="#"
           onClick={() => {
-            document.getElementById('my_modal_1').showModal();
+            const modal = document.getElementById('my_modal_1') as HTMLDialogElement;
+                    if (modal) modal.showModal();
           }}
         >
           Login

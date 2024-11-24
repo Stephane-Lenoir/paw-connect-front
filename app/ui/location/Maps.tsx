@@ -4,10 +4,11 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
+import { MapsProps } from '../../@types/location';
 
 let DefaultIcon = L.icon({
-  iconUrl: icon,
-  shadowUrl: iconShadow,
+  iconUrl: icon.src,
+  shadowUrl: iconShadow.src,
   iconSize: [20, 36],
   iconAnchor: [12, 41],
 });
@@ -22,7 +23,7 @@ let CustomUserIcon = L.icon({
 
 L.Marker.prototype.options.icon = DefaultIcon;
 
-const Map = ({ center, zoom, markers, userLocation }) => {
+const Map = ({ center, zoom, markers, userLocation }: MapsProps) => {
   return (
     <MapContainer center={center} zoom={zoom} style={{ height: '600px', width: '100%' }}>
       <TileLayer
@@ -35,7 +36,7 @@ const Map = ({ center, zoom, markers, userLocation }) => {
         </Marker>
       )}
       {markers.map((marker, index) => (
-        <Marker key={index} position={marker.position}>
+        <Marker key={index} position={[marker.position[0], marker.position[1]]}>
           <Popup>
             <strong>{marker.name}</strong>
             <br />

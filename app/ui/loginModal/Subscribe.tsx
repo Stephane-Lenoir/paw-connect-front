@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useToast } from '../../context/toastContext';
+import { ToastContextType } from '../../@types/toast';
 
 export default function Subscribe() {
-  const { showToastMessage } = useToast(); // Use the toast context
+  const { showToastMessage } = useToast() as ToastContextType;
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const formData = new FormData(event.target);
+    const formData = new FormData(event.currentTarget);
     const data = Object.fromEntries(formData);
 
     // Check if all fields are filled
@@ -16,11 +16,11 @@ export default function Subscribe() {
       showToastMessage(3, false, 'Veuillez remplir tous les champs.'); // Show error toast for signup
       return;
     }
-
-    if (data.password.length < 12) {
-      showToastMessage(3, false, 'Le mot de passe doit contenir au moins 12 caractères.'); // Show error toast for password length
-      return;
-    }
+    const password = formData.get('password') as string;
+        if (password.length < 12) {
+            showToastMessage(3, false, 'Le mot de passe doit contenir au moins 12 caractères.');
+            return;
+        }
 
     try {
       const response = await axios.post('http://localhost:3000/api/register', data, {

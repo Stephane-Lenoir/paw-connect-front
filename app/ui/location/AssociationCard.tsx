@@ -7,7 +7,8 @@ import TitleAssociation from './TitleAssociation';
 import Modal from './Modal';
 import { getAllAssociations, getOneAssociation } from '../../services/Associations';
 import Loader from '../loader';
-import { Association } from '../../@types/association';
+import { Association } from '../../@types/donation';
+
 
 export default function AssociationCard() {
   const [associations, setAssociations] = useState<Association[]>([]);
@@ -32,7 +33,7 @@ export default function AssociationCard() {
 
   const handleAssociationClick = async (id: number) => {
     try {
-      const data = await getOneAssociation(id);
+      const data = await getOneAssociation(id.toString());
       setSelectedAssociation(data);
       setModalOpen(true);
     } catch (error) {
@@ -61,7 +62,7 @@ export default function AssociationCard() {
           <div className="p-4 text-center">
             <TitleAssociation
               title={association.name}
-              onClick={() => handleAssociationClick(association.id)}
+              onClick={() => handleAssociationClick(Number(association.id))}
             />
             <MailtoButton email={association.email} />
           </div>

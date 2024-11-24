@@ -2,10 +2,12 @@ import axios from 'axios';
 import { useAuth } from '../../context/authContext';
 import { useEffect } from 'react';
 import { useToast } from '../../context/toastContext';
+import { AuthContextType } from '../../@types/auth';
+import { ToastContextType } from '../../@types/toast';
 
 export default function Login() {
-  const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth();
-  const { showToastMessage } = useToast(); // Use the toast context
+  const { isLogged, setIsLogged, setUserConnected, userConnected } = useAuth() as AuthContextType;
+  const { showToastMessage } = useToast() as ToastContextType; // Use the toast context
 
   useEffect(() => {
     const checkTokenExpiration = () => {
@@ -23,7 +25,7 @@ export default function Login() {
     return () => clearInterval(intervalId);
   }, [setIsLogged, setUserConnected]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData(event.target);
