@@ -1,4 +1,3 @@
-
 import { ToastProvider } from './context/toastContext';
 import './globals.css';
 import { Caveat } from 'next/font/google';
@@ -15,11 +14,15 @@ export const metadata: Metadata = {
   description: 'Refuge et famille d"accueil',
 };
 
+interface LayoutProps {
+  children: React.ReactNode;
+  types: string;
+}
+
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+  types = 'default'
+}: LayoutProps) {
   return (
     <html lang="fr">
       <body className={caveat.className}>
