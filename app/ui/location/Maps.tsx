@@ -6,13 +6,12 @@ import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import { MapsProps } from '../../@types/location';
 
-const DefaultIcon = L.icon({
-  iconUrl: icon as unknown as string,
-  shadowUrl: iconShadow as unknown as string,
+let DefaultIcon = L.icon({
+  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png',
+  shadowUrl: iconShadow as any,
   iconSize: [20, 36],
   iconAnchor: [12, 41],
 });
-
 // Definition of customized icon for user
 const CustomUserIcon = L.icon({
   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
