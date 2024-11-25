@@ -1,4 +1,3 @@
-'use client';
 
 import { ToastProvider } from './context/toastContext';
 import './globals.css';
