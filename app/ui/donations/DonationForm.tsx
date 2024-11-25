@@ -22,9 +22,8 @@ export default function DonationForm({ associations }: DonationFormProps) {
     userId: ''
   });
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  
+
   const authContext = useAuth();
   const isLogged = authContext?.isLogged;
   const userConnected = authContext?.userConnected;
@@ -53,14 +52,13 @@ export default function DonationForm({ associations }: DonationFormProps) {
     if (isSubmitting) return;
     setIsSubmitting(true);
     setError('');
-    setSuccess('');
-  
+
     try {
       const stripe = await stripePromise;
       if (!stripe) {
         throw new Error("Stripe couldn't be loaded.");
       }
-  
+
       const sessionId = await createStripeSession({
         amount: Number(formData.amount),
         userId: isLogged && userConnected ? userConnected.id.toString() : 'anonymous',
@@ -69,16 +67,20 @@ export default function DonationForm({ associations }: DonationFormProps) {
         message: formData.message,
         associationId: formData.userId
       });
-  
+
+      if (!sessionId) {
+        throw new Error('Session Stripe non générée.');
+      }
+
       const { error } = await stripe.redirectToCheckout({
         sessionId,
       });
-  
+
       if (error) {
-        setError(error.message || 'An error occurred');
+        setError(error.message || 'Une erreur est survenue lors de la redirection vers le paiement.');
       }
     } catch (err) {
-      console.error("Error in handleSubmit:", err);
+      console.error('Error in handleSubmit:', err);
       setError('Une erreur est survenue lors de la préparation du paiement.');
     } finally {
       setIsSubmitting(false);
@@ -171,7 +173,6 @@ export default function DonationForm({ associations }: DonationFormProps) {
           </select>
         </div>
         {error && <p className="text-red-500 text-xs italic">{error}</p>}
-        {success && <p className="text-green-500 text-xs italic">{success}</p>}
         <div className="flex items-center justify-between">
           <button
             className="font-bold bg-primary-color hover:bg-secondary-color transition-colors duration-300 text-white py-2 px-4 rounded focus:outline-none focus:shadow-outline"
