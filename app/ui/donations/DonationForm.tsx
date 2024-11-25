@@ -70,12 +70,12 @@ export default function DonationForm({ associations }: DonationFormProps) {
         associationId: formData.userId
       });
 
-      const result = await stripe.redirectToCheckout({
-        sessionId: session.id,
+      const { error } = await stripe.redirectToCheckout({
+        sessionId: session,
       });
-
-      if (result.error) {
-        setError(result.error.message || 'An error occurred');
+  
+      if (error) {
+        setError(error.message || 'An error occurred');
       }
     } catch (err) {
       console.error("Error in handleSubmit:", err);

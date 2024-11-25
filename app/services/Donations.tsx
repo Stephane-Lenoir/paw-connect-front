@@ -39,18 +39,13 @@ export const getAllDonations = async (): Promise<Donation[]> => {
   }
 };
 
-export const createStripeSession = async (donationData: StripeSessionData) => {
+export const createStripeSession = async (donationData: StripeSessionData): Promise<string> => {
   try {
-    const response = await api.post('/donations/create-stripe-session', donationData);
-    if (response.data.id === lastSessionId) {
-      
-      return response.data;
-    }
-    lastSessionId = response.data.id;
-    return response.data;
+    const response = await api.post<{ sessionId: string }>('/donations/create-stripe-session', donationData);
+    return response.data.sessionId;
   } catch (error) {
     if (axios.isAxiosError(error))
-    console.error('Error creating Stripe session:', error.response?.data || error.message);
+      console.error('Error creating Stripe session:', error.response?.data || error.message);
     throw error;
   }
 };

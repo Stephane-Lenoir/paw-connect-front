@@ -20,7 +20,7 @@ function DonationSuccessContent() {
       checkSessionStatus(sessionId)
         .then((data) => {
           setStatus('success');
-          setDonationDetails(data.donation);
+          setDonationDetails(data.donation ?? null);
         })
         .catch((error) => {
           console.error('Error checking session status:', error);
