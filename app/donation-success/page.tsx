@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { checkSessionStatus } from '../services/Donations';
 import NavBar from '../ui/header/Navbar';
 import Footer from '../ui/footer/Footer';
 import { DonationDetails } from '../@types/donation';
 
-export default function DonationSuccessPage() {
+
+function DonationSuccessContent() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [donationDetails, setDonationDetails] = useState<DonationDetails | null>(null);
   const searchParams = useSearchParams();
@@ -68,5 +69,13 @@ export default function DonationSuccessPage() {
       </button>
       <Footer />
     </div>
+  );
+}
+
+export default function DonationSuccessPage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <DonationSuccessContent />
+    </Suspense>
   );
 }
