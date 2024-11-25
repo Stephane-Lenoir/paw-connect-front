@@ -1,3 +1,5 @@
+'use client';
+
 import { ToastProvider } from './context/toastContext';
 import './globals.css';
 import { Caveat } from 'next/font/google';
@@ -14,12 +16,11 @@ export const metadata: Metadata = {
   description: 'Refuge et famille d"accueil',
 };
 
-type RootLayoutProps = {
+export default function RootLayout({
+  children,
+}: {
   children: React.ReactNode;
-  types?: string;
-};
-
-export default async function RootLayout({ children, types = 'default' }: RootLayoutProps) {
+}) {
   return (
     <html lang="fr">
       <body className={caveat.className}>
