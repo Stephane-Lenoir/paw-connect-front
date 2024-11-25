@@ -1,4 +1,4 @@
-import './globals.css';
+
 import { Caveat } from 'next/font/google';
 import 'leaflet/dist/leaflet.css';
 import { ToastProvider } from '../context/toastContext';
