@@ -54,14 +54,14 @@ export default function DonationForm({ associations }: DonationFormProps) {
     setIsSubmitting(true);
     setError('');
     setSuccess('');
-
+  
     try {
       const stripe = await stripePromise;
       if (!stripe) {
         throw new Error("Stripe couldn't be loaded.");
       }
-
-      const session = await createStripeSession({
+  
+      const sessionId = await createStripeSession({
         amount: Number(formData.amount),
         userId: isLogged && userConnected ? userConnected.id.toString() : 'anonymous',
         donorName: formData.donorName,
@@ -69,9 +69,9 @@ export default function DonationForm({ associations }: DonationFormProps) {
         message: formData.message,
         associationId: formData.userId
       });
-
+  
       const { error } = await stripe.redirectToCheckout({
-        sessionId: session,
+        sessionId,
       });
   
       if (error) {
