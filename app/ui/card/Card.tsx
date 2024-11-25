@@ -14,7 +14,7 @@ import { useFilter } from '../../context/filterContex';
 import { Animal, CardProps } from '../../@types/animal';
 import { FilterContextType } from '../../@types/filter';
 
-export default function Card({ onReload }: CardProps) {
+export default function Card({ onReload = false }: CardProps) {
   const [animals, setAnimals] = useState<Animal[]>([]);
   const [internalReload, setInternalReload] = useState<boolean>(false);
   const pathname = usePathname();

@@ -11,7 +11,7 @@ export default function Home() {
       <FilterProvider>
         <Header />
         <Homeimg />
-        <Card />
+        <Card onReload={false} />
         <Button />
         <Footer />
       </FilterProvider>

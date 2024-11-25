@@ -16,7 +16,7 @@ export interface Animal {
 }
 
 export interface CardProps {
-    onReload?: boolean;
+    onReload: boolean;
     animals?: Animal[];
 }
 
