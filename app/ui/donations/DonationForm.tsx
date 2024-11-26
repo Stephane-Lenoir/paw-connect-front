@@ -61,7 +61,7 @@ export default function DonationForm({ associations }: DonationFormProps) {
         throw new Error("Stripe couldn't be loaded.");
       }
   
-      const sessionId = await createStripeSession({
+      const stripeSessionId = await createStripeSession({
         amount: Number(formData.amount),
         userId: isLogged && userConnected ? userConnected.id.toString() : 'anonymous',
         donorName: formData.donorName,
@@ -71,7 +71,7 @@ export default function DonationForm({ associations }: DonationFormProps) {
       });
   
       const { error } = await stripe.redirectToCheckout({
-        sessionId,
+        sessionId: stripeSessionId,
       });
   
       if (error) {
